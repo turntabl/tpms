@@ -1,16 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavigationComponent } from './screens/admin/components/navigation/navigation.component';
 import { DashboardComponent } from './screens/admin/components/dashboard/dashboard.component';
+import { DashboardComponent as Dev } from "./screens/developer/components/dashboard/dashboard.component";
+import { CardComponent } from './screens/admin/components/card/card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent,
-    DashboardComponent
+    DashboardComponent,
+    Dev,
+    CardComponent
   ],
   imports: [
     BrowserModule,
