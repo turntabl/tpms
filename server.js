@@ -29,7 +29,8 @@ passport.use(
       protocol: "https://",
       entryPoint: process.env.ENTRY_POINT, // SSO URL (Step 2)
       issuer: process.env.ISSUER, // Entity ID (Step 4)
-      path: "/auth/saml/callback" // ACS URL path (Step 4)
+      path: "/auth/saml/callback" ,  // ACS URL path (Step 4)
+      cert: process.env.CERT
     },
     function(profile, done) {
       // Parse user profile data
