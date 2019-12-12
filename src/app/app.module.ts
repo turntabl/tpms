@@ -7,13 +7,19 @@ import { DashboardComponent } from './screens/admin/components/dashboard/dashboa
 import { DashboardComponent as Dev } from "./screens/developer/components/dashboard/dashboard.component";
 import { CardComponent } from './screens/admin/components/card/card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HoursComponent } from './screens/developer/components/hours/hours.component';
+import { HourComponent } from './screens/admin/components/hour/hour.component';
+import { ProjectsComponent } from './screens/admin/components/projects/projects.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     Dev,
-    CardComponent
+    CardComponent,
+    HoursComponent,
+    HourComponent,
+    ProjectsComponent
   ],
   imports: [
     BrowserModule,
