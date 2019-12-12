@@ -13,10 +13,10 @@ export class CardComponent implements OnInit {
   }
 
   number=[
-    {id:1},
-    {id:2},
-    {id:3},
-    {id:4}
+    {id:10},
+    {id:18},
+    {id:5},
+    {id:14}
 
   ]
 
