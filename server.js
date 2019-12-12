@@ -52,7 +52,7 @@ passport.deserializeUser(function(user, done) {
 app.get(
   "/login",
   passport.authenticate("saml", {
-    successRedirect: "/admin",
+    successRedirect: "/",
     failureRedirect: "/login"
   })
 );
@@ -65,8 +65,7 @@ app.get("/logout", function(req, res) {
 app.post(
   "/auth/saml/callback",
   passport.authenticate("saml", {
-    failureRedirect: "/",
-    successRedirect:"/home",
+    failureRedirect: "/error",
     failureFlash: true
   }),
   function(req, res) {
@@ -80,10 +79,6 @@ app.all("*", function(req, res, next) {
   } else {
     res.redirect("/login");
   }
-});
-app.get("/home", function(req, res) {
-  res.redirect("https://tpms-ui.herokuapp.com/admin");
-  // res.sendFile(path.join(__dirname+'/dist/tpms/index.html'));
 });
 app.get("/*", function(req, res) {
   res.sendFile(path.join(__dirname + "/dist/tpms/index.html"));
