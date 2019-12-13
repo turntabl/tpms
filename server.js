@@ -35,6 +35,7 @@ passport.use(
     function(profile, done) {
       // Parse user profile data
       console.log("profile", profile);
+      console.log("assertion", JSON.stringify(profile.getAssertion));
       return done(null, {
         email: profile.email,
         name: profile.name
