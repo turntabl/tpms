@@ -73,7 +73,7 @@ app.post(
     failureFlash: false
   }),
   function(req, res) {
-    res.redirect("https://www.google.com/?user=asa");
+    res.redirect("https://www.google.com/?user=asa"+dummy);
   }
 );
 
