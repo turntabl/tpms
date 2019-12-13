@@ -3,7 +3,7 @@ const express = require("express");
 const path = require("path");
 const SamlStrategy = require("passport-saml").Strategy;
 const passport = require("passport");
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
 
@@ -34,9 +34,19 @@ passport.use(
     },
     function(profile, done) {
       // Parse user profile data
-      done(null, {
-        email: profile.email,
-        name: profile.name
+      // done(null, {
+      //   id: profile.uid,
+      //   email: profile.email,
+      //   name: profile.name
+      // });
+      findByEmail(profile.email, function(err, user) {
+        if (err) {
+          return done(err);
+        }
+        else {
+          console.log("user", user)
+          return done(null, user);
+        }
       });
     }
   )
@@ -71,7 +81,6 @@ app.post(
   }),
   function(req, res) {
     res.redirect("/");
-
   }
 );
 
