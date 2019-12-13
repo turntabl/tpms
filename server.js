@@ -6,7 +6,7 @@ const passport = require("passport");
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
-let dummy = "";
+let userEmail = "";
 const app = express();
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + "/dist/tpms"));
@@ -36,7 +36,7 @@ passport.use(
       // Parse user profile data
       console.log("profile", profile);
       console.log("assertion", profile.getAssertion.toString());
-      dummy = profile.nameID;
+      userEmail = profile.nameID;
       return done(null, {
         email: profile.email,
         name: profile.name
@@ -73,7 +73,7 @@ app.post(
     failureFlash: false
   }),
   function(req, res) {
-    res.redirect("https://tpms-ui.herokuapp.com/admin?user="+dummy);
+    res.redirect("https://tpms-ui.herokuapp.com/admin/"+userEmail);
   }
 );
 
