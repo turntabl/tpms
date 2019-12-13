@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+// Reactive forms
+import { FormGroup, FormControl } from '@angular/forms';
 
 
 
@@ -8,11 +9,10 @@ import { FormControl } from '@angular/forms';
   templateUrl: './addproject.component.html',
   styleUrls: ['./addproject.component.css']
 })
-export class AddprojectComponent implements OnInit {
+export class AddprojectComponent {
+  addProjectForm = new FormGroup({
+    Project_title: new FormControl(''),
+    Project_description: new FormControl(''),
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  });
 }
