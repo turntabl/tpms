@@ -70,8 +70,8 @@ app.post(
     failureFlash: false
   }),
   function(req, res) {
-    // console.log("Logging something");
-    res.redirect("https://yahoo.com");
+    console.log("Logging something");
+    res.redirect("https://tpms-ui.herokuapp.com/");
   }
 );
 
