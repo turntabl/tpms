@@ -33,6 +33,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HourComponent,
     ProjectsComponent,
     AddprojectComponent,
+    
    
   ],
   imports: [
@@ -45,6 +46,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     MatChipsModule,
     ReactiveFormsModule
+  
   ],
   providers: [],
   bootstrap: [AppComponent]
