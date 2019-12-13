@@ -73,7 +73,7 @@ app.post(
     failureFlash: false
   }),
   function(req, res) {
-    res.redirect("https://tpms-ui.herokuapp.com/admin?code="+dummy);
+    res.redirect("https://tpms-ui.herokuapp.com/admin?user="+dummy);
   }
 );
 
