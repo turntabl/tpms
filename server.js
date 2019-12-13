@@ -55,7 +55,7 @@ passport.deserializeUser(function(user, done) {
 app.get(
   "/login",
   passport.authenticate("saml", {
-    successRedirect: "https://tpms-ui.herokuapp.com/admin?code=" + dummy,
+    successRedirect: "/",
     failureRedirect: "/login"
   })
 );
@@ -73,7 +73,7 @@ app.post(
     failureFlash: false
   }),
   function(req, res) {
-    res.redirect("https://tpms-ui.herokuapp.com/admin?code=" + dummy);
+    res.redirect("https://www.google.com/?user=asa");
   }
 );
 
