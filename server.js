@@ -1,44 +1,11 @@
+"use strict";
 const express = require("express");
-const SamlStrategy = require("passport-saml").Strategy;
-const passport = require("passport");
-const bodyParser = require("body-parser");
-const cookieSession = require("cookie-session");
+const session = require("express-session");
 const cookieParser = require("cookie-parser");
-
-// Create express instance
+const bodyParser = require("body-parser");
+const passport = require("passport");
+const SamlStrategy = require("passport-saml").Strategy;
 const app = express();
-
-// Configure your cookie session or alternatives
-app.use(cookieParser());
-app.use(
-  cookieSession({
-    name: "session",
-    keys: ["super secret"],
-    maxAge: 2 * 24 * 60 * 60 * 1000 // 2 days
-  })
-);
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.use(
-  new SamlStrategy(
-    {
-      protocol: "https://",
-      entryPoint: process.env.ENTRY_POINT, // SSO URL (Step 2)
-      issuer: process.env.ISSUER, // Entity ID (Step 4)
-      path: "/auth/saml/callback", // ACS URL path (Step 4)
-      cert: process.env.CERT
-    },
-    function(profile, done) {
-      // Parse user profile data
-      done(null, {
-        email: profile.email,
-        name: profile.name
-      });
-    }
-  )
-);
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -48,6 +15,38 @@ passport.deserializeUser(function(user, done) {
   done(null, user);
 });
 
+passport.use(
+  new SamlStrategy(
+    {
+      entryPoint: process.env.ENTRY_POINT,
+      issuer: process.env.ISSUER,
+      path: "/auth/saml/callback",
+      protocol: "https://",
+      cert: process.env.CERT
+    },
+    function(profile, done) {
+      return done(null, {
+        email: profile.email
+      });
+    }
+  )
+);
+
+app.use(cookieParser());
+app.use(
+  session({
+    secret: "process.env.SECRET",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 30 * 60 * 1000
+    }
+  })
+);
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.get(
   "/login",
   passport.authenticate("saml", {
@@ -56,29 +55,26 @@ app.get(
   })
 );
 
-app.get("/logout", function(req, res) {
-  req.logout();
-  res.end("You have logged out.");
-});
-
 app.post(
   "/auth/saml/callback",
-  bodyParser.urlencoded({ extended: false }),
   passport.authenticate("saml", {
-    failureRedirect: "/error",
+    successRedirect: "/",
     failureFlash: true
   }),
   function(req, res) {
-    res.redirect("/");
+    res.redirect("/login");
   }
 );
 
-// Securing every path in production.
 app.all("*", function(req, res, next) {
-  if (req.isAuthenticated() || process.env.NODE_ENV !== "production") {
+  console.log(req.isAuthenticated());
+  if (req.isAuthenticated() || req.path == "/login") {
     next();
   } else {
     res.redirect("/login");
   }
 });
+
 app.use(express.static(__dirname + "/dist/tpms"));
+
+module.exports = app;
