@@ -17,6 +17,8 @@ import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatChipsModule } from "@angular/material/chips";
+import { AddprojectComponent } from './screens/admin/components/addproject/addproject.component';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { MatChipsModule } from "@angular/material/chips";
     CardComponent,
     HoursComponent,
     HourComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    AddprojectComponent,
+   
   ],
   imports: [
     BrowserModule,

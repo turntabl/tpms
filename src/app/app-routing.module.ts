@@ -6,6 +6,8 @@ import { DashboardComponent } from './screens/developer/components/dashboard/das
 import { HourComponent } from './screens/admin/components/hour/hour.component';
 import { HoursComponent } from './screens/developer/components/hours/hours.component';
 import { ProjectsComponent } from './screens/admin/components/projects/projects.component';
+import { AddprojectComponent } from './screens/admin/components/addproject/addproject.component';
+
 
 
 const routes: Routes = [
@@ -15,7 +17,9 @@ const routes: Routes = [
   // {path:'', redirectTo:'admin', pathMatch:'full'}
   {path:'admin/hour', component:HourComponent},
   {path:'developer/hour', component:HoursComponent},
-  {path:'addproject',component:ProjectsComponent}
+  {path:'addproject', component:AddprojectComponent}
+  
+
 
 ];
 
