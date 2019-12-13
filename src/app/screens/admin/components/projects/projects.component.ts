@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { DomSanitizer } from "@angular/platform-browser";
 import { MatIconRegistry } from "@angular/material/icon";
+import { FormControl } from '@angular/forms';
 @Component({
   selector: "app-projects",
   templateUrl: "./projects.component.html",
