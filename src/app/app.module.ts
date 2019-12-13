@@ -19,6 +19,9 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatChipsModule } from "@angular/material/chips";
 import { AddprojectComponent } from './screens/admin/components/addproject/addproject.component';
 
+// Reactive forms
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -40,7 +43,8 @@ import { AddprojectComponent } from './screens/admin/components/addproject/addpr
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    MatChipsModule
+    MatChipsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
