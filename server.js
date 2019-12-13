@@ -34,7 +34,7 @@ passport.use(
     },
     function(profile, done) {
       // Parse user profile data
-      console.log(profile.email);
+      console.log("profile", profile);
       return done(null, {
         email: profile.email,
         name: profile.name
