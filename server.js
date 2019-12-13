@@ -3,7 +3,7 @@ const express = require("express");
 const path = require("path");
 const SamlStrategy = require("passport-saml").Strategy;
 const passport = require("passport");
-
+const bodyParser = require('body-parser');
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
 
@@ -64,6 +64,7 @@ app.get("/logout", function(req, res) {
 
 app.post(
   "/auth/saml/callback",
+  bodyParser.urlencoded({ extended: false }),
   passport.authenticate("saml", {
     failureRedirect: "/error",
     failureFlash: false
