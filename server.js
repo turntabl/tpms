@@ -6,7 +6,7 @@ const passport = require("passport");
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
-
+let dummy = "";
 const app = express();
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + "/dist/tpms"));
@@ -35,7 +35,8 @@ passport.use(
     function(profile, done) {
       // Parse user profile data
       console.log("profile", profile);
-      console.log("assertion", JSON.stringify(profile.getAssertion));
+      console.log("assertion", profile.getAssertion.toString());
+      dummy = profile.nameID;
       return done(null, {
         email: profile.email,
         name: profile.name
@@ -54,7 +55,7 @@ passport.deserializeUser(function(user, done) {
 app.get(
   "/login",
   passport.authenticate("saml", {
-    successRedirect: "/",
+    successRedirect: "https://tpms-ui.herokuapp.com/admin/user=?" + dummy,
     failureRedirect: "/login"
   })
 );
