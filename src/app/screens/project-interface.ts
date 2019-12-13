@@ -1,5 +1,7 @@
 export interface ProjectInterface {
-project_title: String;
-project_description:String;
+    description: String;
+    project_id?: number;
+    title: String;
+    
 
 }

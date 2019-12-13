@@ -1,10 +1,7 @@
-
-<form class="text-center border border-light p-5" [formGroup]="addProjectForm" (ngSubmit)="onSubmit()">
+<form class="text-center border border-light p-5" [formGroup]="projectForm" (ngSubmit)="onSubmit()">
         <p class="h4 mb-4">Add Project</p>
-        <input type="text" [formControl]="project_title"  class="form-control mb-4" placeholder="Project Title">     
-        <input type="text" [formControl]="project_description"  class="form-control mb-4" placeholder="Project Description">
-    
-        
+        <input type="text" formControlName="title"  class="form-control mb-4" placeholder="Project Title">     
+        <input type="text" formControlName="description"  class="form-control mb-4" placeholder="Project Description">
 
         <button type="submit" class="btn btn-dark">Submit</button>
   </form>
