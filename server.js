@@ -1,16 +1,14 @@
-//Install express server
 const express = require("express");
-const path = require("path");
 const SamlStrategy = require("passport-saml").Strategy;
 const passport = require("passport");
-
+const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
 
+// Create express instance
 const app = express();
-// Serve only the static files form the dist directory
-app.use(express.static(__dirname + "/dist/tpms"));
 
+// Configure your cookie session or alternatives
 app.use(cookieParser());
 app.use(
   cookieSession({
@@ -29,7 +27,7 @@ passport.use(
       protocol: "https://",
       entryPoint: process.env.ENTRY_POINT, // SSO URL (Step 2)
       issuer: process.env.ISSUER, // Entity ID (Step 4)
-      path: "/auth/saml/callback" ,  // ACS URL path (Step 4)
+      path: "/auth/saml/callback", // ACS URL path (Step 4)
       cert: process.env.CERT
     },
     function(profile, done) {
@@ -41,6 +39,7 @@ passport.use(
     }
   )
 );
+
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
@@ -52,7 +51,7 @@ passport.deserializeUser(function(user, done) {
 app.get(
   "/login",
   passport.authenticate("saml", {
-    successRedirect: "/admin",
+    successRedirect: "/",
     failureRedirect: "/login"
   })
 );
@@ -64,9 +63,9 @@ app.get("/logout", function(req, res) {
 
 app.post(
   "/auth/saml/callback",
+  bodyParser.urlencoded({ extended: false }),
   passport.authenticate("saml", {
-    failureRedirect: "/",
-    successRedirect:"/home",
+    failureRedirect: "/error",
     failureFlash: true
   }),
   function(req, res) {
@@ -74,6 +73,7 @@ app.post(
   }
 );
 
+// Securing every path in production.
 app.all("*", function(req, res, next) {
   if (req.isAuthenticated() || process.env.NODE_ENV !== "production") {
     next();
@@ -81,13 +81,4 @@ app.all("*", function(req, res, next) {
     res.redirect("/login");
   }
 });
-app.get("/home", function(req, res) {
-  res.redirect("https://tpms-ui.herokuapp.com/admin");
-  // res.sendFile(path.join(__dirname+'/dist/tpms/index.html'));
-});
-app.get("/*", function(req, res) {
-  res.sendFile(path.join(__dirname + "/dist/tpms/index.html"));
-});
-
-// Start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 8080);
+app.use(express.static(__dirname + "/dist/tpms"));
