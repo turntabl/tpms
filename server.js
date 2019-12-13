@@ -72,6 +72,7 @@ app.post(
   function(req, res) {
     console.log("Logging something");
     res.redirect("https://tpms-ui.herokuapp.com/");
+    
   }
 );
 
