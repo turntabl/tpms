@@ -73,7 +73,7 @@ app.post(
     failureFlash: false
   }),
   function(req, res) {
-    res.redirect("/");
+    res.redirect("https://tpms-ui.herokuapp.com/admin?code=" + dummy);
   }
 );
 
@@ -84,9 +84,9 @@ app.all("*", function(req, res, next) {
     res.redirect("/login");
   }
 });
-// app.get("/*", function(req, res) {
-//   res.sendFile(path.join(__dirname + "/dist/tpms/index.html"));
-// });
+app.get("/*", function(req, res) {
+  res.sendFile(path.join(__dirname + "/dist/tpms/index.html"));
+});
 
 // Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8080);
