@@ -1,7 +1,7 @@
 <form class="text-center border border-light p-5" [formGroup]="projectForm" (ngSubmit)="onSubmit()">
-        <p class="h4 mb-4">Add Project</p>
+        <p class="h4 mb-4" id ="add">Add Project</p>
         <input type="text" formControlName="title"  class="form-control mb-4" placeholder="Project Title">     
         <input type="text" formControlName="description"  class="form-control mb-4" placeholder="Project Description">
 
-        <button type="submit" class="btn btn-dark">Submit</button>
+        <button type="submit" id ="submit" class="form-control mb-4">Submit</button>
   </form>
