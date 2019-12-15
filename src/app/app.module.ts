@@ -17,6 +17,11 @@ import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatChipsModule } from "@angular/material/chips";
+import { DevelopersComponent } from './screens/admin/components/developers/developers.component';
+import { AssignedprojectsComponent } from './screens/developer/components/assignedprojects/assignedprojects.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +31,9 @@ import { MatChipsModule } from "@angular/material/chips";
     CardComponent,
     HoursComponent,
     HourComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    DevelopersComponent,
+    AssignedprojectsComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +43,9 @@ import { MatChipsModule } from "@angular/material/chips";
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    MatChipsModule
+    MatChipsModule,
+    MatTableModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]

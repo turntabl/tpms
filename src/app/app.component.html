@@ -16,7 +16,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" routerLink="admin">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Reports</span></a>
       </li>
@@ -31,8 +31,8 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link " href="#"  aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
+        <a class="nav-link " href="admin/projects"  aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-project-diagram"></i>
           <span>Projects</span>
         </a>
         <!-- <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -46,16 +46,16 @@
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link " href="#"  aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fas fa-fw fa-wrench"></i>
+        <a class="nav-link " routerLink="admin/developer"  aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fas fa-users"></i>
           <span>Developers</span>
         </a>
        
       </li>
 
       <li class="nav-item">
-        <a class="nav-link " href="#"  aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fas fa-fw fa-wrench"></i>
+        <a class="nav-link " routerLink="admin/hour"  aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fas fa-user-clock"></i>
           <span>Hours</span>
         </a>
        
@@ -172,7 +172,7 @@
                 <span class="badge badge-danger badge-counter">7</span>
               </a>
               <!-- Dropdown - Messages -->
-              <!-- <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
                 <h6 class="dropdown-header">
                   Message Center
                 </h6>
@@ -217,7 +217,7 @@
                   </div>
                 </a>
                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-              </div> -->
+              </div>
             </li>
 
             <div class="topbar-divider d-none d-sm-block"></div>
