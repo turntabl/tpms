@@ -118,7 +118,7 @@ export class ProjectsComponent implements OnInit {
     devno: new FormControl("")
   });
 
-  private assignedProjects: Array<ProjectInterface> = [
+  assignedProjects: Array<ProjectInterface> = [
     {
       description: "Sample description",
       project_id: 1,
