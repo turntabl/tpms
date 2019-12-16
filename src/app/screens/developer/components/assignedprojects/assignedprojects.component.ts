@@ -30,7 +30,10 @@ export class AssignedprojectsComponent implements OnInit {
 
   ngOnInit() {}
 
-  logsuccess(){
-    
+  loghour(hour) {
+    // const entry = this.assignedProjects.find(project => project.project_id == )
+    alert("hours " + hour);
   }
+
+  logsuccess() {}
 }
