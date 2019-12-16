@@ -17,13 +17,15 @@ import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatChipsModule } from "@angular/material/chips";
-import { DevelopersComponent } from './screens/admin/components/developers/developers.component';
-import { AssignedprojectsComponent } from './screens/developer/components/assignedprojects/assignedprojects.component';
-import {MatTableModule} from '@angular/material/table';
-import {MatFormFieldModule, MatInputModule } from '@angular/material';
-import {MatToolbarModule} from '@angular/material/toolbar';
-
-
+import { DevelopersComponent } from "./screens/admin/components/developers/developers.component";
+import { AssignedprojectsComponent } from "./screens/developer/components/assignedprojects/assignedprojects.component";
+import { MatTableModule } from "@angular/material/table";
+// import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { NavigationComponent } from "./screens/admin/navigation/navigation.component";
+import { VerifyComponent } from "./screens/verify/verify.component";
+import { MatFormFieldModule, MatInputModule } from "@angular/material";
+import { MatToolbarModule } from "@angular/material/toolbar";
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     ProjectsComponent,
     DevelopersComponent,
     AssignedprojectsComponent,
-    
+    NavigationComponent,
+    VerifyComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +52,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatChipsModule,
     MatTableModule,
     MatFormFieldModule,
+    MatProgressSpinnerModule,
     MatInputModule,
     MatToolbarModule
   ],
