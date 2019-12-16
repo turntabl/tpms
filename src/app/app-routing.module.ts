@@ -11,6 +11,8 @@ import { AssignedprojectsComponent } from "./screens/developer/components/assign
 import { VerifyComponent } from "./screens/verify/verify.component";
 import { NavigationComponent } from "./screens/admin/navigation/navigation.component";
 import { NavComponent } from "./screens/developer/nav/nav.component";
+import { AddprojectComponent } from './screens/admin/components/addproject/addproject.component';
+  
 
 const routes: Routes = [
   {
@@ -19,7 +21,8 @@ const routes: Routes = [
     children: [
       { path: "projects", component: ProjectsComponent },
       { path: "hour", component: HourComponent },
-      { path: "developer", component: DevelopersComponent }
+      { path: "developer", component: DevelopersComponent },
+  {path:'addproject', component:AddprojectComponent}
     ]
   },
   { path: "verify/:name", component: VerifyComponent },
