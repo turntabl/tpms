@@ -67,10 +67,10 @@
     <!-- <app-card></app-card> -->
     <mat-tab-group>
         <mat-tab label="STATUS">
-            <div style="margin:20px;">
+            <div style="margin:20px;" *ngFor="let project of assignedProjects">
                 <mat-card>
                     <mat-card-title>
-                        JAVA Concurrency
+                        {{project.title}}
                     </mat-card-title>
                     <mat-card-subtitle>
                         <mat-chip-list>
@@ -92,56 +92,7 @@
 
                 </mat-card>
 
-            </div>
-
-            <div style="margin:20px;">
-                    <mat-card>
-                        <mat-card-title>
-                            REST API
-                        </mat-card-title>
-                        <mat-card-subtitle>
-                            <mat-chip-list>
-                                <mat-chip>Completed</mat-chip>
-                            </mat-chip-list>
-                        </mat-card-subtitle>
-                        <mat-card-content>
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                        </mat-card-content>
-                        <mat-card-actions>
-    
-                        </mat-card-actions>
-                        <div class="text-right">
-                          <a href="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"data-toggle="modal" data-target="#modalSubscriptionForm">Log Hours
-                           </a>
-                        </div>
-                    </mat-card>
-    
-                </div>
-
-                <div style="margin:20px;">
-                        <mat-card>
-                            <mat-card-title>
-                                Microservices
-                            </mat-card-title>
-                            <mat-card-subtitle>
-                                <mat-chip-list>
-                                    <mat-chip>In Progress</mat-chip>
-                                </mat-chip-list>
-                            </mat-card-subtitle>
-                            <mat-card-content>
-                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                            </mat-card-content>
-                            <mat-card-actions>
-        
-                            </mat-card-actions>
-                            <div class="text-right">
-                              <a href="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"data-toggle="modal" data-target="#modalSubscriptionForm">Log Hours
-                               </a>
-                            </div>
-        
-                        </mat-card>
-        
-                    </div>
+            </div>              
         </mat-tab>
         <mat-tab label="PROJECTS">
             <!-- <div *ngFor="let dev of devs" style="margin:20px"> -->
