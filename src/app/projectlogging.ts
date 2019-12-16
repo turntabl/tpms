@@ -4,4 +4,5 @@ export interface Projectlogging {
     hours: number;
     emp_id: number;
     title: string;
+    project_id: number;
 }

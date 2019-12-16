@@ -1,5 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule, Component } from "@angular/core";
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -10,6 +12,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HoursComponent } from "./screens/developer/components/hours/hours.component";
 import { HourComponent } from "./screens/admin/components/hour/hour.component";
 import { ProjectsComponent } from "./screens/admin/components/projects/projects.component";
+import { ReactiveFormsModule } from '@angular/forms';
+// import { FormComponent } from './form/form.component';
 
 // Material Stuff
 import { MatTabsModule } from "@angular/material/tabs";
@@ -22,6 +26,7 @@ import { AssignedprojectsComponent } from './screens/developer/components/assign
 import {MatTableModule} from '@angular/material/table';
 import {MatFormFieldModule, MatInputModule } from '@angular/material';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 
 
@@ -36,11 +41,13 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     ProjectsComponent,
     DevelopersComponent,
     AssignedprojectsComponent,
+    // FormComponent,
     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatTabsModule,
     MatCardModule,
@@ -50,7 +57,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatDatepickerModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
