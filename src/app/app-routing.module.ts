@@ -12,21 +12,22 @@ import { VerifyComponent } from "./screens/verify/verify.component";
 import { NavigationComponent } from "./screens/admin/navigation/navigation.component";
 
 const routes: Routes = [
-  // { path: 'home', component:AppComponent},
-  // { path: 'admin/:name', component:D},
   {
     path: "admin",
     component: NavigationComponent,
-    children: [{ path: "pro/:name", component: D }]
+    children: [
+      { path: "projects", component: ProjectsComponent },
+      // { path: "projects/:name", component: ProjectsComponent },
+      { path: "hour", component: HourComponent },
+      { path: "developer", component: DevelopersComponent }
+    ]
   },
-
+  { path: "developer", component: DashboardComponent },
+  { path: "developer/hour", component: HoursComponent },
+  { path: "developer/projects", component: AssignedprojectsComponent },
   { path: "verify/:name", component: VerifyComponent },
   { path: "developer", component: DashboardComponent },
-  // {path:'', redirectTo:'verify', pathMatch:'full'},
-  { path: "admin/hour", component: HourComponent },
   { path: "developer/hour", component: HoursComponent },
-  { path: "admin/projects", component: ProjectsComponent },
-  { path: "admin/developer", component: DevelopersComponent },
   { path: "developer/projects", component: AssignedprojectsComponent }
 ];
 
