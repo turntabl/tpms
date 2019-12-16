@@ -22,7 +22,7 @@ const routes: Routes = [
       { path: "projects", component: ProjectsComponent },
       { path: "hour", component: HourComponent },
       { path: "developer", component: DevelopersComponent },
-  {path:'addproject', component:AddprojectComponent}
+     {path:"addproject", component:AddprojectComponent}
     ]
   },
   { path: "verify/:name", component: VerifyComponent },

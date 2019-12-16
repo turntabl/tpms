@@ -9,6 +9,7 @@ import {
   Validators,
   FormBuilder
 } from "@angular/forms";
+import { ProjectInterface } from "src/app/screens/project-interface";
 
 export interface PeriodicElement {
   title: string;
@@ -116,6 +117,25 @@ export class ProjectsComponent implements OnInit {
     enddate: new FormControl(""),
     devno: new FormControl("")
   });
+
+  private assignedProjects: Array<ProjectInterface> = [
+    {
+      description: "Sample description",
+      project_id: 1,
+      title: "Tomato API in C#",
+      startdate: new Date(),
+      enddate: new Date(),
+      dev: 1
+    },
+    {
+      description: "Sample description",
+      project_id: 10,
+      title: "Heroku Pipelining",
+      startdate: new Date(),
+      enddate: new Date(),
+      dev: 1
+    }
+  ];
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {}
 
   displayedColumns: string[] = [
@@ -126,19 +146,40 @@ export class ProjectsComponent implements OnInit {
     "duration",
     "devno"
   ];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+
+  clone = new MatTableDataSource(ELEMENT_DATA)
+  dataSource = this.clone;
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.dataSource.data.push({
+      title: "Christy project",
+      description: "HAhah",
+      startdate: "12.01.18",
+      enddate: "12.01.18",
+      duration: 31,
+      devno: 29
+    });
+  }
 
   onSubmit() {
     // this.ProjectService
     //   .addNewProject(this.projectForm.value)
     //   .subscribe(client=>console.log(client));
     alert(JSON.stringify(this.projectForm.value));
+  }
+  addme() {
+    this.dataSource.data.push({
+      title: "Christy project",
+      description: "HAhah",
+      startdate: "12.01.18",
+      enddate: "12.01.18",
+      duration: 31,
+      devno: 29
+    });
   }
 
   // devs = [
