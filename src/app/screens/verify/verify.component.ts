@@ -15,7 +15,7 @@ export class VerifyComponent implements OnInit {
       switch (this.role) {
         case "admin":
           this.isLoading = false;
-          this.router.navigate(["admin/pro", "Dennis"]);
+          this.router.navigate(["admin/projects"]);
           break;
         default:
           break;
