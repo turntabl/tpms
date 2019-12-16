@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
+import { AppService } from "src/app/services/app.service";
 @Component({
   selector: "app-verify",
   templateUrl: "./verify.component.html",
@@ -7,19 +8,30 @@ import { Router } from "@angular/router";
 })
 export class VerifyComponent implements OnInit {
   isLoading: boolean = true;
-  constructor(private router: Router) {}
-  role: string = "dennis.effa@turntabl.io";
+  constructor(
+    private router: Router,
+    private appservice: AppService,
+    private activatedRoute: ActivatedRoute
+  ) {}
+  role: any;
   ngOnInit() {
-    setTimeout(() => {
-      this.isLoading = false;
-      switch (this.role) {
-        case "dennis.effa@turntabl.io":
-          this.isLoading = false;
-          this.router.navigate(["admin/projects"]);
-          break;
-        default:
-          break;
-      }
-    }, 4000);
+    // console.log(this.activatedRoute.snapshot.params.name);
+    this.appservice
+      .getEmployeeRole(this.activatedRoute.snapshot.params.name)
+      .subscribe(response => {
+        // console.log("Response", response[0].emp_role);
+        switch (response[0].emp_role) {
+          case "admin":
+            this.isLoading = false;
+            this.router.navigate(["admin/projects"]);
+            break;
+          case "Developer":
+            this.isLoading = false;
+            this.router.navigate(["developer/projects"]);
+            break;
+          default:
+            break;
+        }
+      });
   }
 }

@@ -12,7 +12,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HoursComponent } from "./screens/developer/components/hours/hours.component";
 import { HourComponent } from "./screens/admin/components/hour/hour.component";
 import { ProjectsComponent } from "./screens/admin/components/projects/projects.component";
-import { ReactiveFormsModule } from '@angular/forms';
+// import { ReactiveFormsModule } from '@angular/forms';
 // import { FormComponent } from './form/form.component';
 
 // Material Stuff
@@ -63,7 +63,7 @@ import { NavComponent } from './screens/developer/nav/nav.component';
     MatProgressSpinnerModule,
     MatInputModule,
     MatToolbarModule,
-    ReactiveFormsModule
+    // ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
