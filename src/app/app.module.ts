@@ -20,7 +20,9 @@ import { MatChipsModule } from "@angular/material/chips";
 import { DevelopersComponent } from './screens/admin/components/developers/developers.component';
 import { AssignedprojectsComponent } from './screens/developer/components/assignedprojects/assignedprojects.component';
 import {MatTableModule} from '@angular/material/table';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatFormFieldModule, MatInputModule } from '@angular/material';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
 
 
 @NgModule({
@@ -33,7 +35,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     HourComponent,
     ProjectsComponent,
     DevelopersComponent,
-    AssignedprojectsComponent
+    AssignedprojectsComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatIconModule,
     MatChipsModule,
     MatTableModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

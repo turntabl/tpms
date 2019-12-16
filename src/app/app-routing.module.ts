@@ -19,7 +19,7 @@ const routes: Routes = [
   {path:'developer/hour', component:HoursComponent},
   {path:'admin/projects',component:ProjectsComponent},
   {path:'admin/developer', component:DevelopersComponent},
-  {path:'developer/projects',component:AssignedprojectsComponent}
+  {path:'developer/projects',component:AssignedprojectsComponent},
 
 ];
 
