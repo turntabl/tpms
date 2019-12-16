@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
-import { ProjectloggingService } from 'src/app/projectlogging.service';
 
 
 export interface PeriodicElement {
@@ -30,21 +29,13 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./hours.component.css']
 })
 export class HoursComponent implements OnInit {
-  // displayedColumns: string[] = ['title','date','hours','project_id','emp_id'];
-  // dataSource = new MatTableDataSource(ELEMENT_DATA);
-  // constructor(private projectloggingservice: ProjectloggingService) { }
-  
-  // getClients(): void{
-  //   this.clientservice.getClients()
-  //   .subscribe(data=> this.clients=data);
-  // }
+  displayedColumns: string[] = ['project_id','emp_id','title','date','hours'];
+  dataSource = new MatTableDataSource(ELEMENT_DATA);
 
 
-  // applyFilter(filterValue: string) {
-  //   this.dataSource.filter = filterValue.trim().toLowerCase();
-  // }
-
-  
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
 
   constructor() { }
