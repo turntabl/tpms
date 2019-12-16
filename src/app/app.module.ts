@@ -21,14 +21,17 @@ import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatChipsModule } from "@angular/material/chips";
-import { DevelopersComponent } from './screens/admin/components/developers/developers.component';
-import { AssignedprojectsComponent } from './screens/developer/components/assignedprojects/assignedprojects.component';
-import {MatTableModule} from '@angular/material/table';
-import {MatFormFieldModule, MatInputModule } from '@angular/material';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatDatepickerModule} from '@angular/material/datepicker';
 
-
+import { DevelopersComponent } from "./screens/admin/components/developers/developers.component";
+import { AssignedprojectsComponent } from "./screens/developer/components/assignedprojects/assignedprojects.component";
+import { MatTableModule } from "@angular/material/table";
+// import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { NavigationComponent } from "./screens/admin/navigation/navigation.component";
+import { VerifyComponent } from "./screens/verify/verify.component";
+import { MatFormFieldModule, MatInputModule } from "@angular/material";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { NavComponent } from './screens/developer/nav/nav.component';
 
 @NgModule({
   declarations: [
@@ -41,8 +44,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     ProjectsComponent,
     DevelopersComponent,
     AssignedprojectsComponent,
-    // FormComponent,
-    
+    NavigationComponent,
+    VerifyComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
@@ -56,9 +60,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatChipsModule,
     MatTableModule,
     MatFormFieldModule,
+    MatProgressSpinnerModule,
     MatInputModule,
     MatToolbarModule,
-    MatDatepickerModule,
     ReactiveFormsModule
   ],
   providers: [],
