@@ -21,7 +21,9 @@ import { DevelopersComponent } from './screens/admin/components/developers/devel
 import { AssignedprojectsComponent } from './screens/developer/components/assignedprojects/assignedprojects.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { NavigationComponent } from './screens/admin/navigation/navigation.component';
+import { VerifyComponent } from './screens/verify/verify.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     HourComponent,
     ProjectsComponent,
     DevelopersComponent,
-    AssignedprojectsComponent
+    AssignedprojectsComponent,
+    NavigationComponent,
+    VerifyComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +49,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatIconModule,
     MatChipsModule,
     MatTableModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

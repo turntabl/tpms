@@ -17,8 +17,7 @@ export class DashboardComponent implements OnInit {
     this.appService.currentMessage.subscribe(msg => (this.msg = msg));
     this.appService.changeMessage(this.actRoute.snapshot.params.name);
   }
-
   ngOnInit() {
-    // console.log(this.name);
+    console.log("Name", this.name);
   }
 }
