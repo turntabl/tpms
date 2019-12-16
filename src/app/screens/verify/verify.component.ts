@@ -26,12 +26,14 @@ export class VerifyComponent implements OnInit {
           case "Administrator":
             // this.appservice.changeMessage(response[0].emp_name);
             localStorage.setItem("username", response[0].emp_name);
+            localStorage.setItem("empId", response[0].emp_id.toString());
             this.isLoading = false;
             this.router.navigate(["admin/projects"]);
             break;
           case "Developer":
             // this.appservice.changeMessage(response[0].emp_name);
             localStorage.setItem("username", response[0].emp_name);
+            localStorage.setItem("empId", response[0].emp_id.toString());
             this.isLoading = false;
             this.router.navigate(["developer/projects"]);
             break;
