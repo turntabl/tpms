@@ -1,0 +1,10 @@
+<form class="text-center border border-light p-5" [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+        <p id ="add"> Add Project</p>
+        <input type="text" formControlName="title"  class="form-control mb-4" placeholder="Project Title">     
+        <input type="text" formControlName="description"  class="form-control mb-4" placeholder="Project Description">
+        <input type="text" formControlName="startdate"  class="form-control mb-4" placeholder="Start Date">
+        <input type="text" formControlName="enddate"  class="form-control mb-4" placeholder="End Date">
+        <input type="text" formControlName="devno"  class="form-control mb-4" placeholder="Number of Dev">
+
+        <button type="submit" id ="submit" class="form-control mb-4">Submit</button>
+  </form>
