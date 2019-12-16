@@ -34,7 +34,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ["./assignedprojects.component.css"]
 })
 export class AssignedprojectsComponent implements OnInit {
-  private assignedProjects: Array<ProjectInterface> = [
+  assignedProjects: Array<ProjectInterface> = [
     {
       description: "Sample description",
       project_id: 1,
