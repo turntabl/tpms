@@ -24,12 +24,14 @@ export class VerifyComponent implements OnInit {
         // console.log("Response", response[0].emp_role);
         switch (response[0].emp_role) {
           case "admin":
-            this.appservice.changeMessage(response[0].emp_name);
+            // this.appservice.changeMessage(response[0].emp_name);
+            localStorage.setItem("username", response[0].emp_name);
             this.isLoading = false;
             this.router.navigate(["admin/projects"]);
             break;
           case "Developer":
-            this.appservice.changeMessage(response[0].emp_name);
+            // this.appservice.changeMessage(response[0].emp_name);
+            localStorage.setItem("username", response[0].emp_name);
             this.isLoading = false;
             this.router.navigate(["developer/projects"]);
             break;

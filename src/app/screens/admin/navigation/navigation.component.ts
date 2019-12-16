@@ -11,8 +11,9 @@ export class NavigationComponent implements OnInit {
   constructor(private appservice: AppService) {}
 
   ngOnInit() {
-    this.appservice.currentMessage.subscribe(
-      newName => (this.userName = newName)
-    );
+    // this.appservice.currentMessage.subscribe(
+    //   newName => (this.userName = newName)
+    // );
+    this.userName = localStorage.getItem("username");
   }
 }
