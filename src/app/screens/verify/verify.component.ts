@@ -8,12 +8,12 @@ import { Router } from "@angular/router";
 export class VerifyComponent implements OnInit {
   isLoading: boolean = true;
   constructor(private router: Router) {}
-  role: string = "admin";
+  role: string = "dennis.effa@turntabl.io";
   ngOnInit() {
     setTimeout(() => {
       this.isLoading = false;
       switch (this.role) {
-        case "admin":
+        case "dennis.effa@turntabl.io":
           this.isLoading = false;
           this.router.navigate(["admin/projects"]);
           break;
