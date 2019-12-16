@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import { DomSanitizer } from "@angular/platform-browser";
 import { MatIconRegistry } from "@angular/material/icon";
+import { ProjectInterface } from "src/app/screens/project-interface";
 
 
 export interface PeriodicElement {
@@ -28,13 +29,30 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 
 @Component({
-  selector: 'app-assignedprojects',
-  templateUrl: './assignedprojects.component.html',
-  styleUrls: ['./assignedprojects.component.css']
+  selector: "app-assignedprojects",
+  templateUrl: "./assignedprojects.component.html",
+  styleUrls: ["./assignedprojects.component.css"]
 })
-
-
 export class AssignedprojectsComponent implements OnInit {
+  private assignedProjects: Array<ProjectInterface> = [
+    {
+      description: "Sample description",
+      project_id: 1,
+      title: "Tomato API in C#",
+      startdate: new Date(),
+      enddate: new Date(),
+      dev: 1
+    },
+    {
+      description: "Sample description",
+      project_id: 10,
+      title: "Heroku Pipelining",
+      startdate: new Date(),
+      enddate: new Date(),
+      dev: 1
+    }
+  ];
+
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {}
 
   displayedColumns: string[] = ['title','description','startdate','enddate','duration','devno',];
@@ -49,4 +67,5 @@ export class AssignedprojectsComponent implements OnInit {
   ngOnInit() {
   }
 
+  logsuccess() {}
 }
