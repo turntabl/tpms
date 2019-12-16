@@ -15,8 +15,8 @@ export class ProjectloggingService {
 
   constructor( private http: HttpClient) { }
 
-  //get loggedhours from server
-  getClients (): Observable<Clients[]> {
-    return this.http.get<Clients[]>(this.projectsLoggingUrl)
-    }
+  // //get loggedhours from server
+  // getClients (): Observable<Clients[]> {
+  //   return this.http.get<Clients[]>(this.projectsLoggingUrl)
+  //   }
 }
