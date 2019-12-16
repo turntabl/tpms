@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 // Reactive forms
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators,FormBuilder } from '@angular/forms';
 import { ProjectService } from 'src/app/project.service';
 
 
@@ -14,12 +14,19 @@ export class AddprojectComponent implements OnInit {
   projectForm = new FormGroup({
     description: new FormControl(''),
     project_id:new FormControl(''),
-    title: new FormControl('')
+    title: new FormControl(''),
+    startdate: new FormControl(''),
+    enddate: new FormControl(''),
+    devno: new FormControl('')
     
     
 
   }); 
   constructor(private ProjectService: ProjectService) { }
+
+ 
+
+
 
   ngOnInit() { }
   onSubmit() {
