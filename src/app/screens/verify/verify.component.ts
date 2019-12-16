@@ -23,7 +23,7 @@ export class VerifyComponent implements OnInit {
       .subscribe(response => {
         // console.log("Response", response[0].emp_role);
         switch (response[0].emp_role) {
-          case "admin":
+          case "Administrator":
             // this.appservice.changeMessage(response[0].emp_name);
             localStorage.setItem("username", response[0].emp_name);
             this.isLoading = false;
