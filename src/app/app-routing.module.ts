@@ -10,6 +10,7 @@ import { DevelopersComponent } from "./screens/admin/components/developers/devel
 import { AssignedprojectsComponent } from "./screens/developer/components/assignedprojects/assignedprojects.component";
 import { VerifyComponent } from "./screens/verify/verify.component";
 import { NavigationComponent } from "./screens/admin/navigation/navigation.component";
+import { NavComponent } from "./screens/developer/nav/nav.component";
 
 const routes: Routes = [
   {
@@ -17,18 +18,19 @@ const routes: Routes = [
     component: NavigationComponent,
     children: [
       { path: "projects", component: ProjectsComponent },
-      // { path: "projects/:name", component: ProjectsComponent },
       { path: "hour", component: HourComponent },
       { path: "developer", component: DevelopersComponent }
     ]
   },
-  { path: "developer", component: DashboardComponent },
-  { path: "developer/hour", component: HoursComponent },
-  { path: "developer/projects", component: AssignedprojectsComponent },
   { path: "verify/:name", component: VerifyComponent },
-  { path: "developer", component: DashboardComponent },
-  { path: "developer/hour", component: HoursComponent },
-  { path: "developer/projects", component: AssignedprojectsComponent }
+  {
+    path: "developer",
+    component: NavComponent,
+    children: [
+      { path: "hour", component: HoursComponent },
+      { path: "projects", component: AssignedprojectsComponent }
+    ]
+  }
 ];
 
 @NgModule({

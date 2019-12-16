@@ -26,6 +26,7 @@ import { NavigationComponent } from "./screens/admin/navigation/navigation.compo
 import { VerifyComponent } from "./screens/verify/verify.component";
 import { MatFormFieldModule, MatInputModule } from "@angular/material";
 import { MatToolbarModule } from "@angular/material/toolbar";
+import { NavComponent } from './screens/developer/nav/nav.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { MatToolbarModule } from "@angular/material/toolbar";
     DevelopersComponent,
     AssignedprojectsComponent,
     NavigationComponent,
-    VerifyComponent
+    VerifyComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
