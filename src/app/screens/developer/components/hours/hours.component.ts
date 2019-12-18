@@ -38,9 +38,14 @@ export class HoursComponent implements OnInit {
   constructor(private appservice: AppService) {}
 
   ngOnInit() {
-    this.appservice.getLoggedHours().subscribe(response => {
-      // console.log(response);
-      this.dataSource = response
-    });
+    // this.appservice.getLoggedHours().subscribe(response => {
+    //   // console.log(response);
+    //   this.dataSource = response
+    // });
+    this.appservice
+      .getLoggedHoursForDev(localStorage.getItem("empId"))
+      .subscribe(response => {
+        this.dataSource = response;
+      });
   }
 }

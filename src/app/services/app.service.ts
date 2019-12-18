@@ -23,4 +23,9 @@ export class AppService {
   getLoggedHours(): Observable<ProjectModel[]> {
     return this.http.get<ProjectModel[]>(this.developerService + "log");
   }
+  getLoggedHoursForDev(empId: string): Observable<ProjectModel[]> {
+    return this.http.get<ProjectModel[]>(
+      this.developerService + "projectlogged/dev/" + empId
+    );
+  }
 }
