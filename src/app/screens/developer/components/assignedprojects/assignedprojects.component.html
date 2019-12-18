@@ -116,13 +116,13 @@
             <ng-container matColumnDef="Web Services">
               <th mat-header-cell *matHeaderCellDef>{{ incomingProject[0].project_title}} </th>
               <!-- <th mat-header-cell *matHeaderCellDef>{{incomingProject.project_title}} </th> -->
-              <td mat-cell *matCellDef="let element"> <input type="text" id="form3" formControlName="project_hours"
+              <td mat-cell *matCellDef="let element"> <input type="number" id="form3" formControlName="project_hours"
                   class="form-control validate"></td>
             </ng-container>
             <ng-container matColumnDef="Volunteering">
               <th mat-header-cell *matHeaderCellDef>Volunteering</th>
               <td mat-cell *matCellDef="let element">
-                <input type="text" id="form3" formControlName="volunteering_hours" class="form-control validate"></td>
+                <input type="number" id="form3" formControlName="volunteering_hours" class="form-control validate"></td>
             </ng-container>
 
 
