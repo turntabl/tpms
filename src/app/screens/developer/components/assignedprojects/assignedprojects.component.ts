@@ -41,8 +41,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class AssignedprojectsComponent implements OnInit {
   incomingProject = [{ project_id: 1, project_title: "React" }];
-  som: Date = new Date();
-
+  showAlert: boolean = false;
   assignedProjects: Array<ProjectInterface> = [
     {
       description: "Sample description",
@@ -68,7 +67,7 @@ export class AssignedprojectsComponent implements OnInit {
     sick: new FormControl(""),
     emp_id: new FormControl(localStorage.getItem("empId")),
     project_id: new FormControl(this.incomingProject[0].project_id),
-    date: new FormControl(this.som.toISOString().slice(0, 10))
+    date: new FormControl(new Date().toISOString().slice(0, 10))
   });
   constructor(private plog: ProjectloggingService) {}
   newProject = "";
@@ -91,15 +90,16 @@ export class AssignedprojectsComponent implements OnInit {
     // .getaddhours()
     // .subscribe(data=>this.dummy=data);
   }
-  ngOnInit() {
-    // this.getaddhours()
-  }
+  ngOnInit() {}
 
   logsuccess() {}
   onSubmit() {
-    this.plog
-      .loghours(this.hourform.value)
-      .subscribe(response => console.log(response));
+    this.plog.loghours(this.hourform.value).subscribe(response => {
+      setTimeout(() => {
+        this.showAlert = false;
+      }, 3000);
+      this.showAlert = true;
+    });
     // alert(JSON.stringify(this.hourform.value));
     // this.ProjectService
     // .addNewProject(this.projectForm.value)

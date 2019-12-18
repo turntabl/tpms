@@ -1,6 +1,6 @@
 export interface Projectlogging {
 //    projectlogging_id:number;
-    project_hours: string;
+    project_hours: number;
     emp_id: number;
     project_id: number;
     vacation: string;
