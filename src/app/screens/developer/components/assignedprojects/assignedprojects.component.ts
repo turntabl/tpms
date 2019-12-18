@@ -3,15 +3,10 @@ import { MatTableDataSource } from "@angular/material/table";
 import { DomSanitizer } from "@angular/platform-browser";
 import { MatIconRegistry } from "@angular/material/icon";
 import { ProjectInterface } from "src/app/screens/project-interface";
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder
-} from "@angular/forms";
+import { FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
 import { Projectlogging } from "src/app/projectlogging";
-import { ProjectloggingService } from "src/app/projectlogging.service";
-
+import { ProjectloggingService } from "src/app/projectlogging.service";  
+  
 export interface PeriodicElement {
   title: string;
   description: string;
