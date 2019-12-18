@@ -1,15 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
-import { DomSanitizer } from "@angular/platform-browser";
-import { MatIconRegistry } from "@angular/material/icon";
-import { ProjectInterface } from "src/app/screens/project-interface";
 import {
   FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder
-} from "@angular/forms";
-import { Projectlogging } from "src/app/projectlogging";
+  FormControl} from "@angular/forms";
 import { ProjectloggingService } from "src/app/projectlogging.service";
 import { ProjectService } from "src/app/project.service";
 
@@ -47,7 +40,7 @@ export class AssignedprojectsComponent implements OnInit {
     vacation: new FormControl(""),
     sick: new FormControl(""),
     emp_id: new FormControl(localStorage.getItem("empId")),
-    project_id: new FormControl(this.incomingProject.project_id),
+    project_id: new FormControl(localStorage.getItem("pid")),
     date: new FormControl(new Date().toISOString().slice(0, 10))
   });
   constructor(
@@ -72,7 +65,8 @@ export class AssignedprojectsComponent implements OnInit {
     this.projectService
       .getAssignedProject(localStorage.getItem("empId"))
       .subscribe(response => {
-        this.incomingProject.project_id = response.project_id;
+        // this.incomingProject.project_id = response.project_id;
+        localStorage.setItem("pid", response.project_id.toString());
         this.incomingProject.title = response.title;
       });
   }
@@ -90,13 +84,13 @@ export class AssignedprojectsComponent implements OnInit {
     // } else {
 
     // }
-    this.plog.loghours(this.hourform.value).subscribe(response => {
+    this.plog.loghours(this.hourform.value).subscribe(() => {
       setTimeout(() => {
         this.showAlert = false;
       }, 3000);
       this.showAlert = true;
     });
-    // alert(this.hourform.value.volunteering_hours);
+    // alert(JSON.stringify(this.hourform.value));
     // this.ProjectService
     // .addNewProject(this.projectForm.value)
     // .subscribe(client=>console.log(client));
