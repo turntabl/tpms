@@ -9,7 +9,7 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class ProjectloggingService {
-  private projectsUrl = 'https://developerservice03.herokuapp.com/addhours';
+  private projectsUrl = 'https://developerservice03.herokuapp.com/addHours';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
