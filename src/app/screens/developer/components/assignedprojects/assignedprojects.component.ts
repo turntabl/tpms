@@ -1,8 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
-import {
-  FormGroup,
-  FormControl} from "@angular/forms";
+import { FormGroup, FormControl } from "@angular/forms";
+import { DomSanitizer } from "@angular/platform-browser";
+import { MatIconRegistry } from "@angular/material/icon";
+import { ProjectInterface } from "src/app/screens/project-interface";
+import { Projectlogging } from "src/app/projectlogging";
+
 import { ProjectloggingService } from "src/app/projectlogging.service";
 import { ProjectService } from "src/app/project.service";
 
@@ -31,7 +34,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ["./assignedprojects.component.css"]
 })
 export class AssignedprojectsComponent implements OnInit {
-  incomingProject = { project_id: 0, title: "" };
+  incomingProject = { project_id: 2, title: "" };
   showAlert: boolean = false;
 
   hourform = new FormGroup({
@@ -41,7 +44,7 @@ export class AssignedprojectsComponent implements OnInit {
     sick: new FormControl(""),
     emp_id: new FormControl(localStorage.getItem("empId")),
     project_id: new FormControl(localStorage.getItem("pid")),
-    date: new FormControl(new Date().toISOString().slice(0, 10))
+    logged_date: new FormControl(new Date().toISOString().slice(0, 10))
   });
   constructor(
     private plog: ProjectloggingService,
@@ -69,6 +72,12 @@ export class AssignedprojectsComponent implements OnInit {
         localStorage.setItem("pid", response.project_id.toString());
         this.incomingProject.title = response.title;
       });
+    // this.projectService
+    //   .getAssignedProject(localStorage.getItem("empId"))
+    //   .subscribe(response => {
+    //     this.incomingProject.project_id = response.project_id;
+    //     this.incomingProject.title = response.title;
+    //   });
   }
 
   logsuccess() {}
@@ -90,6 +99,8 @@ export class AssignedprojectsComponent implements OnInit {
       }, 3000);
       this.showAlert = true;
     });
+    // console.log(this.hourform.value)
+    // alert(JSON.stringify(this.hourform.value));
     // alert(JSON.stringify(this.hourform.value));
     // this.ProjectService
     // .addNewProject(this.projectForm.value)
