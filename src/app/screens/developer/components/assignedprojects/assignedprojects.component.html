@@ -7,7 +7,7 @@
                 class="fas fa-download fa-sm text-white-50"></i> Add New Project</a>
     </div> -->
     
-    <div class="modal fade" id="modalSubscriptionForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    <!-- <div class="modal fade" id="modalSubscriptionForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -61,7 +61,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
     <!-- Content Row -->
     <!-- <app-card></app-card> -->
@@ -99,40 +99,40 @@
                     <!-- <mat-form-field>
                             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
                             </mat-form-field> -->
-                          
+                          <form action="" [formGroup]="hourform" (ngSubmit)="onSubmit()">
                           <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
                           
                             <!-- Title Column -->
-                            <ng-container matColumnDef="title">
+                            <!-- <ng-container matColumnDef="title">
                               <th mat-header-cell *matHeaderCellDef> Activities </th>
-                              <td mat-cell *matCellDef="let element"> {{element.title}} </td>
-                            </ng-container>
+                              <td mat-cell *matCellDef="let element"> </td>
+                            </ng-container> -->
                           <!-- Description Column -->
-                          <ng-container matColumnDef="description">
-                            <th mat-header-cell *matHeaderCellDef> Monday </th>
-                            <td mat-cell *matCellDef="let element"> <input type="text" id="form3" class="form-control validate"></td>
+                          <ng-container matColumnDef="Web Services">
+                            <th mat-header-cell *matHeaderCellDef>Web Service </th>
+                            <td mat-cell *matCellDef="let element"> <input type="text" id="form3" formControlName="project" class="form-control validate"></td>
                           </ng-container>
-                          
-                          
-                          
-                            <!-- StartDate Column -->
-                            <ng-container matColumnDef="startdate">
-                              <th mat-header-cell *matHeaderCellDef> Tuesday </th>
-                              <td mat-cell *matCellDef="let element"> <input type="text" id="form3" class="form-control validate"> </td>
+                          <ng-container matColumnDef="Volunteering">
+                              <th mat-header-cell *matHeaderCellDef>Volunteering</th>
+                              <td mat-cell *matCellDef="let element"> 
+                                <input type="text" id="form3" formControlName="volunteering" class="form-control validate"></td>
                             </ng-container>
                           
-                            <!-- EndDate Column -->
-                            <ng-container matColumnDef="enddate">
-                              <th mat-header-cell *matHeaderCellDef> Wednesday </th>
-                              <td mat-cell *matCellDef="let element"><input type="text" id="form3" class="form-control validate"></td>
-                            </ng-container>
                           
-                            <!-- Duration Column -->
-                            <ng-container matColumnDef="duration">
-                              <th mat-header-cell *matHeaderCellDef> Thursday </th>
-                              <td mat-cell *matCellDef="let element"><input type="text" id="form3" class="form-control validate"></td>
+                          
+                             <ng-container matColumnDef="Sick">
+                              <th mat-header-cell *matHeaderCellDef> Sick</th>
+                              <td mat-cell *matCellDef="let element"> <input type="checkbox"  ng-model="checkboxModel.value2"  formControlName="sick" id="form3" class="form-control validate"> </td>
                             </ng-container>
-                             <!-- Dev # Column -->
+                         
+                            
+                          <ng-container matColumnDef="Vacation">
+                              <th mat-header-cell *matHeaderCellDef> Vacation </th>
+                              <td mat-cell *matCellDef="let element"><input type="checkbox" value="vacation" formControlName="vacation" id="form3" class="form-control validate"></td>
+                            </ng-container>
+                         
+                            
+                           
                              <ng-container matColumnDef="devno">
                                     <th mat-header-cell *matHeaderCellDef> Friday</th>
                                     <td mat-cell *matCellDef="let element"><input type="text" id="form3" class="form-control validate"> </td>
@@ -142,10 +142,17 @@
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                            
                           </table>
+                          <button type="submit" id ="submit" class="form-control mb-4">Submit</button>
                           
+                        </form>
+                         <br /> 
+
+                         
+
                            
             </div>
-             <button type="submit" id ="submit" class="form-control mb-4">Submit</button>
+            <br />
+             
         </mat-tab>
   
     </mat-tab-group>
