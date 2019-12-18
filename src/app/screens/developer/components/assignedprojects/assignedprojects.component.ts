@@ -93,6 +93,17 @@ export class AssignedprojectsComponent implements OnInit {
     // } else {
 
     // }
+
+    if (
+      this.hourform.value.project_hours ||
+      this.hourform.value.volunteering_hours ||
+      this.hourform.value.vacation ||
+      this.hourform.value.sic
+      this.hourform.value.logged_date
+    ) {
+    } else {
+    }
+
     this.plog.loghours(this.hourform.value).subscribe(() => {
       setTimeout(() => {
         this.showAlert = false;
