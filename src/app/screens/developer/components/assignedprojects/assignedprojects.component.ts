@@ -1,32 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
+import { Component, OnInit } from "@angular/core";
+import { MatTableDataSource } from "@angular/material/table";
 import { DomSanitizer } from "@angular/platform-browser";
 import { MatIconRegistry } from "@angular/material/icon";
 import { ProjectInterface } from "src/app/screens/project-interface";
-
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder
+} from "@angular/forms";
+import { Projectlogging } from "src/app/projectlogging";
+import { ProjectloggingService } from "src/app/projectlogging.service";
 
 export interface PeriodicElement {
   title: string;
-  description:string;
+  description: string;
   startdate: string;
   enddate: string;
   duration: number;
   devno: number;
 }
 const ELEMENT_DATA: PeriodicElement[] = [
-  { title: 'Bug fix', description:'Lorem ipsium', startdate: '12.01.18', enddate:'12.01.18', duration:3,devno:2},
-  { title: 'Data', description:'Lorem ipsium',startdate: '21.04.19', enddate: '12.01.18', duration:1,devno:7},
-  { title: 'Integration', description:'Lorem ipsium',startdate: '13.1.17', enddate:'12.01.18', duration:5,devno:4},
-  { title: 'Web Services',description:'Lorem ipsium' ,startdate: '3.09.17', enddate:'12.01.18', duration:2,devno:1},
-  { title: 'Database', description:'Lorem ipsium',startdate: '12.01.18', enddate: '12.01.18', duration:4,devno:2},
-  { title: 'Testing', description:'Lorem ipsium',startdate: '13.1.17', enddate: '12.01.18', duration:8,devno:6},
-  { title: 'API', description:'Lorem ipsium',startdate: '3.09.17', enddate:'12.01.18', duration:6,devno:2},
-  { title: 'Code', description:'Lorem ipsium',startdate: '13.1.17', enddate: '12.01.18', duration:1,devno:3},
-  { title: 'Meeting', description:'Lorem ipsium',startdate: '3.09.17', enddate:'12.01.18', duration:1,devno:9},
-  { title: 'Finance', description:'Lorem ipsium',startdate: '12.01.18', enddate:'12.01.18', duration:9,devno:8}
+  {
+    title: "Web Services",
+    description: "Lorem ipsium",
+    startdate: "3.09.17",
+    enddate: "12.01.18",
+    duration: 6,
+    devno: 2
+  }
 ];
-
-
 
 @Component({
   selector: "app-assignedprojects",
@@ -34,38 +37,46 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ["./assignedprojects.component.css"]
 })
 export class AssignedprojectsComponent implements OnInit {
-  assignedProjects: Array<ProjectInterface> = [
-    {
-      description: "Sample description",
-      project_id: 1,
-      title: "Tomato API in C#",
-      startdate: new Date(),
-      enddate: new Date(),
-      dev: 1
-    },
-    {
-      description: "Sample description",
-      project_id: 10,
-      title: "Heroku Pipelining",
-      startdate: new Date(),
-      enddate: new Date(),
-      dev: 1
-    }
+  incomingProject = [{ project_id: 1, project_title: "React" }];
+  showAlert: boolean = false;
+
+  hourform = new FormGroup({
+    project_hours: new FormControl(""),
+    volunteering_hours: new FormControl(""),
+    vacation: new FormControl(""),
+    sick: new FormControl(""),
+    emp_id: new FormControl(localStorage.getItem("empId")),
+    project_id: new FormControl(this.incomingProject[0].project_id),
+    date: new FormControl(new Date().toISOString().slice(0, 10))
+  });
+  constructor(private plog: ProjectloggingService) {}
+  newProject = "";
+  displayedColumns: string[] = [
+    "Web Services",
+    "Volunteering",
+    "Sick",
+    "Vacation"
   ];
-
-  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {}
-
-  displayedColumns: string[] = ['title','description','startdate','enddate','duration','devno',];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
-
+  dummy = [];
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   logsuccess() {}
+  onSubmit() {
+    this.plog.loghours(this.hourform.value).subscribe(response => {
+      setTimeout(() => {
+        this.showAlert = false;
+      }, 3000);
+      this.showAlert = true;
+    });
+    // alert(JSON.stringify(this.hourform.value));
+    // this.ProjectService
+    // .addNewProject(this.projectForm.value)
+    // .subscribe(client=>console.log(client));
+  }
 }
