@@ -12,14 +12,14 @@ export interface PeriodicElement {
 const ELEMENT_DATA: PeriodicElement[] = [
   { title: 'Bug fix', date: '12.01.18', hours: 2},
   { title: 'Chorkor Basic School', date: '21.04.19', hours: 3},
-  { title: 'Integration', date: '13.1.17', hours: 6},
-  { title: 'Achimota SHS', date: '3.09.17', hours:6},
-  { title: 'Database', date: '12.01.18', hours: 4},
-  { title: 'Testing', date: '13.1.17', hours: 4},
-  { title: 'API', date: '3.09.17', hours: 5},
-  { title: 'Global Code', date: '13.1.17', hours: 7},
-  { title: 'Meeting', date: '3.09.17', hours:2},
-  { title: 'Finance', date: '12.01.18', hours: 4}
+  // { title: 'Integration', date: '13.1.17', hours: 6},
+  // { title: 'Achimota SHS', date: '3.09.17', hours:6},
+  // { title: 'Database', date: '12.01.18', hours: 4},
+  // { title: 'Testing', date: '13.1.17', hours: 4},
+  // { title: 'API', date: '3.09.17', hours: 5},
+  // { title: 'Global Code', date: '13.1.17', hours: 7},
+  // { title: 'Meeting', date: '3.09.17', hours:2},
+  // { title: 'Finance', date: '12.01.18', hours: 4}
 ];
 
 @Component({
@@ -29,12 +29,14 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class HoursComponent implements OnInit {
   displayedColumns: string[] = ['title','date','hours'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  dataSource =[
+    { title: 'Chorkor Basic School', date: '21.04.19', hours: 3},
+  ]
 
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
+  // applyFilter(filterValue: string) {
+  //   this.dataSource.filter = filterValue.trim().toLowerCase();
+  // }
 
 
   constructor() { }
