@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { Employee } from "../employee";
+import ProjectModel from "../models/ProjectModel";
 @Injectable({
   providedIn: "root"
 })
@@ -18,5 +19,8 @@ export class AppService {
     return this.http.get<Employee[]>(
       this.developerService + "dev/email/" + email
     );
+  }
+  getLoggedHours(): Observable<ProjectModel[]> {
+    return this.http.get<ProjectModel[]>(this.developerService + "log");
   }
 }
