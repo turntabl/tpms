@@ -1,4 +1,18 @@
 table {
     width: 100%;
   }
-  
+  #submit{
+    background-color: rgb(98, 43, 226);
+   color: white;
+   font-size: larger;
+
+}
+
+#add{
+    color:black; 
+    font-size: x-large;
+}
+
+input {
+  width: 100px;
+}
