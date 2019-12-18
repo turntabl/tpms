@@ -3,13 +3,9 @@ import { MatTableDataSource } from "@angular/material/table";
 import { DomSanitizer } from "@angular/platform-browser";
 import { MatIconRegistry } from "@angular/material/icon";
 import { ProjectInterface } from "src/app/screens/project-interface";
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder
-} from "@angular/forms";
+import { FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
 import { Projectlogging } from "src/app/projectlogging";
+
 import { ProjectloggingService } from "src/app/projectlogging.service";
 import { ProjectService } from "src/app/project.service";
 
@@ -38,7 +34,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ["./assignedprojects.component.css"]
 })
 export class AssignedprojectsComponent implements OnInit {
-  incomingProject = { project_id: 0, title: "" };
+  incomingProject = { project_id: 2, title: "" };
   showAlert: boolean = false;
 
   hourform = new FormGroup({
@@ -69,12 +65,16 @@ export class AssignedprojectsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.projectService
-      .getAssignedProject(localStorage.getItem("empId"))
-      .subscribe(response => {
-        this.incomingProject.project_id = response.project_id;
-        this.incomingProject.title = response.title;
-      });
+    // this.projectService
+    //   .getAssignedProject(localStorage.getItem("empId"))
+    //   .subscribe(response => {
+    //     this.incomingProject.project_id = response.project_id;
+    //     this.incomingProject.title = response.title;
+    //   });
+    this.projectService.getAssignedProject(localStorage.getItem("empId")).subscribe(response => {
+          this.incomingProject.project_id = response.project_id;
+          this.incomingProject.title = response.title;
+        });
   }
 
   logsuccess() {}
@@ -96,7 +96,8 @@ export class AssignedprojectsComponent implements OnInit {
       }, 3000);
       this.showAlert = true;
     });
-    // alert(this.hourform.value.volunteering_hours);
+
+    // alert(JSON.stringify(this.hourform.value));
     // this.ProjectService
     // .addNewProject(this.projectForm.value)
     // .subscribe(client=>console.log(client));
