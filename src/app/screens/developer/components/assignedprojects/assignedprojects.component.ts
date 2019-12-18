@@ -82,39 +82,11 @@ export class AssignedprojectsComponent implements OnInit {
 
   logsuccess() {}
   onSubmit() {
-    // Object.keys(this.hourform.value).forEach(entry => {
-    //   console.log(entry, this.hourform.value[entry]);
-    //   if (this.hourform.value[entry] == "") {
-    //     console.log("Enter something");
-    //   }
-    // });
-    // if (this.hourform.value.sick == "" || this.hourform.value) {
-
-    // } else {
-
-    // }
-
-    if (
-      this.hourform.value.project_hours ||
-      this.hourform.value.volunteering_hours ||
-      this.hourform.value.vacation ||
-      this.hourform.value.sic
-      this.hourform.value.logged_date
-    ) {
-    } else {
-    }
-
     this.plog.loghours(this.hourform.value).subscribe(() => {
       setTimeout(() => {
         this.showAlert = false;
       }, 3000);
       this.showAlert = true;
     });
-    // console.log(this.hourform.value)
-    // alert(JSON.stringify(this.hourform.value));
-    // alert(JSON.stringify(this.hourform.value));
-    // this.ProjectService
-    // .addNewProject(this.projectForm.value)
-    // .subscribe(client=>console.log(client));
   }
 }
