@@ -61,8 +61,10 @@ app.get(
 );
 
 app.get("/logout", function(req, res) {
+  localStorage.clear();
   req.logout();
-  res.end("You have logged out.");
+  res.redirect("https://turntabl.io");
+  // res.end("You have logged out.");
 });
 
 app.post(
@@ -73,7 +75,7 @@ app.post(
     failureFlash: false
   }),
   function(req, res) {
-    res.redirect("https://tpms-ui.herokuapp.com/verify/"+userEmail);
+    res.redirect("https://tpms-ui.herokuapp.com/verify/" + userEmail);
   }
 );
 
@@ -90,5 +92,3 @@ app.get("/*", function(req, res) {
 
 // Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8080);
-
-
