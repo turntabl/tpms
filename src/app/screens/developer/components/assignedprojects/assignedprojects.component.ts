@@ -85,13 +85,13 @@ export class AssignedprojectsComponent implements OnInit {
 
   logsuccess() {}
   onSubmit() {
-    // this.plog.loghours(this.hourform.value).subscribe(() => {
-    //   setTimeout(() => {
-    //     this.showAlert = false;
-    //   }, 3000);
-    //   this.showAlert = true;
-    // });
-    alert(JSON.stringify(this.hourform.value));
+    this.plog.loghours(this.hourform.value).subscribe(() => {
+      setTimeout(() => {
+        this.showAlert = false;
+      }, 3000);
+      this.showAlert = true;
+    });
+    // alert(JSON.stringify(this.hourform.value));
     
   }
 
