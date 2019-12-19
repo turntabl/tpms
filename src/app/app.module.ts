@@ -80,6 +80,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatToolbarModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSelectModule,
+    MatAutocompleteModule
 
      
 
