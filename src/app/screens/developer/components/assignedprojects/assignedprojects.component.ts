@@ -6,6 +6,7 @@ import { MatIconRegistry } from "@angular/material/icon";
 import { ProjectInterface } from "src/app/screens/project-interface";
 import { Projectlogging } from "src/app/projectlogging";
 
+
 import { ProjectloggingService } from "src/app/projectlogging.service";
 import { ProjectService } from "src/app/project.service";
 
@@ -36,6 +37,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class AssignedprojectsComponent implements OnInit {
   incomingProject = { project_id: 2, title: "" };
   showAlert: boolean = false;
+  
 
   hourform = new FormGroup({
     project_hours: new FormControl(""),
@@ -88,5 +90,6 @@ export class AssignedprojectsComponent implements OnInit {
       }, 3000);
       this.showAlert = true;
     });
+    
   }
 }
