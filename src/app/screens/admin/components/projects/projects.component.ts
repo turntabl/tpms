@@ -80,9 +80,10 @@ export class ProjectsComponent implements OnInit {
   displayedColumns: string[] = [
     'title'
   ];
+  dataSource = [];
 
-  clone = new MatTableDataSource(ELEMENT_DATA);
-  dataSource = this.clone;
+  // clone = new MatTableDataSource(ELEMENT_DATA);
+  // dataSource = this.clone;
 
   // ngOnInit() {
   //      this.dataSource.data.push({
@@ -91,20 +92,20 @@ export class ProjectsComponent implements OnInit {
 
 
 
-  projectObservable: Observable<ProjectInterface[]>;
-  incomingProjects = [];
+  // projectObservable: Observable<ProjectInterface[]>;
+  // incomingProjects = [];
   // addme() {
   //   this.dataSource.data.push({
   //     title: 'Christy project' });
   // }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
+  // applyFilter(filterValue: string) {
+  //   this.dataSource.filter = filterValue.trim().toLowerCase();
+  // }
 
   ngOnInit() {
     this.ProjectService.getProject().subscribe(response => {
-        this.incomingProjects = response;
+        this.dataSource = response;
       });
     }
       onSubmit() {
