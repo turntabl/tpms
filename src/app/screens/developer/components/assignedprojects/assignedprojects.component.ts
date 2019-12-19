@@ -90,5 +90,6 @@ export class AssignedprojectsComponent implements OnInit {
       }, 3000);
       this.showAlert = true;
     });
+    
   }
 }

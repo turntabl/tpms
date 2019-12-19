@@ -16,3 +16,6 @@ table {
 input {
   width: 100px;
 }
+mat-form-field {
+  margin-right: 12px;
+}
