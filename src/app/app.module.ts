@@ -37,6 +37,8 @@ import { VerifyComponent } from "./screens/verify/verify.component";
 import { MatFormFieldModule, MatInputModule, MatNativeDateModule, DateAdapter, MAT_DATE_LOCALE } from "@angular/material";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { NavComponent } from './screens/developer/nav/nav.component';
+import { ViewChild, HostListener, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+
 
 @NgModule({
   declarations: [
@@ -74,6 +76,8 @@ import { NavComponent } from './screens/developer/nav/nav.component';
     MatToolbarModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    
+
 
      
 
