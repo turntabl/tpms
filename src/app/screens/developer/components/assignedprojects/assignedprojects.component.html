@@ -21,6 +21,7 @@
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
+  <button mat-raised-button (click)="picker.open()">Open</button>
   <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 50px;">
     <h3 style="font-weight: bolder; color: rgb(97, 93, 93);">Log Project Hours Here</h3>
   </div>
