@@ -16,9 +16,13 @@ export class ProjectService {
   //  adding project to db
   addNewProject(body: ProjectInterface): Observable<ProjectInterface> {
     return this.http.post<ProjectInterface>(
-      this.projectUrl + '/projects',
+      this.projectUrl + '/projects/add',
       body
     );
+  }
+
+  getProject(): Observable<ProjectInterface[]> {
+    return this.http.get<ProjectInterface[]>(this.projectUrl + '/projects');
   }
 
   getAssignedProject(empId: string): Observable<ProjectInterface> {

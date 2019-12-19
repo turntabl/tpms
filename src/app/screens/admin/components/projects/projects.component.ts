@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import { ProjectService } from 'src/app/project.service';
 import { ProjectInterface } from 'src/app/screens/project-interface';
+import { Observable } from 'rxjs';
 
 export interface PeriodicElement {
   title: string;
@@ -19,41 +20,41 @@ export interface PeriodicElement {
 
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {
-    title: 'Bug fix'
-  },
-  {
-    title: 'Data'
-  },
-  {
-    title: 'Integration'
-  },
-  {
-    title: 'Web Services'
+  // {
+  //   title: 'Bug fix'
+  // },
+  // {
+  //   title: 'Data'
+  // },
+  // {
+  //   title: 'Integration'
+  // },
+  // {
+  //   title: 'Web Services'
 
-  },
-  {
-    title: 'Database'
+  // },
+  // {
+  //   title: 'Database'
 
-  },
-  {
-    title: 'Testing'
+  // },
+  // {
+  //   title: 'Testing'
 
-  },
-  {
-    title: 'TPMS'
-  },
-  {
-    title: 'Code'
+  // },
+  // {
+  //   title: 'TPMS'
+  // },
+  // {
+  //   title: 'Code'
 
-  },
-  {
-    title: 'Meeting'
-  },
-  {
-    title: 'Finance'
+  // },
+  // {
+  //   title: 'Meeting'
+  // },
+  // {
+  //   title: 'Finance'
 
-  }
+  // }
 ];
 
 @Component({
@@ -62,16 +63,20 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements OnInit {
-  // constructor(private ProjectService: ProjectService) { }
-  // ProjectService: any;
-  // tslint:disable-next-line: no-shadowed-variable
-  constructor(private ProjectService: ProjectService, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {}
+
+  constructor(
+    // tslint:disable-next-line: no-shadowed-variable
+    private ProjectService: ProjectService,
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer) {}
+
+
+
   projectForm = new FormGroup({
     title: new FormControl('')
   });
 
 
-  // tslint:disable-next-line: member-ordering
   displayedColumns: string[] = [
     'title'
   ];
@@ -79,26 +84,34 @@ export class ProjectsComponent implements OnInit {
   clone = new MatTableDataSource(ELEMENT_DATA);
   dataSource = this.clone;
 
-  addme() {
-    this.dataSource.data.push({
-      title: 'Christy project' });
-  }
+  // ngOnInit() {
+  //      this.dataSource.data.push({
+  //        title: 'Christy project' });
+  //    }
+
+
+
+  projectObservable: Observable<ProjectInterface[]>;
+  incomingProjects = [];
+  // addme() {
+  //   this.dataSource.data.push({
+  //     title: 'Christy project' });
+  // }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-
   ngOnInit() {
-    this.dataSource.data.push({
-      title: 'Christy project' });
-  }
-
-  onSubmit() {
+    this.ProjectService.getProject().subscribe(response => {
+        this.incomingProjects = response;
+      });
+    }
+      onSubmit() {
       this.ProjectService
         .addNewProject(this.projectForm.value)
         .subscribe(client => console.log(client));
-      alert(JSON.stringify(this.projectForm.value));
+      // alert(JSON.stringify(this.projectForm.value));
   }
 
 
