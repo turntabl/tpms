@@ -61,10 +61,9 @@ app.get(
 );
 
 app.get("/logout", function(req, res) {
-  // localStorage.clear();
   req.logout();
-  res.end("You have logged out.");
-  // res.redirect("https://turntabl.io");
+  res.redirect("https://turntabl.io");
+  // res.end("You have logged out.");
 });
 
 app.post(
