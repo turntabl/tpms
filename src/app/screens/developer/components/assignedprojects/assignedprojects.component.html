@@ -6,6 +6,7 @@
     </button>
   </div>
 
+<<<<<<< HEAD
   
     <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Back Log</h1>
@@ -158,6 +159,77 @@
   
     </mat-tab-group>
     <!-- Content Row -->
+=======
+
+  <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 50px;">
+    <h3 style="font-weight: bolder; color: rgb(97, 93, 93);">Log Project Hours Here</h3>
+  </div>
+  <br />
+  <!-- <div *ngFor="let dev of devs" style="margin:20px"> -->
+  <div class="container-fluid">
+    <form action="" [formGroup]="hourform" (ngSubmit)="onSubmit()">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!-- Title Column -->
+        <!-- <ng-container matColumnDef="title">
+                              <th mat-header-cell *matHeaderCellDef> Activities </th>
+                              <td mat-cell *matCellDef="let element"> </td>
+                            </ng-container> -->
+        <!-- Description Column -->
+        <ng-container matColumnDef="Web Services">
+          <th mat-header-cell *matHeaderCellDef style="font-size: xx-large;">{{incomingProject.title}} </th>
+          <td mat-cell *matCellDef="let element"> <input required="" placeholder="hours" autofocus type="number" min="0"
+              id="form3" formControlName="project_hours" class="form-control validate"></td>
+        </ng-container>
+        <ng-container matColumnDef="Volunteering">
+          <th mat-header-cell *matHeaderCellDef style="font-size: xx-large;">Volunteering</th>
+          <td mat-cell *matCellDef="let element">
+            <input type="number" min="0" id="form3" formControlName="volunteering_hours" class="form-control validate"
+              placeholder="hours"></td>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="Sick">
+          <th mat-header-cell *matHeaderCellDef style="font-size: xx-large;"> Sick</th>
+          <td mat-cell *matCellDef="let element"> <input type="radio" ng-model="checkboxModel.value2"
+              formControlName="vacation" id="form3" class="form-control validate"> </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="Vacation">
+          <th mat-header-cell *matHeaderCellDef style="font-size: xx-large;"> Vacation </th>
+          <td mat-cell *matCellDef="let element"><input type="radio" value="vacation" formControlName="vacation"
+              id="form3" class="form-control validate"></td>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="devno">
+          <th mat-header-cell *matHeaderCellDef> Friday</th>
+          <td mat-cell *matCellDef="let element"><input type="text" id="form3" class="form-control validate"> </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+      <br />
+      <button type="submit" id="submit" class="form-control mb-4">Submit</button>
+
+    </form>
+    <br />
+
+
+
+
+  </div>
+  <br />
+
+
+  <!-- Content Row -->
+
+>>>>>>> 7acc429d171c3510f815adead678e5082d19b25a
 
 
     <!-- Content Row -->

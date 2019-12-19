@@ -1,16 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
+import { FormGroup, FormControl } from "@angular/forms";
 import { DomSanitizer } from "@angular/platform-browser";
 import { MatIconRegistry } from "@angular/material/icon";
 import { ProjectInterface } from "src/app/screens/project-interface";
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder
-} from "@angular/forms";
 import { Projectlogging } from "src/app/projectlogging";
+
 import { ProjectloggingService } from "src/app/projectlogging.service";
+import { ProjectService } from "src/app/project.service";
 
 export interface PeriodicElement {
   title: string;
@@ -37,7 +34,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ["./assignedprojects.component.css"]
 })
 export class AssignedprojectsComponent implements OnInit {
-  incomingProject = [{ project_id: 1, project_title: "React" }];
+  incomingProject = { project_id: 2, title: "" };
   showAlert: boolean = false;
 
   hourform = new FormGroup({
@@ -46,10 +43,13 @@ export class AssignedprojectsComponent implements OnInit {
     vacation: new FormControl(""),
     sick: new FormControl(""),
     emp_id: new FormControl(localStorage.getItem("empId")),
-    project_id: new FormControl(this.incomingProject[0].project_id),
-    date: new FormControl(new Date().toISOString().slice(0, 10))
+    project_id: new FormControl(localStorage.getItem("pid")),
+    logged_date: new FormControl(new Date().toISOString().slice(0, 10))
   });
-  constructor(private plog: ProjectloggingService) {}
+  constructor(
+    private plog: ProjectloggingService,
+    private projectService: ProjectService
+  ) {}
   newProject = "";
   displayedColumns: string[] = [
     "Web Services",
@@ -64,10 +64,25 @@ export class AssignedprojectsComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.projectService
+      .getAssignedProject(localStorage.getItem("empId"))
+      .subscribe(response => {
+        // this.incomingProject.project_id = response.project_id;
+        localStorage.setItem("pid", response.project_id.toString());
+        this.incomingProject.title = response.title;
+      });
+    // this.projectService
+    //   .getAssignedProject(localStorage.getItem("empId"))
+    //   .subscribe(response => {
+    //     this.incomingProject.project_id = response.project_id;
+    //     this.incomingProject.title = response.title;
+    //   });
+  }
 
   logsuccess() {}
   onSubmit() {
+<<<<<<< HEAD
     this.plog
       .loghours(this.hourform.value)
       .subscribe(response =>{
@@ -81,5 +96,13 @@ export class AssignedprojectsComponent implements OnInit {
     // this.ProjectService
     // .addNewProject(this.projectForm.value)
     // .subscribe(client=>console.log(client));
+=======
+    this.plog.loghours(this.hourform.value).subscribe(() => {
+      setTimeout(() => {
+        this.showAlert = false;
+      }, 3000);
+      this.showAlert = true;
+    });
+>>>>>>> 7acc429d171c3510f815adead678e5082d19b25a
   }
 }
