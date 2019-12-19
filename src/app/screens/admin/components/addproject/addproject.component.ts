@@ -20,7 +20,7 @@ export class AddprojectComponent implements OnInit {
     // devno: new FormControl('')
   });  constructor(private ProjectService: ProjectService) { }
 
- 
+
 
 
 
@@ -28,7 +28,7 @@ export class AddprojectComponent implements OnInit {
   onSubmit() {
     this.ProjectService
       .addNewProject(this.projectForm.value)
-      .subscribe(client=> console.log(client));
+      .subscribe(client => console.log(client));
   // alert(JSON.stringify(this.projectForm.value))
   }
 }
