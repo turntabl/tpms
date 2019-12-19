@@ -1,190 +1,102 @@
-import { Component, OnInit } from "@angular/core";
-import { DomSanitizer } from "@angular/platform-browser";
-import { MatIconRegistry } from "@angular/material/icon";
+import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatIconRegistry } from '@angular/material/icon';
 
-import { MatTableDataSource } from "@angular/material/table";
+import { MatTableDataSource } from '@angular/material/table';
 import {
   FormGroup,
   FormControl,
   Validators,
   FormBuilder
-} from "@angular/forms";
-import { ProjectInterface } from "src/app/screens/project-interface";
+} from '@angular/forms';
+import { ProjectInterface } from 'src/app/screens/project-interface';
 
 export interface PeriodicElement {
   title: string;
-  description: string;
-  startdate: string;
-  enddate: string;
-  duration: number;
-  devno: number;
+
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
   {
-    title: "Bug fix",
-    description: "Lorem ipsium",
-    startdate: "12.01.18",
-    enddate: "12.01.18",
-    duration: 3,
-    devno: 2
+    title: 'Bug fix'
   },
   {
-    title: "Data",
-    description: "Lorem ipsium",
-    startdate: "21.04.19",
-    enddate: "12.01.18",
-    duration: 1,
-    devno: 7
+    title: 'Data'
   },
   {
-    title: "Integration",
-    description: "Lorem ipsium",
-    startdate: "13.1.17",
-    enddate: "12.01.18",
-    duration: 5,
-    devno: 4
+    title: 'Integration'
   },
   {
-    title: "Web Services",
-    description: "Lorem ipsium",
-    startdate: "3.09.17",
-    enddate: "12.01.18",
-    duration: 2,
-    devno: 1
+    title: 'Web Services'
+
   },
   {
-    title: "Database",
-    description: "Lorem ipsium",
-    startdate: "12.01.18",
-    enddate: "12.01.18",
-    duration: 4,
-    devno: 2
+    title: 'Database'
+
   },
   {
-    title: "Testing",
-    description: "Lorem ipsium",
-    startdate: "13.1.17",
-    enddate: "12.01.18",
-    duration: 8,
-    devno: 6
+    title: 'Testing'
+
   },
   {
-    title: "API",
-    description: "Lorem ipsium",
-    startdate: "3.09.17",
-    enddate: "12.01.18",
-    duration: 6,
-    devno: 2
+    title: 'TPMS'
   },
   {
-    title: "Code",
-    description: "Lorem ipsium",
-    startdate: "13.1.17",
-    enddate: "12.01.18",
-    duration: 1,
-    devno: 3
+    title: 'Code'
+
   },
   {
-    title: "Meeting",
-    description: "Lorem ipsium",
-    startdate: "3.09.17",
-    enddate: "12.01.18",
-    duration: 1,
-    devno: 9
+    title: 'Meeting'
   },
   {
-    title: "Finance",
-    description: "Lorem ipsium",
-    startdate: "12.01.18",
-    enddate: "12.01.18",
-    duration: 9,
-    devno: 8
+    title: 'Finance'
+
   }
 ];
 
 @Component({
-  selector: "app-projects",
-  templateUrl: "./projects.component.html",
-  styleUrls: ["./projects.component.css"]
+  selector: 'app-projects',
+  templateUrl: './projects.component.html',
+  styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements OnInit {
   projectForm = new FormGroup({
-    description: new FormControl(""),
-    project_id: new FormControl(""),
-    title: new FormControl(""),
-    startdate: new FormControl(""),
-    enddate: new FormControl(""),
-    devno: new FormControl("")
-  });
 
-  assignedProjects: Array<ProjectInterface> = [
-    {
-      description: "Sample description",
-      project_id: 1,
-      title: "Tomato API in C#",
-      startdate: new Date(),
-      enddate: new Date(),
-      dev: 1
-    },
-    {
-      description: "Sample description",
-      project_id: 10,
-      title: "Heroku Pipelining",
-      startdate: new Date(),
-      enddate: new Date(),
-      dev: 1
-    }
-  ];
+    title: new FormControl(''),
+
+  });
+  ProjectService: any;
+
+
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {}
 
   displayedColumns: string[] = [
-    "title",
-    "description",
-    "startdate",
-    "enddate",
-    "duration",
-    "devno"
+    'title'
+
   ];
 
-  clone = new MatTableDataSource(ELEMENT_DATA)
+  clone = new MatTableDataSource(ELEMENT_DATA);
   dataSource = this.clone;
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+
   ngOnInit() {
     this.dataSource.data.push({
-      title: "Christy project",
-      description: "HAhah",
-      startdate: "12.01.18",
-      enddate: "12.01.18",
-      duration: 31,
-      devno: 29
-    });
+      title: 'Christy project' });
   }
 
   onSubmit() {
-    // this.ProjectService
-    //   .addNewProject(this.projectForm.value)
-    //   .subscribe(client=>console.log(client));
-    alert(JSON.stringify(this.projectForm.value));
+    //  this.ProjectService
+    //    .addNewProject(this.projectForm.value)
+    //    .subscribe(client => console.log(client));
+     alert(JSON.stringify(this.projectForm.value));
   }
   addme() {
     this.dataSource.data.push({
-      title: "Christy project",
-      description: "HAhah",
-      startdate: "12.01.18",
-      enddate: "12.01.18",
-      duration: 31,
-      devno: 29
-    });
+      title: 'Christy project' });
   }
 
-  // devs = [
-  //   { id: 1, name: "Christy", desk: "Desk 1" },
-  //   { id: 2, name: "Bill", desk: "Desk 1" },
-  //   { id: 3, name: "Francis", desk: "Desk 1" }
-  // ];
 }
