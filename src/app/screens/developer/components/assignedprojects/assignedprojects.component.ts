@@ -47,6 +47,7 @@ export class AssignedprojectsComponent implements OnInit {
     emp_id: new FormControl(localStorage.getItem("empId")),
     project_id: new FormControl(localStorage.getItem("pid")),
     logged_date: new FormControl(new Date().toISOString().slice(0, 10))
+    
   });
   constructor(
     private plog: ProjectloggingService,
@@ -90,6 +91,13 @@ export class AssignedprojectsComponent implements OnInit {
       }, 3000);
       this.showAlert = true;
     });
+    // alert(JSON.stringify(this.hourform.value));
     
+  }
+
+  myFilter = (d: Date): boolean => {
+    const day = d.getDay();
+    // Prevent Saturday and Sunday from being selected.
+    return day !== 0 && day !== 6;
   }
 }

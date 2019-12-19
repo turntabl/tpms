@@ -25,6 +25,8 @@ import { AddprojectComponent } from './screens/admin/components/addproject/addpr
 import {MatDatepickerModule} from '@angular/material/datepicker';
 
 
+
+
 import { DevelopersComponent } from "./screens/admin/components/developers/developers.component";
 import { AssignedprojectsComponent } from "./screens/developer/components/assignedprojects/assignedprojects.component";
 import { MatTableModule } from "@angular/material/table";
@@ -32,7 +34,7 @@ import { MatTableModule } from "@angular/material/table";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { NavigationComponent } from "./screens/admin/navigation/navigation.component";
 import { VerifyComponent } from "./screens/verify/verify.component";
-import { MatFormFieldModule, MatInputModule, MatNativeDateModule } from "@angular/material";
+import { MatFormFieldModule, MatInputModule, MatNativeDateModule, DateAdapter, MAT_DATE_LOCALE } from "@angular/material";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { NavComponent } from './screens/developer/nav/nav.component';
 
@@ -71,10 +73,13 @@ import { NavComponent } from './screens/developer/nav/nav.component';
     MatInputModule,
     MatToolbarModule,
     MatDatepickerModule,
-    MatNativeDateModule, 
+    MatNativeDateModule,
+
+     
 
   ],
-  providers: [],
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+             ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
