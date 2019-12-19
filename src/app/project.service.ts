@@ -26,4 +26,14 @@ export class ProjectService {
       this.projectUrl + "/dev/assign/" + empId
     );
   }
+
+  getProject(): Observable<ProjectInterface[]> {
+    return this.http.get<ProjectInterface[]>(this.projectUrl + '/projects');
+  }
+
+  assignProjecttoDev(body: ProjectInterface): Observable<ProjectInterface[]> {
+      return this.http.post<ProjectInterface[]>(this.projectUrl + " /projects/assign/{project_id}",body);
+  }
+ 
+
 }

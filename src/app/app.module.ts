@@ -35,6 +35,12 @@ import { VerifyComponent } from "./screens/verify/verify.component";
 import { MatFormFieldModule, MatInputModule } from "@angular/material";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { NavComponent } from './screens/developer/nav/nav.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -70,6 +76,8 @@ import { NavComponent } from './screens/developer/nav/nav.component';
     MatProgressSpinnerModule,
     MatInputModule,
     MatToolbarModule,
+    MatSelectModule,
+    MatAutocompleteModule
 
   ],
   providers: [],
