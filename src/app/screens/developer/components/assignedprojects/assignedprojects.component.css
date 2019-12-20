@@ -19,3 +19,6 @@ input {
 mat-form-field {
   margin-right: 12px;
 }
+th{
+  color: rgb(97, 93, 93);
+}
