@@ -111,11 +111,17 @@ export class ProjectsComponent implements OnInit {
       onSubmit() {
       this.ProjectService
         .addNewProject(this.projectForm.value)
-        .subscribe(client => console.log(client));
-      // // alert(JSON.stringify(this.projectForm.value));
 
-      }
+       // .subscribe(client => console.log(client));
+      // alert(JSON.stringify(this.projectForm.value));
+  }
+
+       
+      
+
+    
   
+
 
 
 }
