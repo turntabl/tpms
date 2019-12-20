@@ -28,4 +28,7 @@ export class AppService {
       this.developerService + "projectlogged/dev/" + empId
     );
   }
+  getDevelopers(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(this.developerService + "dev/");
+  }
 }
