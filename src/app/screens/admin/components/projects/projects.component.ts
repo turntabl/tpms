@@ -81,9 +81,18 @@ export class ProjectsComponent implements OnInit {
         
         
     //  alert(JSON.stringify(this.projectForm.value));
+        
 
-      }
+       // .subscribe(client => console.log(client));
+      // alert(JSON.stringify(this.projectForm.value));
+  }
+
+       
+      
+
+    
   
+
 
 
 }

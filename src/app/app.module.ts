@@ -37,7 +37,15 @@ import { VerifyComponent } from "./screens/verify/verify.component";
 import { MatFormFieldModule, MatInputModule, MatNativeDateModule, DateAdapter, MAT_DATE_LOCALE } from "@angular/material";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { NavComponent } from './screens/developer/nav/nav.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatListModule} from '@angular/material/list';
+
+
+
+
 import { ViewChild, HostListener, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+
 
 
 @NgModule({
@@ -76,7 +84,9 @@ import { ViewChild, HostListener, AfterViewInit, ChangeDetectorRef } from '@angu
     MatToolbarModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    
+    MatSelectModule,
+    MatAutocompleteModule,
+    MatListModule
 
 
      

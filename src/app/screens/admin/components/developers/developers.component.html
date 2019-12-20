@@ -1,32 +1,83 @@
 <div class="container-fluid">
 
-    <!-- Page Heading -->
+ <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Developer Profile</h1>
+        <h1 class="h3 mb-0 text-gray-800">Assign Developer to a Project</h1>
     </div>
+<div class="container">
+<div >
+   
 
-
-
-<mat-card class="example-card">
+  <mat-card class="example-card">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Dennis Bill</mat-card-title>
-      <mat-card-subtitle>Software Engineer</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="https://images.unsplash.com/photo-1461988320302-91bde64fc8e4?ixid=2yJhcHBfaWQiOjEyMDd9&&fm=jpg&w=400&fit=max" alt="Photo of a Shiba Inu">
-    <mat-card-content>
-      <p>
-        <b>STACK </b>
-      </p>
-      <p>
-        MEAN (MongoDB, Express.js, AngularJS, and Node.js) and LAMP (Linux, Apache, MySQL, and PHP.) 
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button>Assign Project</button>
-    </mat-card-actions>
+    <mat-form-field>
+      <mat-label>Select a Developer</mat-label>
+      <mat-select (selectionChange)="devMethod($event.value)">
+        <mat-option  *ngFor="let developer of developers" [value]="developer">
+        {{developer.emp_name}}
+      </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+ 
+    <p>Selected developer: {{curremp}}</p>
+
+  </mat-card>
+
+  </div> 
+
+  <span style='font-size:130px;'>&#8680;</span>
+
+
+
+<div>
+
+  <!-- Page Heading -->
+  <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Developer Profile</h1>
+  </div> -->
+
+
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{curremp}}</mat-card-title>
+    </mat-card-header>
+    <!-- <form class="example-form" [formGroup]="myControl" >
+      <mat-form-field class="example-full-width">
+        <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form> -->
+    <mat-form-field>
+      <mat-label>Assign Project</mat-label>
+      <mat-select (selectionChange)="projMethod($event.value)">
+        <mat-option  *ngFor="let project of projects" [value]="project">
+        {{project.title}}
+      </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <p>Selected project: {{currproj}}</p>
+
+    <mat-list  *ngFor="let assignedproject of assignedprojects" role="list">
+      {{assignedproject}}
+    </mat-list>
+    
+    <!-- <p>
+      Options selected: {{shoes.selectedOptions.selected.length}}
+    </p> -->
+    
   </mat-card>
 
 
+</div>
+</div>
 
 </div>
