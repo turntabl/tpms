@@ -15,6 +15,12 @@
   .example-full-width {
     width: 100%;
   }
-  #right{
-    float: left;
+
+
+  .container {
+    display: flex;
+    margin-bottom: 200px;
+  }
+  .container > div {
+    flex: 1; /*grow*/
   }

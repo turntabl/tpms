@@ -28,6 +28,10 @@ export class DevelopersComponent implements OnInit {
     // {value: 'DBMS'}
   ];
   // projselected = 'option2';
+  incomingProject = { project_id: 2, title: "" };
+
+
+  typesOfShoes: string[] = ['Data', 'Threads', 'API'];
 
   myControl = new FormControl({
 
@@ -51,16 +55,26 @@ export class DevelopersComponent implements OnInit {
     this.ProjectService.getProject().subscribe(response => {
       this.projects = response;
     });
-  
+
+    this.ProjectService
+    .getAssignedProject(localStorage.getItem("empId"))
+    .subscribe(response => {
+      // this.incomingProject.project_id = response.project_id;
+      localStorage.setItem("pid", response.project_id.toString());
+      this.incomingProject.title = response.title;
+    });
+
   }
  
 
-//   onSubmit() {
-//     this.ProjectService
-//       .assignProjecttoDev(this.myControl.value)
-//       .subscribe(result=>console.log(result));
+  onselectionchange() {
+    this.ProjectService
+      .assignProjecttoDev(this.myControl.value)
+      .subscribe(result=>console.log(result));
 
-// }
+}
+
+
 
 curremp:string;
 currproj:string;
