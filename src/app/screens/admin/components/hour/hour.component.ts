@@ -89,7 +89,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ["./hour.component.css"]
 })
 export class HourComponent implements OnInit {
-  displayedColumns: string[] = ["name", "activity", "title", "date", "hours"];
+  displayedColumns: string[] = ["name", "title", "date", "hours"];
   dataSource = [];
   // dataSource = new MatTableDataSource(ELEMENT_DATA);
 
@@ -101,8 +101,8 @@ export class HourComponent implements OnInit {
 
   ngOnInit() {
     this.appservice.getLoggedHours().subscribe(response => {
-      console.log(response);
-      // this.dataSource = response;
+      // console.log(response);
+      this.dataSource = response;
     });
   }
 }
