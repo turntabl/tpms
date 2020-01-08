@@ -1,0 +1,24 @@
+table {
+    width: 100%;
+  }
+  #submit{
+    background-color:#4e73df;
+   color: white;
+   font-size: larger;
+
+}
+
+#add{
+    color:black; 
+    font-size: x-large;
+}
+
+input {
+  width: 100px;
+}
+mat-form-field {
+  margin-right: 12px;
+}
+th{
+  color: rgb(97, 93, 93);
+}

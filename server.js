@@ -3,10 +3,10 @@ const express = require("express");
 const path = require("path");
 const SamlStrategy = require("passport-saml").Strategy;
 const passport = require("passport");
-
+const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
-
+let userEmail = "";
 const app = express();
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + "/dist/tpms"));
@@ -19,7 +19,7 @@ app.use(
     maxAge: 2 * 24 * 60 * 60 * 1000 // 2 days
   })
 );
-
+app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -34,7 +34,10 @@ passport.use(
     },
     function(profile, done) {
       // Parse user profile data
-      done(null, {
+      console.log("profile", profile);
+      console.log("assertion", profile.getAssertion.toString());
+      userEmail = profile.nameID;
+      return done(null, {
         email: profile.email,
         name: profile.name
       });
@@ -59,17 +62,19 @@ app.get(
 
 app.get("/logout", function(req, res) {
   req.logout();
-  res.end("You have logged out.");
+  res.redirect("https://turntabl.io");
+  // res.end("You have logged out.");
 });
 
 app.post(
   "/auth/saml/callback",
+  bodyParser.urlencoded({ extended: false }),
   passport.authenticate("saml", {
     failureRedirect: "/error",
-    failureFlash: true
+    failureFlash: false
   }),
   function(req, res) {
-    res.redirect("/");
+    res.redirect("https://tpms-ui.herokuapp.com/verify/" + userEmail);
   }
 );
 
