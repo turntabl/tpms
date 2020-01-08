@@ -32,8 +32,8 @@ export class ProjectService {
   }
 
 
-  assignProjecttoDev(body: ProjectInterface, empId:string): Observable<ProjectInterface[]> {
-      return this.http.post<ProjectInterface[]>(this.projectUrl + " /projects/assign/{project_id}",body + empId);
+  assignProjecttoDev(project_id: number, body:number): Observable<ProjectInterface[]> {
+      return this.http.post<ProjectInterface[]>(this.projectUrl + "/projects/assign/"+ project_id,body);
   }
  
 

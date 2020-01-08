@@ -14,7 +14,9 @@ import { ProjectInterface } from 'src/app/screens/project-interface';
   templateUrl: './developers.component.html',
   styleUrls: ['./developers.component.css']
 })
+
 export class DevelopersComponent implements OnInit {
+  currentDevsId:number
   developers = [
     // {value: 'Dennis Bill'},
     // {value: 'Francis Billa'},
@@ -29,7 +31,13 @@ export class DevelopersComponent implements OnInit {
   ];
   // projselected = 'option2';
 
-  assignedprojects = { project_id: 2, title: "" };
+  // assignedprojects = [
+  //   { project_id: 1, title: "Some" },
+  //   { project_id: 2, title: "djsd" },
+
+  
+  // ];
+  assignedprojects=[{project_id: 1, title: "Devs projects appear here"}]
 
   // incomingProject = { project_id: 2, title: "" };
 
@@ -63,11 +71,7 @@ export class DevelopersComponent implements OnInit {
 
  
  
-//     this.ProjectService.assignProjecttoDev().subscribe(response => {
-//         this.projects = response;
-//       });
 
-// }
 
   }
  
@@ -77,6 +81,7 @@ currproj:string;
 
 devMethod(emp){
   this.curremp=emp.emp_name
+  this.currentDevsId=emp.emp_id
   // console.log(emp)
 
   this.ProjectService
@@ -84,7 +89,10 @@ devMethod(emp){
   .subscribe(response => {
     // this.incomingProject.project_id = response.project_id;
     // localStorage.setItem("pid", response.project_id.toString());
-    // this.assignedprojects.title = response.title;
+    // this.assignedprojects.length=0
+    this.assignedprojects[0].project_id = response.project_id;
+    this.assignedprojects[0].title = response.title;
+
     console.log(response);
     
   });
@@ -93,8 +101,13 @@ devMethod(emp){
 }
 
 projMethod(proj){
-  this.currproj=proj
+  // this.currproj=proj.title
   // console.log(proj)
+      this.ProjectService.assignProjecttoDev(proj.project_id, this.currentDevsId).subscribe(response => {
+        // this.projects = response;
+        console.log(response)
+      });
+
   
 }
 
