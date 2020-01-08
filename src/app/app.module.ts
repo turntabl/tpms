@@ -22,6 +22,8 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatChipsModule } from "@angular/material/chips";
 import { AddprojectComponent } from './screens/admin/components/addproject/addproject.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
 
 
 
@@ -32,9 +34,20 @@ import { MatTableModule } from "@angular/material/table";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { NavigationComponent } from "./screens/admin/navigation/navigation.component";
 import { VerifyComponent } from "./screens/verify/verify.component";
-import { MatFormFieldModule, MatInputModule } from "@angular/material";
+import { MatFormFieldModule, MatInputModule, MatNativeDateModule, DateAdapter, MAT_DATE_LOCALE } from "@angular/material";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { NavComponent } from './screens/developer/nav/nav.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatListModule} from '@angular/material/list';
+
+
+
+
+import { ViewChild, HostListener, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { ReportComponent } from './screens/admin/components/report/report.component';
+
+
 
 @NgModule({
   declarations: [
@@ -50,7 +63,8 @@ import { NavComponent } from './screens/developer/nav/nav.component';
     AssignedprojectsComponent,
     NavigationComponent,
     VerifyComponent,
-    NavComponent
+    NavComponent,
+    ReportComponent
 
   ],
   imports: [
@@ -70,9 +84,18 @@ import { NavComponent } from './screens/developer/nav/nav.component';
     MatProgressSpinnerModule,
     MatInputModule,
     MatToolbarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatAutocompleteModule,
+    MatListModule
+
+
+     
 
   ],
-  providers: [],
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+             ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
