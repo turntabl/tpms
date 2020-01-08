@@ -32,7 +32,7 @@ passport.use(
       path: "/auth/saml/callback", // ACS URL path (Step 4)
       cert: process.env.CERT
     },
-    function(profile, done) {
+    function (profile, done) {
       // Parse user profile data
       console.log("profile", profile);
       console.log("assertion", profile.getAssertion.toString());
@@ -44,11 +44,11 @@ passport.use(
     }
   )
 );
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   done(null, user);
 });
 
-passport.deserializeUser(function(user, done) {
+passport.deserializeUser(function (user, done) {
   done(null, user);
 });
 
@@ -60,7 +60,8 @@ app.get(
   })
 );
 
-app.get("/logout", function(req, res) {
+app.get("/logout", function (req, res) {
+  res.clearCookie('ttemail')
   req.logout();
   res.redirect("https://turntabl.io");
   // res.end("You have logged out.");
@@ -73,19 +74,21 @@ app.post(
     failureRedirect: "/error",
     failureFlash: false
   }),
-  function(req, res) {
+  function (req, res) {
+    // sets a cookie called ttemail and sets its max age to 1 day
+    res.cookie('ttemail', userEmail, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: true })
     res.redirect("https://tpms-ui.herokuapp.com/verify/" + userEmail);
   }
 );
 
-app.all("*", function(req, res, next) {
+app.all("*", function (req, res, next) {
   if (req.isAuthenticated() || process.env.NODE_ENV !== "production") {
     next();
   } else {
     res.redirect("/login");
   }
 });
-app.get("/*", function(req, res) {
+app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname + "/dist/tpms/index.html"));
 });
 
