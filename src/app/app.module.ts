@@ -45,6 +45,7 @@ import {MatListModule} from '@angular/material/list';
 
 
 import { ViewChild, HostListener, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { LinechartComponent } from './linechart/linechart.component';
 
 
 
@@ -62,7 +63,8 @@ import { ViewChild, HostListener, AfterViewInit, ChangeDetectorRef } from '@angu
     AssignedprojectsComponent,
     NavigationComponent,
     VerifyComponent,
-    NavComponent
+    NavComponent,
+    LinechartComponent
 
   ],
   imports: [
