@@ -44,16 +44,7 @@
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>{{curremp}}</mat-card-title>
     </mat-card-header>
-    <!-- <form class="example-form" [formGroup]="myControl" >
-      <mat-form-field class="example-full-width">
-        <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-            {{option}}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-    </form> -->
+
     <mat-form-field>
       
 
@@ -66,16 +57,12 @@
       </mat-form-field>
       
    
-      <p>Selected developer: {{curremp}}</p>
-  
-
-
-
+     
 
 
 
       
-      <mat-label>Assign Project</mat-label>
+      <mat-label>Name</mat-label>
       <mat-select (selectionChange)="projMethod($event.value)">
         <mat-option  *ngFor="let project of projects" [value]="project">
         {{project.title}}
@@ -83,10 +70,10 @@
       </mat-select>
     </mat-form-field>
     
-    <p>Selected project: {{currproj}}</p>
+    <!-- <p>Selected project: {{currproj}}</p> -->
 
     <mat-list  *ngFor="let assignedproject of assignedprojects" role="list">
-      {{assignedproject.title}}
+      <span>{{assignedproject.title}}</span> <button>delete</button>
     </mat-list>
     
     <!-- <p>
@@ -97,6 +84,7 @@
 
 
 </div>
+
 </div>
 
 </div>
