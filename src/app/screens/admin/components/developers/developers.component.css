@@ -1,5 +1,12 @@
 .example-card {
-    max-width: 400px;
+    max-width: 600px;
+    height: 500px;
+    margin-left: 200px;
+  }
+  .h1{
+    color: black;
+    display: flex;
+    margin-left: 220px;
   }
   
   .example-header-image {

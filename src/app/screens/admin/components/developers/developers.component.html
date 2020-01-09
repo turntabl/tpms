@@ -2,7 +2,7 @@
 
  <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Assign Developer to a Project</h1>
+        <h1 class="h1">Assign Developer to a Project</h1>
     </div>
 <div class="container">
 <!-- <div >
@@ -41,7 +41,7 @@
 
   <mat-card class="example-card">
     <mat-card-header>
-     
+      <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>{{curremp}}</mat-card-title>
     </mat-card-header>
 
@@ -70,7 +70,7 @@
       </mat-select>
     </mat-form-field>
     
-    <!-- <p>Selected project: {{currproj}}</p> -->
+    <p>Selected project: {{currproj}}</p>
 
     <mat-list  *ngFor="let assignedproject of assignedprojects" role="list">
       <span>{{assignedproject.title}}</span> <button>delete</button>
