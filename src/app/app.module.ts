@@ -64,7 +64,7 @@ import { ReportComponent } from './screens/admin/components/report/report.compon
     NavigationComponent,
     VerifyComponent,
     NavComponent,
-    ReportComponent
+    ReportComponent,
 
   ],
   imports: [
@@ -88,7 +88,8 @@ import { ReportComponent } from './screens/admin/components/report/report.compon
     MatNativeDateModule,
     MatSelectModule,
     MatAutocompleteModule,
-    MatListModule
+    MatListModule,
+    
 
 
      
