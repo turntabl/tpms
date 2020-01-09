@@ -3,7 +3,8 @@ import { NgModule, Component } from "@angular/core";
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
+// Cookie stuff
+import {CookieService} from 'ngx-cookie-service';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -94,8 +95,7 @@ import { ReportComponent } from './screens/admin/components/report/report.compon
      
 
   ],
-  providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
-             ],
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}, CookieService ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
