@@ -23,7 +23,8 @@ export class DevelopersComponent implements OnInit {
     // {value: 'Francis Billa'}
   ];
   // devselected = 'option2';
-
+  selectable = true;
+  removable = true;
   projects = [
     // {value: 'TPMS'},
     // {value: 'TCMS'},
@@ -47,6 +48,16 @@ export class DevelopersComponent implements OnInit {
   options: Array<Employee> = [];
   filteredOptions: Observable<Employee[]>;
 
+  projectmyControl = new FormControl();
+  projectoptions: Array<ProjectInterface> = [];
+  projectfilteredOptions: Observable<ProjectInterface[]>;
+  assignedProjects: Array<ProjectInterface> = []
+
+
+
+  
+
+
 
   constructor(private ProjectService: ProjectService, private devService: AppService) { }
 
@@ -67,20 +78,66 @@ export class DevelopersComponent implements OnInit {
     });
     this.ProjectService.getProject().subscribe(response => {
       this.projects = response;
+      this.projectoptions = response
+      console.log(response);
+      
     });
     this.filterOptions()
 
-
+    this.projectfilterOptions()
 
 
   }
+  remove(dev: ProjectInterface): void {
+    const index = this.assignedProjects.indexOf(dev);
+
+    if (index >= 0) {
+      this.assignedProjects.splice(index, 1);
+    }
+    
+  }
+  private _projectfilter(value: string): ProjectInterface[] {
+    const filterValue = value.toLowerCase();
+    // return this.options.filter(option => option.emp_name.toLowerCase().includes(filterValue));
+    return this.projectoptions.filter(option => option.title.toLowerCase().indexOf(filterValue) === 0)
+  }
+  
+ projectfilterOptions() {
+  this.projectfilteredOptions = this.projectmyControl.valueChanges
+    .pipe(
+      startWith(''),
+      map(value => typeof value === 'string' ? value : value.title),
+      map(title => title ? this._projectfilter(title) : this.projectoptions.slice())
+    );
+}
+projectdisplayFn(user?: ProjectInterface): string | undefined {
+  // if (user !== null) {
+  //   // fetch assigned projects
+  //   this.ProjectService
+  //     .getAssignedProject(user.project_id.toString())
+  //     .subscribe(response => {
+  //       // this.incomingProject.project_id = response.project_id;
+  //       // localStorage.setItem("pid", response.project_id.toString());
+  //       // // this.assignedprojects.length=0
+  //       // this.assignedprojects[0].project_id = response.project_id;
+  //       // this.assignedprojects[0].title = response.title;
+  //       this.assignedProjects.push(response);
+  //       // console.log(response);
+
+  //     });
+  // }
+  console.log(user);
+  
+  return user ? user.title : undefined;
+}
+
   private _filter(value: string): Employee[] {
     const filterValue = value.toLowerCase();
     // return this.options.filter(option => option.emp_name.toLowerCase().includes(filterValue));
     return this.options.filter(option => option.emp_name.toLowerCase().indexOf(filterValue) === 0)
   }
   filterOptions() {
-      this.filteredOptions = this.myControl.valueChanges
+    this.filteredOptions = this.myControl.valueChanges
       .pipe(
         startWith(''),
         map(value => typeof value === 'string' ? value : value.emp_name),
@@ -91,20 +148,26 @@ export class DevelopersComponent implements OnInit {
     if (user !== null) {
       // fetch assigned projects
       this.ProjectService
-      .getAssignedProject(user.emp_id.toString())
-      .subscribe(response => {
-        // this.incomingProject.project_id = response.project_id;
-        // localStorage.setItem("pid", response.project_id.toString());
-        // // this.assignedprojects.length=0
-        // this.assignedprojects[0].project_id = response.project_id;
-        // this.assignedprojects[0].title = response.title;
+        .getAssignedProject(user.emp_id.toString())
+        .subscribe(response => {
+          // this.incomingProject.project_id = response.project_id;
+          // localStorage.setItem("pid", response.project_id.toString());
+          // // this.assignedprojects.length=0
+          // this.assignedprojects[0].project_id = response.project_id;
+          // this.assignedprojects[0].title = response.title;
+          this.assignedProjects.push(response);
+          // console.log(response);
 
-        console.log(response);
-
-      });
+        });
     }
+
+
+
+
+    // 
     return user ? user.emp_name : undefined;
   }
+
 
 
   curremp: string;
@@ -124,10 +187,10 @@ export class DevelopersComponent implements OnInit {
         this.assignedprojects[0].project_id = response.project_id;
         this.assignedprojects[0].title = response.title;
 
-    //     console.log(response);
+        //     console.log(response);
 
       });
-console.log(emp);
+    // console.log(emp);
 
 
   }
@@ -137,7 +200,7 @@ console.log(emp);
     // console.log(proj)
     this.ProjectService.assignProjecttoDev(proj.project_id, this.currentDevsId).subscribe(response => {
       // this.projects = response;
-      console.log(response)
+      // console.log(response)
     });
 
 
