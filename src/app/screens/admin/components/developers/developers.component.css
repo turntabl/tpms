@@ -2,6 +2,8 @@
     max-width: 600px;
     height: 500px;
     margin-left: 200px;
+    /* justify-content: center; */
+    align-items: center;
   }
   .h1{
     color: black;
