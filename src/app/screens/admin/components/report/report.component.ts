@@ -11,7 +11,7 @@ import { Data } from 'src/app/data';
 })
 
 export class ReportComponent implements OnInit {
-  url = 'https://developerservice03.herokuapp.com/log';  
+  url = 'https://developerservice03.herokuapp.com/report';  
   data: Data[];  
   Dates = [];  
   Project = [];  
@@ -24,8 +24,8 @@ export class ReportComponent implements OnInit {
     this.httpClient.get(this.url).subscribe((result: Data[]) => {  
       result.forEach(x => {  
         this.Dates.push(x.logged_date);  
-        this.Project.push(x.project_hours);
-        this.Volunteer.push(x.volunteering_hours);
+        this.Project.push(x.total_project_hours);
+        this.Volunteer.push(x.total_volunteering_hours);
         this.Sick.push(x.sick);
         this.Vacation.push(x.vacation);  
       });  
@@ -63,14 +63,16 @@ export class ReportComponent implements OnInit {
           datasets: [
             {
               label: 'Project',
-              fill:false,
-              borderColor: 'rgb(255, 99, 132)',
+              fill:true,
+              backgroundColor: 'rgba(55, 173, 221,  0.6)',
+              borderColor: 'rgba(55, 173, 221, 1.0)',
               data: this.Project,
               // yAxisID:'y1'
           },
           {
             label: 'Volunteer',
-            fill:false,
+            fill:true,
+            backgroundColor:  "#f990a7", 
             borderColor: 'rgb(71, 203, 142)',
             data: this.Volunteer,
             // yAxisID:'y2'
@@ -92,23 +94,30 @@ export class ReportComponent implements OnInit {
     }
         ]
       },
-        options: {
-            
-        }
+     
     
         // options: {  
         //   legend: {  
         //     display: false  
         //   },  
-        //   scales: {  
-        //     xAxes: [{  
-        //       display: true  
-        //     }],  
-        //     yAxes: [{  
-        //       display: true  
-        //     }],  
-        //   }  
+          scales: {  
+            xAxes: [{  
+              ticks: {
+              display: true, 
+                // min: 0,
+                // max: 5
+              }
+            }],  
+            yAxes: [{  
+              ticks: {
+              display: true  ,
+              min: 0,
+              max: 5
+              }
+            }],  
+          }  
         // }  
+       
       });  
     });  
   }  
