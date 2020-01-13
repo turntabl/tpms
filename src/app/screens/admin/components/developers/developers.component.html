@@ -2,81 +2,59 @@
 
  <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Assign Developer to a Project</h1>
+        <h1 class="h1">Assign Developer to a Project</h1>
     </div>
-<div class="container">
-<!-- <div >
    
-
-  <mat-card class="example-card">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-    </mat-card-header>
-    <mat-form-field>
-      <mat-label>Select a Developer</mat-label>
-      <mat-select (selectionChange)="devMethod($event.value)">
-        <mat-option  *ngFor="let developer of developers" [value]="developer">
-        {{developer.emp_name}}
-      </mat-option>
-      </mat-select>
-    </mat-form-field>
-    
- 
-    <p>Selected developer: {{curremp}}</p>
-
-  </mat-card>
-
-  </div>  -->
-
-
+<div class="container">
 
 
 <div>
+  <mat-form-field class="example-full-width">
+    <input type="text" placeholder="Developer name" matInput [formControl]="myControl" [matAutocomplete]="dev">
+    <mat-autocomplete #dev="matAutocomplete" [displayWith]="displayFn.bind(this)">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{option.emp_name}}
+      </mat-option>
+    </mat-autocomplete>
+    
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input type="text" placeholder="Attach New Project" aria-label="Number" matInput [formControl]="projectmyControl" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="projectdisplayFn.bind(this)">
+      <mat-option *ngFor="let project of projectfilteredOptions | async" [value]="project">
+        {{project.title}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field> 
+   <!--  <button type="submit" id="submit"  class="form-control mb-4" >Save</button> --> 
+   <p>Selected project: {{currproj}}</p>
+  <mat-chip-list *ngFor="let project of assignedProjects">
+    <mat-chip  [selectable]="selectable"
+    [removable]="removable" (removed)="remove(project)" >{{project.title}}
 
-  <!-- Page Heading -->
-  <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
-      <h1 class="h3 mb-0 text-gray-800">Developer Profile</h1>
-  </div> -->
-
-
-  <mat-card class="example-card">
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+   
+  </mat-chip-list>
+ 
+  
+  
+  <!-- <mat-card class="example-card">
     <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
+      
       <mat-card-title>{{curremp}}</mat-card-title>
     </mat-card-header>
-    <!-- <form class="example-form" [formGroup]="myControl" >
-      <mat-form-field class="example-full-width">
-        <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-            {{option}}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-    </form> -->
+
     <mat-form-field>
       
 
-      <mat-form-field>
-        <mat-select (selectionChange)="devMethod($event.value)">
-          <mat-option  *ngFor="let developer of developers" [value]="developer">
-          {{developer.emp_name}}
-        </mat-option>
-        </mat-select>
-      </mat-form-field>
-      
-   
-      <p>Selected developer: {{curremp}}</p>
-  
+       
+    
 
+      <mat-label>Name</mat-label>
 
-
-
-
-
-      
-      <mat-label>Assign Project</mat-label>
-      <mat-select (selectionChange)="projMethod($event.value)">
+      <mat-select  (selectionChange)="projMethod($event.value)">
+        
         <mat-option  *ngFor="let project of projects" [value]="project">
         {{project.title}}
       </mat-option>
@@ -86,17 +64,16 @@
     <p>Selected project: {{currproj}}</p>
 
     <mat-list  *ngFor="let assignedproject of assignedprojects" role="list">
-      {{assignedproject.title}}
+      <span>{{assignedproject.title}}</span> <button>delete</button>
     </mat-list>
-    
-    <!-- <p>
-      Options selected: {{shoes.selectedOptions.selected.length}}
-    </p> -->
-    
-  </mat-card>
+
+  </mat-card> -->
+  
 
 
 </div>
+
+ 
 </div>
 
 </div>
