@@ -55,7 +55,8 @@ export class AssignedprojectsComponent implements OnInit {
     'Web Services',
     'Volunteering',
     'Sick',
-    'Vacation'
+    'Vacation',
+    'Reset'
   ];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   dummy = [];
@@ -103,15 +104,27 @@ export class AssignedprojectsComponent implements OnInit {
     }
   }
 
-  submitChecked(event) {
-    // tslint:disable-next-line: triple-equals
-    if (event == 'true') {
+  submitChecked(event: string) {
+    if (event === 'true') {
       this.hourform.controls.vacation.enable();
       this.hourform.controls.sick.enable();
       this.hourform.controls.volunteering_hours.enable();
       this.hourform.controls.project_hours.enable();
     }
   }
+
+  resetChecked(event) {
+    if (event === 'true') {
+      this.hourform.controls.vacation.enable();
+      this.hourform.controls.sick.enable();
+      this.hourform.controls.volunteering_hours.enable();
+      this.hourform.controls.project_hours.enable();
+    }
+  }
+  // clear(){  
+  //   this.hourform = null; // or false or ''
+  // }  
+  // hourform.controls['sick'].reset();
 
   //  uncheck(event) {
   //    if (event == true) {
