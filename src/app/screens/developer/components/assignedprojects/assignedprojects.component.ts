@@ -113,21 +113,28 @@ export class AssignedprojectsComponent implements OnInit {
     }
   }
 
-//   $scope.uncheck = function(event) {
-//     if ($scope.checked == event.target.value)
-//         $scope.checked = false
+  //  uncheck(event) {
+  //    if (event == true) {
+  //    this.hourform.value.sick = 'sick';
+  //    }
+  //   }
+
+
+//   scope.uncheck = function(event) {
+//     if (scope.checkboxModel == event.target.value)
+//         scope.checkboxModel = false
 // }
 
   logsuccess() {}
   onSubmit() {
-    console.log(this.hourform.value);
-    // this.plog.loghours(this.hourform.value).subscribe(() => {
-    //   setTimeout(() => {
-    //     this.showAlert = false;
-    //   }, 3000);
-    //   this.showAlert = true;
-    // });
-    // alert(JSON.stringify(this.hourform.value));
+    // console.log(this.hourform.value);
+    this.plog.loghours(this.hourform.value).subscribe(() => {
+      setTimeout(() => {
+        this.showAlert = false;
+      }, 3000);
+      this.showAlert = true;
+    });
+    alert(JSON.stringify(this.hourform.value));
     this.hourform.reset();
   }
 
@@ -135,5 +142,5 @@ export class AssignedprojectsComponent implements OnInit {
     const day = d.getDay();
     // Prevent Saturday and Sunday from being selected.
     return day !== 0 && day !== 6;
-  };
+  }
 }
