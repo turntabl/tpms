@@ -133,7 +133,7 @@ export class AssignedprojectsComponent implements OnInit {
       }, 3000);
       this.showAlert = true;
     });
-    alert(JSON.stringify(this.hourform.value));
+   // alert('Successfully submitted');
     this.hourform.reset();
   }
 

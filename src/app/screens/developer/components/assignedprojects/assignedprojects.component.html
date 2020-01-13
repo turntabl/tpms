@@ -75,7 +75,7 @@
         <ng-container matColumnDef="Reset">
            <th mat-header-cell *matHeaderCellDef style="font-size: xx-large;">  </th> 
           <td mat-cell *matCellDef="let element">
-            <button (click)="clear()" type="reset" id="reset" (ngModelChange)="resetChecked($event)">Reset</button>
+            <button type="reset" id="reset" (ngModelChange)="resetChecked($event)">Reset</button>
           </td>
         </ng-container>
        
