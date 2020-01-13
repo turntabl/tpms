@@ -121,22 +121,8 @@ export class AssignedprojectsComponent implements OnInit {
       this.hourform.controls.project_hours.enable();
     }
   }
-  // clear(){  
-  //   this.hourform = null; // or false or ''
-  // }  
-  // hourform.controls['sick'].reset();
-
-  //  uncheck(event) {
-  //    if (event == true) {
-  //    this.hourform.value.sick = 'sick';
-  //    }
-  //   }
 
 
-//   scope.uncheck = function(event) {
-//     if (scope.checkboxModel == event.target.value)
-//         scope.checkboxModel = false
-// }
 
   logsuccess() {}
   onSubmit() {
@@ -147,7 +133,7 @@ export class AssignedprojectsComponent implements OnInit {
       }, 3000);
       this.showAlert = true;
     });
-    alert(JSON.stringify(this.hourform.value));
+   // alert('Successfully submitted');
     this.hourform.reset();
   }
 
