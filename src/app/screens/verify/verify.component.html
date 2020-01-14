@@ -1,8 +1,18 @@
-
 {{role}}
-<div *ngIf="isLoading">
+<div *ngIf="isLoading; else expired">
 
     <mat-spinner style="position: fixed; top: 45%; left: 45%;">
     </mat-spinner>
 
 </div>
+
+<ng-template #expired>
+    <div style="position: fixed; top: 20%; left: 40%; width: 300px;">
+        <div style="flex:1; align-items: center; justify-content: center;">
+            <img src="https://avatars1.githubusercontent.com/u/21255133?s=200&v=4" style="margin-left: 40px;" alt="">
+            <h4 style="text-align: center; margin:20px; color: black;">Oops it seems your session has expired</h4>
+            <button type="button" class="btn btn-primary" style="margin-left: 70px;" (click)="reauth()"> Reauthenticate</button>
+        </div>
+    </div>
+
+</ng-template>
