@@ -47,6 +47,9 @@ import {MatListModule} from '@angular/material/list';
 
 import { ViewChild, HostListener, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { ReportComponent } from './screens/admin/components/report/report.component';
+import { AreaComponent } from './screens/admin/components/area/area.component';
+import { HighchartsChartModule } from 'highcharts-angular';
+
 
 
 
@@ -66,6 +69,7 @@ import { ReportComponent } from './screens/admin/components/report/report.compon
     VerifyComponent,
     NavComponent,
     ReportComponent,
+    AreaComponent,
 
   ],
   imports: [
@@ -90,6 +94,7 @@ import { ReportComponent } from './screens/admin/components/report/report.compon
     MatSelectModule,
     MatAutocompleteModule,
     MatListModule,
+    HighchartsChartModule
     
 
 
