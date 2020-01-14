@@ -20,7 +20,7 @@ export interface PeriodicElement {
 
 
 const ELEMENT_DATA: PeriodicElement[] = [
- 
+
 ];
 
 @Component({
@@ -78,20 +78,20 @@ export class ProjectsComponent implements OnInit {
       this.ProjectService
       .addNewProject(this.projectForm.value)
       .subscribe(client => console.log(client));
-        
-        
+
+
     //  alert(JSON.stringify(this.projectForm.value));
-        
+
 
        // .subscribe(client => console.log(client));
       // alert(JSON.stringify(this.projectForm.value));
   }
 
-       
-      
 
-    
-  
+
+
+
+
 
 
 
