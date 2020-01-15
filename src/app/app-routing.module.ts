@@ -13,6 +13,7 @@ import { NavigationComponent } from "./screens/admin/navigation/navigation.compo
 import { NavComponent } from "./screens/developer/nav/nav.component";
 import { AddprojectComponent } from './screens/admin/components/addproject/addproject.component';
 import { ReportComponent } from './screens/admin/components/report/report.component';
+import { AreaComponent } from './screens/admin/components/area/area.component';
   
 
 const routes: Routes = [
@@ -23,11 +24,11 @@ const routes: Routes = [
       { path: "projects", component: ProjectsComponent },
       { path: "hour", component: HourComponent },
       { path: "developer", component: DevelopersComponent },
-     {path:"addproject", component:AddprojectComponent},
-     {path:"reports", component:ReportComponent}
+      {path:"addproject", component:AddprojectComponent},
+      {path:"reports", component:AreaComponent}
     ]
   },
-  { path: "verify/:name", component: VerifyComponent },
+  { path: "verify", component: VerifyComponent },
   {
     path: "developer",
     component: NavComponent,
