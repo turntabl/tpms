@@ -9,6 +9,12 @@ import { Projectlogging } from 'src/app/projectlogging';
 import { ProjectloggingService } from 'src/app/projectlogging.service';
 import { ProjectService } from 'src/app/project.service';
 
+
+export interface Food {
+  value: string;
+  viewValue: string;
+}
+
 export interface PeriodicElement {
   title: string;
   description: string;
@@ -33,6 +39,16 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './assignedprojects.component.html',
   styleUrls: ['./assignedprojects.component.css']
 })
+
+// // tslint:disable-next-line: component-class-suffix
+// export class SelectOverviewExample {
+//   foods: Food[] = [
+//     {value: 'steak-0', viewValue: 'Steak'},
+//     {value: 'pizza-1', viewValue: 'Pizza'},
+//     {value: 'tacos-2', viewValue: 'Tacos'}
+//   ];
+// }
+
 export class AssignedprojectsComponent implements OnInit {
   incomingProject = { project_id: 2, title: '' };
   showAlert: boolean = false;
@@ -51,6 +67,7 @@ export class AssignedprojectsComponent implements OnInit {
     private projectService: ProjectService
   ) {}
   newProject = '';
+  assignedprojects =[{title: "tpms"}]
   displayedColumns: string[] = [
     'Web Services',
     'Volunteering',
@@ -64,6 +81,8 @@ export class AssignedprojectsComponent implements OnInit {
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+
 
   ngOnInit() {
     this.projectService
@@ -142,4 +161,6 @@ export class AssignedprojectsComponent implements OnInit {
     // Prevent Saturday and Sunday from being selected.
     return day !== 0 && day !== 6;
   }
+
+
 }
