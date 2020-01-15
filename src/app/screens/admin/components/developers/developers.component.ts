@@ -126,7 +126,14 @@ projectdisplayFn(user?: ProjectInterface): string | undefined {
 
   //     });
   // }
-  console.log(user);
+  if (user) {
+    console.log(user);
+    this.assignedProjects.push(user)
+  } else {
+    console.log("non");
+    
+  }
+  
   
   return user ? user.title : undefined;
 }
@@ -190,7 +197,7 @@ projectdisplayFn(user?: ProjectInterface): string | undefined {
         //     console.log(response);
 
       });
-    // console.log(emp);
+    console.log(emp);
 
 
   }
@@ -200,7 +207,7 @@ projectdisplayFn(user?: ProjectInterface): string | undefined {
     // console.log(proj)
     this.ProjectService.assignProjecttoDev(proj.project_id, this.currentDevsId).subscribe(response => {
       // this.projects = response;
-      // console.log(response)
+      console.log(response)
     });
 
 
