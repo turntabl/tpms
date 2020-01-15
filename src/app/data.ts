@@ -4,10 +4,5 @@ export class Data {
     total_volunteering_hours:number;
     vacation: string;
     sick:string;
-
-    public static addDays(date: Date, days: number): Date {
-        date.setDate(date.getDate() + days);
-        return date;
-    }
 }
 

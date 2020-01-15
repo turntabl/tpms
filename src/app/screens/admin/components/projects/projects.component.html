@@ -32,12 +32,14 @@
             <div class="md-form mb-3">
               <i class="fas fa-tasks prefix grey-text"></i>
               <input type="text" id="form1" class="form-control validate" formControlName="title" placeholder=" Title">
+              <input type="text" id="form1" class="form-control validate" formControlName="title" placeholder=" Description">
+
               <!-- <label data-error="wrong" data-success="right" for="form1">TITLE</label> -->
             </div>          
 
             <div style="margin-top: 20px; margin-bottom: 20px;">
               <button type="submit" id="submit" (ngSubmit)="onSubmit()" class="btn btn-primary btn-lg btn-block">Submit</button>
-              <button type="submit"  (ngSubmit)="onSubmit()" class="btn btn-warning btn-lg btn-block" data-dismiss="modal">Dimiss</button>
+              <!-- <button type="submit"  (ngSubmit)="onSubmit()" class="btn btn-warning btn-lg btn-block" data-dismiss="modal">Dimiss</button> -->
 
             </div>
           </div>
