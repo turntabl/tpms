@@ -13,13 +13,13 @@
     <input type="text" placeholder="Developer name" matInput [formControl]="myControl" [matAutocomplete]="dev">
     <mat-autocomplete #dev="matAutocomplete" [displayWith]="displayFn.bind(this)">
       <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-        {{option.emp_name}}
+        {{option.employee.employee_firstname}}
       </mat-option>
     </mat-autocomplete>
     
   </mat-form-field>
   <mat-form-field class="example-full-width">
-    <input type="text" placeholder="Attach New Project" aria-label="Number" matInput [formControl]="projectmyControl" [matAutocomplete]="auto">
+    <input type="text" placeholder="Assign New Project" aria-label="Number" matInput [formControl]="projectmyControl" [matAutocomplete]="auto">
     <mat-autocomplete #auto="matAutocomplete" [displayWith]="projectdisplayFn.bind(this)">
       <mat-option *ngFor="let project of projectfilteredOptions | async" [value]="project">
         {{project.title}}

@@ -17,7 +17,7 @@ import { ProjectInterface } from 'src/app/screens/project-interface';
 
 export class DevelopersComponent implements OnInit {
   currentDevsId: number
-  developers: Array<Employee> = [
+  developers: Array<any> = [
     // {value: 'Dennis Bill'},
     // {value: 'Francis Billa'},
     // {value: 'Francis Billa'}
@@ -45,18 +45,13 @@ export class DevelopersComponent implements OnInit {
 
 
   myControl = new FormControl();
-  options: Array<Employee> = [];
-  filteredOptions: Observable<Employee[]>;
+  options: Array<any> = [];
+  filteredOptions: Observable<any>;
 
   projectmyControl = new FormControl();
   projectoptions: Array<ProjectInterface> = [];
   projectfilteredOptions: Observable<ProjectInterface[]>;
   assignedProjects: Array<ProjectInterface> = []
-
-
-
-  
-
 
 
   constructor(private ProjectService: ProjectService, private devService: AppService) { }
@@ -72,9 +67,15 @@ export class DevelopersComponent implements OnInit {
 
   ngOnInit() {
     this.devService.getDevelopers().subscribe(response => {
-      this.developers = response;
-      this.options = response
-      // this.developers.forEach(e => console.log(response.emp_name))
+      console.log("Response from server | ",response)
+      if(response.code === "00"){
+        this.options = response.data;
+      }else{
+        console.log(response);
+      }
+      // this.developers = response;
+      // this.options = response
+      //this.developers.forEach(e => console.log("Response from server | ",response))
     });
     this.ProjectService.getProject().subscribe(response => {
       this.projects = response;
@@ -140,22 +141,25 @@ projectdisplayFn(user?: ProjectInterface): string | undefined {
 
   private _filter(value: string): Employee[] {
     const filterValue = value.toLowerCase();
+    console.log("filter option",this.options);
+    return this.options.filter(option => option.employee.employee_firstname.toLowerCase().indexOf(filterValue) === 0)
+    
     // return this.options.filter(option => option.emp_name.toLowerCase().includes(filterValue));
-    return this.options.filter(option => option.emp_name.toLowerCase().indexOf(filterValue) === 0)
+    //return this.options.filter(option => option.employee_firstname.toLowerCase().indexOf(filterValue) === 0)
   }
   filterOptions() {
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
         startWith(''),
-        map(value => typeof value === 'string' ? value : value.emp_name),
-        map(emp_name => emp_name ? this._filter(emp_name) : this.options.slice())
+        map(value => typeof value === 'string' ? value : value.employee.employee_firstname),
+        map(employee_firstname => employee_firstname ? this._filter(employee_firstname) : this.options.slice())
       );
   }
-  displayFn(user?: Employee): string | undefined {
+  displayFn(user?: any): string | undefined {
     if (user !== null) {
       // fetch assigned projects
       this.ProjectService
-        .getAssignedProject(user.emp_id.toString())
+        .getAssignedProject(user.employee.employee_id.toString())
         .subscribe(response => {
           // this.incomingProject.project_id = response.project_id;
           // localStorage.setItem("pid", response.project_id.toString());
@@ -172,7 +176,7 @@ projectdisplayFn(user?: ProjectInterface): string | undefined {
 
 
     // 
-    return user ? user.emp_name : undefined;
+    return user ? user.employee.employee_firstname : undefined;
   }
 
 
@@ -186,7 +190,7 @@ projectdisplayFn(user?: ProjectInterface): string | undefined {
     // // console.log(emp)
 
     this.ProjectService
-      .getAssignedProject(emp.emp_id)
+      .getAssignedProject(emp.employee_id)
       .subscribe(response => {
         // this.incomingProject.project_id = response.project_id;
         // localStorage.setItem("pid", response.project_id.toString());
