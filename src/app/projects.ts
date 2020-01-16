@@ -1,5 +1,5 @@
 export interface Projects { 
-    project_title:string;
+    title:string;
     project_description: string;
     project_status:string;
     project_start_date:Date;
