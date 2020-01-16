@@ -1,4 +1,7 @@
-export interface Projects {
-    emp_id:number;
-    title:string;
+export interface Projects { 
+    project_title:string;
+    project_description: string;
+    project_status:string;
+    project_start_date:Date;
+    project_end_Date:Date;
 }

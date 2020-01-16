@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
+
+
+
 
 import { MatTableDataSource } from '@angular/material/table';
 import {
@@ -13,15 +16,11 @@ import { ProjectService } from 'src/app/project.service';
 import { ProjectInterface } from 'src/app/screens/project-interface';
 import { Observable } from 'rxjs';
 
-export interface PeriodicElement {
-  title: string;
-
-}
 
 
-const ELEMENT_DATA: PeriodicElement[] = [
+// const ELEMENT_DATA: PeriodicElement[] = [
 
-];
+// ];
 
 @Component({
   selector: 'app-projects',
@@ -29,6 +28,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements OnInit {
+
+  
 
   constructor(
     // tslint:disable-next-line: no-shadowed-variable
@@ -39,12 +40,22 @@ export class ProjectsComponent implements OnInit {
 
 
   projectForm = new FormGroup({
-    title: new FormControl('')
+  project_title: new FormControl(''),
+  project_description: new FormControl(''),
+  project_status: new FormControl(''),
+  project_start_date: new FormControl(''),
+  project_end_Date:new FormControl(''),
+  project_tech_stack:new FormControl('')
+
   });
 
 
   displayedColumns: string[] = [
-    'title'
+    'title',
+    'description',
+    'status',
+    'start_date',
+    'end_date'
   ];
   dataSource = [];
 
