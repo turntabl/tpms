@@ -77,7 +77,7 @@ app.post(
   function (req, res) {
     // sets a cookie called ttemail and sets its max age to 1 day
     res.cookie('ttemail', userEmail, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
-    res.redirect("https://tpms-ui.herokuapp.com/verify");
+    res.redirect("http://tpmsapp-env.jmmhdvhcxh.us-east-2.elasticbeanstalk.com/verify");
   }
 );
 
