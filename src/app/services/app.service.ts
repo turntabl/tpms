@@ -15,9 +15,9 @@ export class AppService {
   changeMessage(message: string) {
     this.messageSource.next(message);
   }
-  getEmployeeRole(email: string): Observable<Employee[]> {
+  getEmployeeRole(email: string): Observable<any> {
     return this.http.get<Employee[]>(
-      this.developerService + "dev/email/" + email
+      this.developerService + "/v1/api/login" + email
     );
   }
   getLoggedHours(): Observable<ProjectModel[]> {
