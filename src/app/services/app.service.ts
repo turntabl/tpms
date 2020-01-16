@@ -16,7 +16,7 @@ export class AppService {
     this.messageSource.next(message);
   }
   getEmployeeRole(email: string): Observable<any> {
-    return this.http.get<Employee[]>(
+    return this.http.get<any>(
       this.developerService + "/v1/api/login" + email
     );
   }
