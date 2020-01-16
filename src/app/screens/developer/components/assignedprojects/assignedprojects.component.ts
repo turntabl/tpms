@@ -44,6 +44,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class AssignedprojectsComponent implements OnInit {
   incomingProject = { project_id: 2, title: '' };
   showAlert: boolean = false;
+  userProjects: any
 
   hourform = new FormGroup({
     project_hours: new FormControl(''),
@@ -77,14 +78,23 @@ export class AssignedprojectsComponent implements OnInit {
 
 
   ngOnInit() {
-    this.projectService
-      .getAssignedProject(localStorage.getItem('empId'))
-      .subscribe(response => {
-        // this.incomingProject.project_id = response.project_id;
-        localStorage.setItem('pid', response.project_id.toString());
-        this.incomingProject.title = response.title;
-      });
-    console.log(this.incomingProject.title);
+    
+    var userData = JSON.parse(localStorage.getItem("userData"))
+    console.log("User Data | ",userData);
+    
+    if(userData === null){
+      this.userProjects = [];
+    }else{
+      this.userProjects = userData.projects;
+    }
+    // this.projectService
+    //   .getAssignedProject(localStorage.getItem('empId'))
+    //   .subscribe(response => {
+    //     // this.incomingProject.project_id = response.project_id;
+    //     localStorage.setItem('pid', response.project_id.toString());
+    //     this.incomingProject.title = response.title;
+    //   });
+    
   }
 
   sickFieldChecked(event) {

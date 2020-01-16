@@ -17,7 +17,7 @@ export class AppService {
   }
   getEmployeeRole(email: string): Observable<any> {
     return this.http.get<any>(
-      this.developerService + "/v1/api/login/" + email
+      this.developerService + "/v1/api/login" + email
     );
   }
   getLoggedHours(): Observable<ProjectModel[]> {
@@ -28,7 +28,7 @@ export class AppService {
       this.developerService + "projectlogged/dev/" + empId
     );
   }
-  getDevelopers(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(this.developerService + "dev/");
+  getDevelopers(): Observable<any> {
+    return this.http.get<any>(this.developerService + "/v1/api/employees");
   }
 }

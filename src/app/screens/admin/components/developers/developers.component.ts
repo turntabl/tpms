@@ -17,12 +17,17 @@ import { ProjectInterface } from 'src/app/screens/project-interface';
 
 export class DevelopersComponent implements OnInit {
   currentDevsId: number
-  developers: Array<Employee> = [
+  developers: Array<any> = [
     // {value: 'Dennis Bill'},
     // {value: 'Francis Billa'},
     // {value: 'Francis Billa'}
   ];
   // devselected = 'option2';
+  
+selectedDeveloper_id
+
+selectedProject_id
+
   selectable = true;
   removable = true;
   projects = [
@@ -45,18 +50,14 @@ export class DevelopersComponent implements OnInit {
 
 
   myControl = new FormControl();
-  options: Array<Employee> = [];
-  filteredOptions: Observable<Employee[]>;
+  options: Array<any> = [];
+  filteredOptions: Observable<any>;
 
   projectmyControl = new FormControl();
-  projectoptions: Array<ProjectInterface> = [];
-  projectfilteredOptions: Observable<ProjectInterface[]>;
-  assignedProjects: Array<ProjectInterface> = []
-
-
-
-  
-
+  projectoptions: Array<any> = [];
+  projectfilteredOptions: Observable<any>;
+  assignedProjects: Array<any> 
+  // assignedProjects: Array<ProjectInterface> = []
 
 
   constructor(private ProjectService: ProjectService, private devService: AppService) { }
@@ -67,20 +68,30 @@ export class DevelopersComponent implements OnInit {
   projectsObservable: Observable<ProjectInterface[]>;
   project = [];
 
-  assignedObservable: Observable<ProjectInterface[]>;
+  assignedObservable: Observable<any>;
   assign = [];
 
   ngOnInit() {
     this.devService.getDevelopers().subscribe(response => {
-      this.developers = response;
-      this.options = response
-      // this.developers.forEach(e => console.log(response.emp_name))
+      // console.log("Response from server | ",response)
+      if(response.code === "00"){
+        this.options = response.data;
+        
+      }else{
+        console.log(response);
+      }
+      // this.developers = response;
+      // this.options = response
+      //this.developers.forEach(e => console.log("Response from server | ",response))
     });
     this.ProjectService.getProject().subscribe(response => {
-      this.projects = response;
-      this.projectoptions = response
-      console.log(response);
-      
+      console.log("Response from server | ",response)
+      if(response.code === "00"){
+        this.projectoptions = response.data;
+      }else{
+        console.log(response);
+      }
+    
     });
     this.filterOptions()
 
@@ -98,81 +109,89 @@ export class DevelopersComponent implements OnInit {
   }
   private _projectfilter(value: string): ProjectInterface[] {
     const filterValue = value.toLowerCase();
+    console.log("Filtering ",filterValue);
+    
     // return this.options.filter(option => option.emp_name.toLowerCase().includes(filterValue));
-    return this.projectoptions.filter(option => option.title.toLowerCase().indexOf(filterValue) === 0)
+    return this.projectoptions.filter(option => option.project.project_name.toLowerCase().indexOf(filterValue) === 0)
   }
   
  projectfilterOptions() {
   this.projectfilteredOptions = this.projectmyControl.valueChanges
     .pipe(
       startWith(''),
-      map(value => typeof value === 'string' ? value : value.title),
-      map(title => title ? this._projectfilter(title) : this.projectoptions.slice())
+      map(value => typeof value === 'string' ? value : value.project.project_name),
+      map(project_name => project_name ? this._projectfilter(project_name) : this.projectoptions.slice())
     );
 }
-projectdisplayFn(user?: ProjectInterface): string | undefined {
-  // if (user !== null) {
-  //   // fetch assigned projects
-  //   this.ProjectService
-  //     .getAssignedProject(user.project_id.toString())
-  //     .subscribe(response => {
-  //       // this.incomingProject.project_id = response.project_id;
-  //       // localStorage.setItem("pid", response.project_id.toString());
-  //       // // this.assignedprojects.length=0
-  //       // this.assignedprojects[0].project_id = response.project_id;
-  //       // this.assignedprojects[0].title = response.title;
-  //       this.assignedProjects.push(response);
-  //       // console.log(response);
+  projectdisplayFn(user?: any): any | undefined {
 
-  //     });
-  // }
-  if (user) {
-    console.log(user);
-    this.assignedProjects.push(user)
-  } else {
-    console.log("non");
+    // if (user !== null) {
+    //   // fetch assigned projects
+    //   this.ProjectService
+    //     .getAssignedProject(user.project_id.toString())
+    //     .subscribe(response => {
+    //       // this.incomingProject.project_id = response.project_id;
+    //       // localStorage.setItem("pid", response.project_id.toString());
+    //       // // this.assignedprojects.length=0
+    //       // this.assignedprojects[0].project_id = response.project_id;
+    //       // this.assignedprojects[0].title = response.title;
+    //       this.assignedProjects.push(response);
+    //       // console.log(response);
+
+    //     });
+    // }
+    if (user) {
+      console.log("Printing project | ",user);
+      // this.assignedProjects.push(user)
+    } else {
+      console.log("non");
+      
+    }
     
+    
+    return user ? user.project.project_name : undefined;
   }
-  
-  
-  return user ? user.title : undefined;
-}
+
+
+
 
   private _filter(value: string): Employee[] {
     const filterValue = value.toLowerCase();
+    return this.options.filter(option => option.employee.employee_firstname.toLowerCase().indexOf(filterValue) === 0)
+    
     // return this.options.filter(option => option.emp_name.toLowerCase().includes(filterValue));
-    return this.options.filter(option => option.emp_name.toLowerCase().indexOf(filterValue) === 0)
+    //return this.options.filter(option => option.employee_firstname.toLowerCase().indexOf(filterValue) === 0)
   }
   filterOptions() {
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
         startWith(''),
-        map(value => typeof value === 'string' ? value : value.emp_name),
-        map(emp_name => emp_name ? this._filter(emp_name) : this.options.slice())
+        map(value => typeof value === 'string' ? value : value.employee.employee_firstname),
+        map(employee_firstname => employee_firstname ? this._filter(employee_firstname) : this.options.slice())
       );
   }
-  displayFn(user?: Employee): string | undefined {
+  displayFn(user?: any): any | undefined {
+    
+    
     if (user !== null) {
+      this.selectedDeveloper_id = user.employee.employee_id
+
+      this.assignedProjects = user.projects;
       // fetch assigned projects
-      this.ProjectService
-        .getAssignedProject(user.emp_id.toString())
-        .subscribe(response => {
-          // this.incomingProject.project_id = response.project_id;
-          // localStorage.setItem("pid", response.project_id.toString());
-          // // this.assignedprojects.length=0
-          // this.assignedprojects[0].project_id = response.project_id;
-          // this.assignedprojects[0].title = response.title;
-          this.assignedProjects.push(response);
-          // console.log(response);
+      // this.ProjectService
+      //   .getAssignedProject(user.employee.employee_id.toString())
+      //   .subscribe(response => {
+      //     // this.incomingProject.project_id = response.project_id;
+      //     // localStorage.setItem("pid", response.project_id.toString());
+      //     // // this.assignedprojects.length=0
+      //     // this.assignedprojects[0].project_id = response.project_id;
+      //     // this.assignedprojects[0].title = response.title;
+          
+          console.log(user);
 
-        });
+      //   });
     }
-
-
-
-
-    // 
-    return user ? user.emp_name : undefined;
+    return user ? user.employee.employee_firstname : undefined;
   }
 
 
@@ -186,7 +205,7 @@ projectdisplayFn(user?: ProjectInterface): string | undefined {
     // // console.log(emp)
 
     this.ProjectService
-      .getAssignedProject(emp.emp_id)
+      .getAssignedProject(emp.employee_id)
       .subscribe(response => {
         // this.incomingProject.project_id = response.project_id;
         // localStorage.setItem("pid", response.project_id.toString());

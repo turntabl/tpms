@@ -29,24 +29,34 @@ export class VerifyComponent implements OnInit {
         .getEmployeeRole(this.cookie.get("ttemail"))
         .subscribe(response => {
           // console.log("Response", response[0].emp_role);
-          switch (response[0].emp_role) {
-            case "Administrator":
-              // this.appservice.changeMessage(response[0].emp_name);
-              localStorage.setItem("username", response[0].emp_name);
-              localStorage.setItem("empId", response[0].emp_id.toString());
-              this.isLoading = false;
-              this.router.navigate(["admin/projects"]);
-              break;
-            case "Developer":
-              // this.appservice.changeMessage(response[0].emp_name);
-              localStorage.setItem("username", response[0].emp_name);
-              localStorage.setItem("empId", response[0].emp_id.toString());
-              this.isLoading = false;
-              this.router.navigate(["developer/projects"]);
-              break;
-            default:
-              break;
+          if(response.code == "00"){
+            var employee_fullname = response.data.employee.employee_firstname + " " + response.data.employee.employee_lastname;
+            var employee_id = response.data.employee.employee_id;
+            switch (response.data.employee.employee_role) {
+              case "ADMINISTRATOR":
+                // this.appservice.changeMessage(response[0].emp_name);
+
+                localStorage.setItem("username", employee_fullname);
+                localStorage.setItem("userData", JSON.stringify(response.data));
+                localStorage.setItem("empId", employee_id.toString());
+                this.isLoading = false;
+                this.router.navigate(["admin/projects"]);
+                break;
+              case "DEVELOPER":
+                // this.appservice.changeMessage(response[0].emp_name);
+                localStorage.setItem("username", employee_fullname);
+                localStorage.setItem("userData", JSON.stringify(response.data));
+                localStorage.setItem("empId", employee_id.toString());
+                this.isLoading = false;
+                this.router.navigate(["developer/projects"]);
+                break;
+              default:
+                break;
+            }
+          }else{
+
           }
+          
         });
     } else {
       // Tell the person to reauthenticate

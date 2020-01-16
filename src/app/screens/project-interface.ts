@@ -1,7 +1,7 @@
 export interface ProjectInterface {
     // description: string;
-    project_id?: number;
-    title: string;
+    employee_id?: number;
+    project_id: number;
     // startdate: Date;
     // enddate: Date;
     // dev: number;

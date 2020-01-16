@@ -68,8 +68,8 @@
       <!-- <mat-label>Assigned Project</mat-label> -->
       <mat-select>
         <!-- <mat-option>None</mat-option>        -->
-        <mat-option *ngFor="let project of incomingProject" [value]="project">
-          {{project.title}}
+        <mat-option *ngFor="let project of userProjects" [value]="project">
+          {{project.project_name}}
         </mat-option>
       </mat-select>
     </mat-form-field>

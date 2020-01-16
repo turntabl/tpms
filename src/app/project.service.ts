@@ -7,7 +7,7 @@ import { ProjectInterface } from './screens/project-interface';
   providedIn: 'root'
 })
 export class ProjectService {
-  private projectUrl = 'https://projectservice02.herokuapp.com';
+  private projectUrl = 'http://employementprofilingapp-env.snvx8mbkdw.us-east-2.elasticbeanstalk.com';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -21,13 +21,13 @@ export class ProjectService {
     );
   }
 
-  getProject(): Observable<ProjectInterface[]> {
-    return this.http.get<ProjectInterface[]>(this.projectUrl + '/projects');
+  getProject(): Observable<any> {
+    return this.http.get<any>(this.projectUrl + '/v1/api/projects');
   }
 
-  getAssignedProject(empId: string): Observable<ProjectInterface> {
-    return this.http.get<ProjectInterface>(
-      this.projectUrl + '/projects/assigned/' + empId
+  getAssignedProject(employee_id: string): Observable<any> {
+    return this.http.get<any>(
+      this.projectUrl + 'v1/api/project//assign/employee/' + employee_id
     );
   }
 
