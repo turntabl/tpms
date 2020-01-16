@@ -1,9 +1,7 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
-
-
-
+import {NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 
 import { MatTableDataSource } from '@angular/material/table';
 import {
@@ -28,24 +26,31 @@ import { Observable } from 'rxjs';
   styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements OnInit {
+  hoveredDate: NgbDate;
 
+  fromDate: NgbDate;
+  toDate: NgbDate;
   
 
   constructor(
     // tslint:disable-next-line: no-shadowed-variable
     private ProjectService: ProjectService,
     iconRegistry: MatIconRegistry,
-    sanitizer: DomSanitizer) {}
+    calendar: NgbCalendar,
+    sanitizer: DomSanitizer) {
+      this.fromDate = calendar.getToday();
+      this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+    }
 
 
 
   projectForm = new FormGroup({
-  project_title: new FormControl(''),
-  project_description: new FormControl(''),
-  project_status: new FormControl(''),
-  project_start_date: new FormControl(''),
-  project_end_Date:new FormControl(''),
-  project_tech_stack:new FormControl('')
+  title: new FormControl(''),
+  // project_description: new FormControl(''),
+  // project_status: new FormControl(''),
+  // project_start_date: new FormControl(''),
+  // project_end_Date:new FormControl(''),
+  // project_tech_stack:new FormControl('')
 
   });
 
@@ -98,7 +103,28 @@ export class ProjectsComponent implements OnInit {
       // alert(JSON.stringify(this.projectForm.value));
   }
 
+  onDateSelection(date: NgbDate) {
+    if (!this.fromDate && !this.toDate) {
+      this.fromDate = date;
+    } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
+      this.toDate = date;
+    } else {
+      this.toDate = null;
+      this.fromDate = date;
+    }
+  }
 
+  isHovered(date: NgbDate) {
+    return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
+  }
+
+  isInside(date: NgbDate) {
+    return date.after(this.fromDate) && date.before(this.toDate);
+  }
+
+  isRange(date: NgbDate) {
+    return date.equals(this.fromDate) || date.equals(this.toDate) || this.isInside(date) || this.isHovered(date);
+  }
 
 
 

@@ -9,15 +9,15 @@ import ProjectModel from "../models/ProjectModel";
 export class AppService {
   private messageSource = new BehaviorSubject("");
   currentMessage = this.messageSource.asObservable();
-  private developerService = "https://developerservice03.herokuapp.com/";
+  private developerService = "http://employementprofilingapp-env.snvx8mbkdw.us-east-2.elasticbeanstalk.com";
   constructor(private http: HttpClient) {}
 
   changeMessage(message: string) {
     this.messageSource.next(message);
   }
-  getEmployeeRole(email: string): Observable<Employee[]> {
-    return this.http.get<Employee[]>(
-      this.developerService + "dev/email/" + email
+  getEmployeeRole(email: string): Observable<any> {
+    return this.http.get<any>(
+      this.developerService + "/v1/api/login/" + email
     );
   }
   getLoggedHours(): Observable<ProjectModel[]> {
