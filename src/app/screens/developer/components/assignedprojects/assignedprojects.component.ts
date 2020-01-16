@@ -40,14 +40,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./assignedprojects.component.css']
 })
 
-// // tslint:disable-next-line: component-class-suffix
-// export class SelectOverviewExample {
-//   foods: Food[] = [
-//     {value: 'steak-0', viewValue: 'Steak'},
-//     {value: 'pizza-1', viewValue: 'Pizza'},
-//     {value: 'tacos-2', viewValue: 'Tacos'}
-//   ];
-// }
 
 export class AssignedprojectsComponent implements OnInit {
   incomingProject = { project_id: 2, title: '' };
