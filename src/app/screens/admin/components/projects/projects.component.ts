@@ -57,10 +57,10 @@ export class ProjectsComponent implements OnInit {
 
   displayedColumns: string[] = [
     'title',
-    'description',
-    'status',
-    'start_date',
-    'end_date'
+    // 'description',
+    // 'status',
+    // 'start_date',
+    // 'end_date'
   ];
   dataSource = [];
 
