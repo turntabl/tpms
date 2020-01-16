@@ -84,7 +84,7 @@ export class AssignedprojectsComponent implements OnInit {
         localStorage.setItem('pid', response.project_id.toString());
         this.incomingProject.title = response.title;
       });
-
+    console.log(this.incomingProject.title);
   }
 
   sickFieldChecked(event) {
