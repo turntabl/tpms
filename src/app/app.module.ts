@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 // Cookie stuff
 import {CookieService} from 'ngx-cookie-service';
@@ -94,7 +95,8 @@ import { HighchartsChartModule } from 'highcharts-angular';
     MatSelectModule,
     MatAutocompleteModule,
     MatListModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    NgbModule,
     
 
 

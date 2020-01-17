@@ -37,6 +37,7 @@ export class VerifyComponent implements OnInit {
                 // this.appservice.changeMessage(response[0].emp_name);
 
                 localStorage.setItem("username", employee_fullname);
+                localStorage.setItem("userData", JSON.stringify(response.data));
                 localStorage.setItem("empId", employee_id.toString());
                 this.isLoading = false;
                 this.router.navigate(["admin/projects"]);
@@ -44,6 +45,7 @@ export class VerifyComponent implements OnInit {
               case "DEVELOPER":
                 // this.appservice.changeMessage(response[0].emp_name);
                 localStorage.setItem("username", employee_fullname);
+                localStorage.setItem("userData", JSON.stringify(response.data));
                 localStorage.setItem("empId", employee_id.toString());
                 this.isLoading = false;
                 this.router.navigate(["developer/projects"]);

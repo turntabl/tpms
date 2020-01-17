@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
+import {NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 
 import { MatTableDataSource } from '@angular/material/table';
 import {
@@ -13,15 +14,11 @@ import { ProjectService } from 'src/app/project.service';
 import { ProjectInterface } from 'src/app/screens/project-interface';
 import { Observable } from 'rxjs';
 
-export interface PeriodicElement {
-  title: string;
-
-}
 
 
-const ELEMENT_DATA: PeriodicElement[] = [
+// const ELEMENT_DATA: PeriodicElement[] = [
 
-];
+// ];
 
 @Component({
   selector: 'app-projects',
@@ -29,22 +26,41 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements OnInit {
+  hoveredDate: NgbDate;
+
+  fromDate: NgbDate;
+  toDate: NgbDate;
+  
 
   constructor(
     // tslint:disable-next-line: no-shadowed-variable
     private ProjectService: ProjectService,
     iconRegistry: MatIconRegistry,
-    sanitizer: DomSanitizer) {}
+    calendar: NgbCalendar,
+    sanitizer: DomSanitizer) {
+      this.fromDate = calendar.getToday();
+      this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+    }
 
 
 
   projectForm = new FormGroup({
-    title: new FormControl('')
+  title: new FormControl(''),
+  // project_description: new FormControl(''),
+  // project_status: new FormControl(''),
+  // project_start_date: new FormControl(''),
+  // project_end_Date:new FormControl(''),
+  // project_tech_stack:new FormControl('')
+
   });
 
 
   displayedColumns: string[] = [
-    'title'
+    'title',
+    // 'description',
+    // 'status',
+    // 'start_date',
+    // 'end_date'
   ];
   dataSource = [];
 
@@ -87,7 +103,28 @@ export class ProjectsComponent implements OnInit {
       // alert(JSON.stringify(this.projectForm.value));
   }
 
+  onDateSelection(date: NgbDate) {
+    if (!this.fromDate && !this.toDate) {
+      this.fromDate = date;
+    } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
+      this.toDate = date;
+    } else {
+      this.toDate = null;
+      this.fromDate = date;
+    }
+  }
 
+  isHovered(date: NgbDate) {
+    return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
+  }
+
+  isInside(date: NgbDate) {
+    return date.after(this.fromDate) && date.before(this.toDate);
+  }
+
+  isRange(date: NgbDate) {
+    return date.equals(this.fromDate) || date.equals(this.toDate) || this.isInside(date) || this.isHovered(date);
+  }
 
 
 

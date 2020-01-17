@@ -17,7 +17,7 @@ export class AppService {
   }
   getEmployeeRole(email: string): Observable<any> {
     return this.http.get<any>(
-      this.developerService + "/v1/api/login" + email
+      this.developerService + "/v1/api/login/" + email
     );
   }
   getLoggedHours(): Observable<ProjectModel[]> {

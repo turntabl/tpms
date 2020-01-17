@@ -32,12 +32,35 @@
             <div class="md-form mb-3">
               <i class="fas fa-tasks prefix grey-text"></i>
               <input type="text" id="form1" class="form-control validate" formControlName="title" placeholder=" Title">
+              <input type="text" id="form2" class="form-control validate" formControlName="title" placeholder=" Description">
+              <select class="custom-select" id="inputGroupSelect01" >
+                <option selected>Select a Tech Stack</option>
+                <option value="1">Java</option>
+                <option value="2">Scala</option>
+                <option value="3">API</option>
+              </select>
+              <!-- <input placeholder="Selected date" type="text" id="date-picker-example" class="form-control datepicker"> -->
+              
+              <!-- <input class="form-control" id="datepicker" name="date" placeholder="MM/DD/YYY" type="text" readonly/> -->
+              <!-- <input type="text" class="form-control" name="date" id="datepicker" placeholder="Start Date" >
+              <input type="text" class="form-control" name="date2" id="datepicker2" placeholder="End Date" > -->
+             
+             <!-- date picker -->
+
+
+              
               <!-- <label data-error="wrong" data-success="right" for="form1">TITLE</label> -->
-            </div>          
+
+
+
+
+          
+            </div>  
+                    
 
             <div style="margin-top: 20px; margin-bottom: 20px;">
               <button type="submit" id="submit" (ngSubmit)="onSubmit()" class="btn btn-primary btn-lg btn-block">Submit</button>
-              <button type="submit"  (ngSubmit)="onSubmit()" class="btn btn-warning btn-lg btn-block" data-dismiss="modal">Dimiss</button>
+              <!-- <button type="submit"  (ngSubmit)="onSubmit()" class="btn btn-warning btn-lg btn-block" data-dismiss="modal">Dimiss</button> -->
 
             </div>
           </div>
@@ -52,9 +75,9 @@
     <mat-tab label="PROJECT">
       <!-- <div *ngFor="let dev of devs" style="margin:20px"> -->
       <div class="container-fluid" style="margin-bottom:50px;">
-        <mat-form-field>
-          <!-- <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter"> -->
-        </mat-form-field>
+        <!-- <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field> -->
 
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -62,6 +85,12 @@
           <ng-container matColumnDef="title">
             <th mat-header-cell *matHeaderCellDef style="font-size: xx-large;">Project Title </th>
             <td mat-cell *matCellDef="let incomingProject"> {{incomingProject.title}} </td>
+            <!-- <td mat-cell *matCellDef="let incomingProject"> {{incomingProject.project_description}} </td>
+            <td mat-cell *matCellDef="let incomingProject"> {{incomingProject.project_start_date}} </td>
+            <td mat-cell *matCellDef="let incomingProject"> {{incomingProject.project_end_date}} </td>
+            <td mat-cell *matCellDef="let incomingProject"> {{incomingProject.project_tech_stack}} </td> -->
+
+
           </ng-container>
          
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
