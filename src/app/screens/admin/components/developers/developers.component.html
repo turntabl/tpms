@@ -2,7 +2,7 @@
 
  <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h1">Assign Developer to a Project</h1>
+        <h1 class="h1">Assign Developer to a Project</h1><hr />
     </div>
    
 <div class="container">
@@ -13,7 +13,7 @@
     <input type="text" placeholder="Developer name" matInput [formControl]="myControl" [matAutocomplete]="dev">
     <mat-autocomplete #dev="matAutocomplete" [displayWith]="displayFn.bind(this)">
       <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-        {{option.employee.employee_firstname}}
+        {{option.employee.employee_firstname}}  {{option.employee.employee_lastname}}
       </mat-option>
     </mat-autocomplete>
     

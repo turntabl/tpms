@@ -6,6 +6,7 @@ import { ProjectInterface } from './screens/project-interface';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProjectService {
   private projectUrl = 'http://employementprofilingapp-env.snvx8mbkdw.us-east-2.elasticbeanstalk.com';
   httpOptions = {
