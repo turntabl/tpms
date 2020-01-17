@@ -25,12 +25,16 @@ import { Observable } from 'rxjs';
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.css']
 })
+
+
+
 export class ProjectsComponent implements OnInit {
   hoveredDate: NgbDate;
 
   fromDate: NgbDate;
   toDate: NgbDate;
-  
+
+
 
   constructor(
     // tslint:disable-next-line: no-shadowed-variable
