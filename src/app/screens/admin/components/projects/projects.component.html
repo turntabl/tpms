@@ -40,15 +40,10 @@
                 <option value="3">API</option>
               </select>
               <mat-form-field>
-                <input matInput [matDatepicker]="picker" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Start Date">
+    
+                <input matInput ng-model-options="{timezone: null}" [matDatepickerFilter]="myFilter" [matDatepicker]="picker" placeholder="Start Date" formControlName="project_start_date">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
-                
-              </mat-form-field>
-              <mat-form-field>
-                <input matInput [matDatepicker]="picker1" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;End Date">
-                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                <mat-datepicker #picker1></mat-datepicker>
                 
               </mat-form-field>
               

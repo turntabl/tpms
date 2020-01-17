@@ -54,8 +54,9 @@ export class ProjectsComponent implements OnInit {
   title: new FormControl(''),
   // project_description: new FormControl(''),
   // project_status: new FormControl(''),
-  // project_start_date: new FormControl(''),
-  // project_end_Date:new FormControl(''),
+  project_start_date: new FormControl(''),
+  
+  project_end_Date: new FormControl(new Date().toISOString().slice(0, 10)),
   // project_tech_stack:new FormControl('')
 
   });
