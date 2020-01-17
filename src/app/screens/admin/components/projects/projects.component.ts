@@ -29,12 +29,14 @@ import { Observable } from 'rxjs';
 
 
 export class ProjectsComponent implements OnInit {
+
+  
   hoveredDate: NgbDate;
 
   fromDate: NgbDate;
   toDate: NgbDate;
-
-
+  date = new FormControl(new Date());
+  serializedDate = new FormControl((new Date()).toISOString()); 
 
   constructor(
     // tslint:disable-next-line: no-shadowed-variable

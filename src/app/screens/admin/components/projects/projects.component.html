@@ -22,7 +22,7 @@
           <h4 style="font-weight: bolder; color: rgb(15, 15, 15);">Add a Project</h4>
           
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+            <!-- <span aria-hidden="true">&times;</span> -->
           </button>
         </div>
 
@@ -39,6 +39,19 @@
                 <option value="2">Scala</option>
                 <option value="3">API</option>
               </select>
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Start Date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker1" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;End Date">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+                
+              </mat-form-field>
+              
               <!-- <input placeholder="Selected date" type="text" id="date-picker-example" class="form-control datepicker"> -->
               
               <!-- <input class="form-control" id="datepicker" name="date" placeholder="MM/DD/YYY" type="text" readonly/> -->
