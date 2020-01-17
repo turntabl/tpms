@@ -39,13 +39,15 @@
                 <option value="2">Scala</option>
                 <option value="3">API</option>
               </select>
+              <br /><br />
               <mat-form-field>
     
-                <input matInput ng-model-options="{timezone: null}" [matDatepickerFilter]="myFilter" [matDatepicker]="picker" placeholder="Start Date" formControlName="project_start_date">
+                <input matInput ng-model-options="{timezone: null}" [matDatepickerFilter]="myFilter" [matDatepicker]="picker" placeholder="Project Start Date" formControlName="project_start_date">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
                 
               </mat-form-field>
+              
               
               <!-- <input placeholder="Selected date" type="text" id="date-picker-example" class="form-control datepicker"> -->
               
