@@ -53,7 +53,7 @@
     <!-- <mat-list  *ngFor="let assignedproject of assignedprojects" role="list">
       <span>{{assignedproject.title}}</span> <button>delete</button>
     </mat-list> -->
-    <th mat-header-cell *matHeaderCellDef style="font-size: xx-large;">
+    <th mat-header-cell *matHeaderCellDef style="font-size: xx-medium;">
 
       <!-- <mat-form-field>
         <mat-label>Favorite food</mat-label>
@@ -66,7 +66,7 @@
 
     <mat-form-field>
       <!-- <mat-label>Assigned Project</mat-label> -->
-      <mat-select>
+      <mat-select style="font-size: xx-medium;">
         <!-- <mat-option>None</mat-option>        -->
         <mat-option *ngFor="let project of userProjects" [value]="project">
           {{project.project_name}}
