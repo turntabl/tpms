@@ -19,7 +19,7 @@
       <div class="modal-content">
         <div class="modal-header text-center">
 
-          <h4 style="font-weight: bolder; color: rgb(15, 15, 15);">Add Project</h4>
+          <h4 id ="ph4" style="font-weight: bolder; color: rgb(15, 15, 15);">Add Project</h4>
           
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             
@@ -40,7 +40,9 @@
                 <option value="1">Java</option>
                 <option value="2">Scala</option>
                 <option value="3">API</option>
-              </select><br /><br />
+              </select>
+              <br />
+              <br />
 
              
               
@@ -51,7 +53,9 @@
                 <mat-datepicker-toggle  matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
                 
-              </mat-form-field><br /><br />
+              </mat-form-field>
+              <br />
+              <br />
               <mat-form-field>
     
                 <input matInput ng-model-options="{timezone: null}" [matDatepickerFilter]="myFilter" [matDatepicker]="picker2" placeholder="Project End Date" formControlName="project_end_date">
@@ -68,7 +72,7 @@
 
             <div style="margin-top: 20px; margin-bottom: 20px;">
               <button type="submit" id="submit" (ngSubmit)="onSubmit()" class="btn btn-primary btn-lg btn-block" value="true">Submit</button>
-              <!-- <button type="submit"  (ngSubmit)="onSubmit()" class="btn btn-warning btn-lg btn-block" data-dismiss="modal">Dimiss</button> -->
+            
 
             </div>
           </div>

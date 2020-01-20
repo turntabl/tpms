@@ -8,6 +8,11 @@ table {
   width: 100%;
 }
 
+#ph4{
+  margin-left: 150px;
+  
+}
+
 .mat-table {
   overflow-x: scroll;
 }
