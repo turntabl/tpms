@@ -31,21 +31,13 @@ import { Observable } from 'rxjs';
 export class ProjectsComponent implements OnInit {
 
   
-  // hoveredDate: NgbDate;
-
-  // fromDate: NgbDate;
-  // toDate: NgbDate;
-  // date = new FormControl(new Date());
-  // serializedDate = new FormControl((new Date()).toISOString()); 
-
   constructor(
-    // tslint:disable-next-line: no-shadowed-variable
+
     private ProjectService: ProjectService,
     iconRegistry: MatIconRegistry,
     calendar: NgbCalendar,
     sanitizer: DomSanitizer) {
-      // this.fromDate = calendar.getToday();
-      // this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+   
     }
 
 

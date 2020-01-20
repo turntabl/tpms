@@ -33,26 +33,36 @@
               <i class="fas fa-tasks prefix grey-text"></i>
               <input type="text" id="form1" class="form-control validate" formControlName="project_title" placeholder=" Title"><br />
               <input type="text" id="form2" class="form-control validate" formControlName="project_description" placeholder=" Description"><br />
-              <!-- <select class="custom-select" id="inputGroupSelect01" formControlName="project_tech_stack" >
+              <select class="custom-select" id="inputGroupSelect01" formControlName="project_tech_stack" >
                 <option selected>Select a Tech Stack</option>
                 <option value="1">Java</option>
                 <option value="2">Scala</option>
                 <option value="3">API</option>
               </select><br /><br />
-           -->
+
+              <!-- <mat-form-field>
+                <mat-select placeholder="Select Stack" formControlName="project_tech_stack" multiple>
+                  <mat-select-trigger>
+                    {{toppings.value ? toppings.value[0] : ''}}
+                    <span *ngIf="toppings.value?.length > 1" class="example-additional-selection">
+                      (+{{toppings.value.length - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
+                    </span>
+                  </mat-select-trigger>
+                  <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                </mat-select>
+              </mat-form-field> -->
+              <br /><br /><br />
+
+
+
+
+
+
+
+
+          
               <mat-form-field>
-                <mat-form-field>
-                  <mat-select placeholder="Toppings" [formControl]="toppings" multiple>
-                    <mat-select-trigger>
-                      {{toppings.value ? toppings.value[0] : ''}}
-                      <span *ngIf="toppings.value?.length > 1" class="example-additional-selection">
-                        (+{{toppings.value.length - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
-                      </span>
-                    </mat-select-trigger>
-                    <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-                
+    
                 <input matInput ng-model-options="{timezone: null}" [matDatepickerFilter]="myFilter" [matDatepicker]="picker" placeholder="Project Start Date" formControlName="project_start_date">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
@@ -95,7 +105,7 @@
                     
 
             <div style="margin-top: 20px; margin-bottom: 20px;">
-              <button type="submit" id="submit" (ngSubmit)="onSubmit()" class="btn btn-primary btn-lg btn-block">Submit</button>
+              <button type="submit" id="submit" (ngSubmit)="onSubmit()" class="btn btn-primary btn-lg btn-block" (ngModelChange)="submitChecked($event)" value="true">Submit</button>
               <!-- <button type="submit"  (ngSubmit)="onSubmit()" class="btn btn-warning btn-lg btn-block" data-dismiss="modal">Dimiss</button> -->
 
             </div>
