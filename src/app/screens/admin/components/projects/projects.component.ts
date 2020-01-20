@@ -31,12 +31,12 @@ import { Observable } from 'rxjs';
 export class ProjectsComponent implements OnInit {
 
   
-  hoveredDate: NgbDate;
+  // hoveredDate: NgbDate;
 
-  fromDate: NgbDate;
-  toDate: NgbDate;
-  date = new FormControl(new Date());
-  serializedDate = new FormControl((new Date()).toISOString()); 
+  // fromDate: NgbDate;
+  // toDate: NgbDate;
+  // date = new FormControl(new Date());
+  // serializedDate = new FormControl((new Date()).toISOString()); 
 
   constructor(
     // tslint:disable-next-line: no-shadowed-variable
@@ -44,21 +44,20 @@ export class ProjectsComponent implements OnInit {
     iconRegistry: MatIconRegistry,
     calendar: NgbCalendar,
     sanitizer: DomSanitizer) {
-      this.fromDate = calendar.getToday();
-      this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+      // this.fromDate = calendar.getToday();
+      // this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
     }
 
 
 
   projectForm = new FormGroup({
-  title: new FormControl(''),
-  // project_description: new FormControl(''),
-  // project_status: new FormControl(''),
+  project_title: new FormControl(''),
+  project_description: new FormControl(''),
+  project_tech_stack:new FormControl(''),
+  project_start_date: new FormControl(new Date().toISOString().slice(0, 10)),
+  project_end_date: new FormControl(new Date().toISOString().slice(0, 10))
   
   
-  project_end_Date: new FormControl(new Date().toISOString().slice(0, 10)),
-  project_start_Date: new FormControl(new Date().toISOString().slice(0, 10)),
-  // project_tech_stack:new FormControl('')
 
   });
 
@@ -104,35 +103,35 @@ export class ProjectsComponent implements OnInit {
       .subscribe(client => console.log(client));
 
 
-    //  alert(JSON.stringify(this.projectForm.value));
+     alert(JSON.stringify(this.projectForm.value));
 
 
        // .subscribe(client => console.log(client));
       // alert(JSON.stringify(this.projectForm.value));
   }
 
-  onDateSelection(date: NgbDate) {
-    if (!this.fromDate && !this.toDate) {
-      this.fromDate = date;
-    } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
-      this.toDate = date;
-    } else {
-      this.toDate = null;
-      this.fromDate = date;
-    }
-  }
+    // onDateSelection(date: NgbDate) {
+    //   if (!this.fromDate && !this.toDate) {
+    //     this.fromDate = date;
+    //   } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
+    //     this.toDate = date;
+    //   } else {
+    //     this.toDate = null;
+    //     this.fromDate = date;
+    //   }
+    // }
 
-  isHovered(date: NgbDate) {
-    return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
-  }
+  // isHovered(date: NgbDate) {
+  //   return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
+  // }
 
-  isInside(date: NgbDate) {
-    return date.after(this.fromDate) && date.before(this.toDate);
-  }
+  // isInside(date: NgbDate) {
+  //   return date.after(this.fromDate) && date.before(this.toDate);
+  // }
 
-  isRange(date: NgbDate) {
-    return date.equals(this.fromDate) || date.equals(this.toDate) || this.isInside(date) || this.isHovered(date);
-  }
+  // isRange(date: NgbDate) {
+  //   return date.equals(this.fromDate) || date.equals(this.toDate) || this.isInside(date) || this.isHovered(date);
+  // }
 
 
 
