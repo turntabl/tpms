@@ -30,10 +30,10 @@
 
           <div class="modal-body mx-1">
             <div class="md-form mb-3">
-              <i class="fas fa-tasks prefix grey-text"></i>
+              <!-- <i class="fas fa-tasks prefix grey-text"></i> -->
               <input type="text" id="form1" class="form-control validate" formControlName="project_title" placeholder=" Title"><br />
               <input type="text" id="form2" class="form-control validate" formControlName="project_description" placeholder=" Description"><br />
-              <mat-label>&nbsp;&nbsp;&nbsp;&nbsp;Select Stack</mat-label>
+              <mat-label>&nbsp;&nbsp;&nbsp;Select Stack</mat-label>
               <select class="custom-select" id="inputGroupSelect01" formControlName="project_tech_stack" >
                 
                 
@@ -48,7 +48,7 @@
               <mat-form-field>
     
                 <input matInput ng-model-options="{timezone: null}" [matDatepickerFilter]="myFilter" [matDatepicker]="picker" placeholder="Project Start Date" formControlName="project_start_date">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker-toggle  matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
                 
               </mat-form-field><br /><br />
