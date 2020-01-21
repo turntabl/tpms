@@ -106,6 +106,8 @@ export class ProjectsComponent implements OnInit {
         this.dataSource = response;
       });
     }
+
+    myFilter ="";
       onSubmit() {
        
         
