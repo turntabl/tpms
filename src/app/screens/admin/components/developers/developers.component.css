@@ -11,8 +11,8 @@
     margin-left: 220px;
   }
   #selectedProject, p{
-    background-color: burlywood;
-    border-radius: 15px;
+    background-color: rgb(118, 156, 238);
+    border-radius: 30px ;
     color: black;
   }
   .example-header-image {
