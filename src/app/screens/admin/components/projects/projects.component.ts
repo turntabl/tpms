@@ -16,9 +16,7 @@ import { Observable } from 'rxjs';
 
 
 
-// const ELEMENT_DATA: PeriodicElement[] = [
 
-// ];
 
 @Component({
   selector: 'app-projects',
@@ -40,10 +38,28 @@ export class ProjectsComponent implements OnInit {
    
     }
 
-
+    toppings = new FormControl();
+    toppingList: any[] = [
+      {
+        "tech_id":1,
+        "tech_name":"Java",
+        "tech_status":"ACTIVE"
+      },
+      {
+        "tech_id":2,
+        "tech_name":"Python",
+        "tech_status":"ACTIVE"
+      },
+      {
+        "tech_id":3,
+        "tech_name":"Scala",
+        "tech_status":"ACTIVE"
+      }
+    
+    ];
 
   projectForm = new FormGroup({
-  project_title: new FormControl(''),
+  project_name: new FormControl(''),
   project_description: new FormControl(''),
   project_tech_stack:new FormControl(''),
   project_start_date: new FormControl(new Date().toISOString().slice(0, 10)),
@@ -52,6 +68,7 @@ export class ProjectsComponent implements OnInit {
   
 
   });
+
 
 
   displayedColumns: string[] = [
@@ -90,16 +107,30 @@ export class ProjectsComponent implements OnInit {
       });
     }
       onSubmit() {
+        
+        var formValues = this.projectForm.value;
+        let requestData = {
+          "project_description": formValues.project_description,
+          "project_end_date": formValues.project_end_date,
+          "project_name": formValues.project_name,
+          "project_start_date": formValues.project_start_date,
+          "project_status": "ACTIVE",
+          "project_tech_stack": formValues.project_tech_stack
+        }
+        console.log("Printing request data | ",requestData)
       this.ProjectService
-      .addNewProject(this.projectForm.value)
-      .subscribe(client => console.log(client));
+      .addNewProject(requestData)
+      .subscribe(response => {
+        console.log("Response from server | ",response)
+        alert("Successfully added project")
+        });
 
 
-     alert(JSON.stringify(this.projectForm.value));
+      
 
      
 
-       // .subscribe(client => console.log(client));
+      //  .subscribe(client => console.log(client));
       // alert(JSON.stringify(this.projectForm.value));
   }
 
