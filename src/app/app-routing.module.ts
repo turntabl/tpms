@@ -28,7 +28,7 @@ const routes: Routes = [
       {path:"reports", component:AreaComponent}
     ]
   },
-  { path: "verify", component: VerifyComponent },
+  { path: "", component: VerifyComponent },
   {
     path: "developer",
     component: NavComponent,
