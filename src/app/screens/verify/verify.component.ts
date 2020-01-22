@@ -26,7 +26,7 @@ export class VerifyComponent implements OnInit {
       this.userName = name
     });
   
-    // this.cookie.set("ttemail", "");
+    this.cookie.set("ttemail", "ali.fuseini@turntabl.io");
     this.cookieAvailable = this.cookie.check("ttemail");
     if (this.cookieAvailable == true) {
       this.appservice
@@ -35,7 +35,8 @@ export class VerifyComponent implements OnInit {
           console.log("Response from server | ", response);
           if(response.code == "00"){
             console.log("Checking User existence | ", response.data);
-            if(response.data === {}) {
+            console.log("Checking User existence Size | ", Object.keys(response.data).length);
+            if(Object.keys(response.data).length === 0) {
               var employee_email = this.cookie.get("ttemail");
               let requestData = {
                 "employee_address": "",
