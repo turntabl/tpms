@@ -70,7 +70,7 @@ export class ProjectsComponent implements OnInit {
 
   });
 
-
+  myFilter : any
 
   displayedColumns: string[] = [
     'title',
