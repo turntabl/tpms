@@ -16,43 +16,59 @@ import { Observable } from 'rxjs';
 
 
 
-// const ELEMENT_DATA: PeriodicElement[] = [
 
-// ];
 
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.css']
 })
+
+
+
 export class ProjectsComponent implements OnInit {
-  hoveredDate: NgbDate;
 
-  fromDate: NgbDate;
-  toDate: NgbDate;
   
-
   constructor(
-    // tslint:disable-next-line: no-shadowed-variable
+
     private ProjectService: ProjectService,
     iconRegistry: MatIconRegistry,
     calendar: NgbCalendar,
     sanitizer: DomSanitizer) {
-      this.fromDate = calendar.getToday();
-      this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+   
     }
 
-
+    toppings = new FormControl();
+    toppingList: any[] = [
+      {
+        "tech_id":1,
+        "tech_name":"Java",
+        "tech_status":"ACTIVE"
+      },
+      {
+        "tech_id":2,
+        "tech_name":"Python",
+        "tech_status":"ACTIVE"
+      },
+      {
+        "tech_id":3,
+        "tech_name":"Scala",
+        "tech_status":"ACTIVE"
+      }
+    
+    ];
 
   projectForm = new FormGroup({
-  title: new FormControl(''),
-  // project_description: new FormControl(''),
-  // project_status: new FormControl(''),
-  // project_start_date: new FormControl(''),
-  // project_end_Date:new FormControl(''),
-  // project_tech_stack:new FormControl('')
+  project_name: new FormControl(''),
+  project_description: new FormControl(''),
+  project_tech_stack:new FormControl(''),
+  project_start_date: new FormControl(new Date().toISOString().slice(0, 10)),
+  project_end_date: new FormControl(new Date().toISOString().slice(0, 10))
+  
+  
 
   });
+
 
 
   displayedColumns: string[] = [
@@ -90,41 +106,59 @@ export class ProjectsComponent implements OnInit {
         this.dataSource = response;
       });
     }
+
+   
       onSubmit() {
+       
+        
+        var formValues = this.projectForm.value;
+        let requestData = {
+          project_description: formValues.project_description,
+          project_end_date: formValues.project_end_date,
+          project_name: formValues.project_name,
+          project_start_date: formValues.project_start_date,
+          project_status: "ACTIVE",
+          project_tech_stack: formValues.project_tech_stack
+        }
+        console.log("Printing request data | ",requestData)
       this.ProjectService
-      .addNewProject(this.projectForm.value)
-      .subscribe(client => console.log(client));
+      .addNewProject(requestData)
+      .subscribe(response => {
+        console.log("Response from server | ",response)
+        alert("Successfully added project")
+        });
 
 
-    //  alert(JSON.stringify(this.projectForm.value));
+      
 
+     
 
-       // .subscribe(client => console.log(client));
+      //  .subscribe(client => console.log(client));
       // alert(JSON.stringify(this.projectForm.value));
   }
 
-  onDateSelection(date: NgbDate) {
-    if (!this.fromDate && !this.toDate) {
-      this.fromDate = date;
-    } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
-      this.toDate = date;
-    } else {
-      this.toDate = null;
-      this.fromDate = date;
-    }
-  }
+    // onDateSelection(date: NgbDate) {
+    //   if (!this.fromDate && !this.toDate) {
+    //     this.fromDate = date;
+    //   } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
+    //     this.toDate = date;
+    //   } else {
+    //     this.toDate = null;
+    //     this.fromDate = date;
+    //   }
+    // }
 
-  isHovered(date: NgbDate) {
-    return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
-  }
+  // isHovered(date: NgbDate) {
+  //   return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
+  // }
 
-  isInside(date: NgbDate) {
-    return date.after(this.fromDate) && date.before(this.toDate);
-  }
+  // isInside(date: NgbDate) {
+  //   return date.after(this.fromDate) && date.before(this.toDate);
+  // }
 
-  isRange(date: NgbDate) {
-    return date.equals(this.fromDate) || date.equals(this.toDate) || this.isInside(date) || this.isHovered(date);
-  }
+  // isRange(date: NgbDate) {
+  //   return date.equals(this.fromDate) || date.equals(this.toDate) || this.isInside(date) || this.isHovered(date);
+  // }
 
 
 

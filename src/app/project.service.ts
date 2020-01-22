@@ -1,24 +1,29 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpHeaders, HttpClient, } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ProjectInterface } from './screens/project-interface';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProjectService {
-  private projectUrl = 'http://employementprofilingapp-env.snvx8mbkdw.us-east-2.elasticbeanstalk.com';
+  private projectUrl = 'http://employmentprofilingapp-env.dbqsnkfqpq.us-east-2.elasticbeanstalk.com/';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
   constructor(private http: HttpClient) {}
   //  adding project to db
-  addNewProject(body: ProjectInterface): Observable<ProjectInterface> {
-    return this.http.post<ProjectInterface>(
-      this.projectUrl + '/projects/add',
-      body
-    );
+  addNewProject(requestBody: any): Observable<any> {
+    let body = JSON.stringify(requestBody);
+    let headers = new HttpHeaders({'Content-Type':'application/json'});
+   
+    return this.http.post<any>(
+      this.projectUrl + '/v1/api/project',body,{headers: headers} );
+
+      
+
   }
 
   getProject(): Observable<any> {
