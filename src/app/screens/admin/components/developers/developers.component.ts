@@ -27,6 +27,7 @@ export class DevelopersComponent implements OnInit {
 selectedDeveloper_id
 
 selectedProject_id
+assignedNewProject =[]
 
   selectable = true;
   removable = true;
@@ -73,7 +74,7 @@ selectedProject_id
 
   ngOnInit() {
     this.devService.getDevelopers().subscribe(response => {
-      // console.log("Response from server | ",response)
+      console.log("Response from server | ",response)
       if(response.code === "00"){
         this.options = response.data;
         
@@ -107,49 +108,26 @@ selectedProject_id
     }
     
   }
-  private _projectfilter(value: string): ProjectInterface[] {
-    const filterValue = value.toLowerCase();
-    console.log("Filtering ",filterValue);
+
     
-    // return this.options.filter(option => option.emp_name.toLowerCase().includes(filterValue));
-    return this.projectoptions.filter(option => option.project.project_name.toLowerCase().indexOf(filterValue) === 0)
-  }
-  
- projectfilterOptions() {
-  this.projectfilteredOptions = this.projectmyControl.valueChanges
-    .pipe(
-      startWith(''),
-      map(value => typeof value === 'string' ? value : value.project.project_name),
-      map(project_name => project_name ? this._projectfilter(project_name) : this.projectoptions.slice())
-    );
-}
-  projectdisplayFn(user?: any): any | undefined {
-
-    // if (user !== null) {
-    //   // fetch assigned projects
-    //   this.ProjectService
-    //     .getAssignedProject(user.project_id.toString())
-    //     .subscribe(response => {
-    //       // this.incomingProject.project_id = response.project_id;
-    //       // localStorage.setItem("pid", response.project_id.toString());
-    //       // // this.assignedprojects.length=0
-    //       // this.assignedprojects[0].project_id = response.project_id;
-    //       // this.assignedprojects[0].title = response.title;
-    //       this.assignedProjects.push(response);
-    //       // console.log(response);
-
-    //     });
-    // }
-    if (user) {
-      console.log("Printing project | ",user);
-      // this.assignedProjects.push(user)
-    } else {
-      console.log("non");
-      
+  displayFn(user?: any): any | undefined {
+    if (user !== null) {
+      this.selectedDeveloper_id = user.employee.employee_id
+      this.assignedProjects = user.projects;
+          // console.log(user);
     }
-    
-    
-    return user ? user.project.project_name : undefined;
+    return user ? user.employee.employee_firstname : undefined;
+  }
+
+
+  projectdisplayFn(project?: any): any | undefined {
+
+    if (project !== null) {
+      this.selectedProject_id =project.project.project_id
+      this.assignedNewProject.push(project.project)
+      // console.log("Printing project | ",project);
+    }   
+    return project ? project.project.project_name : undefined;
   }
 
 
@@ -162,6 +140,13 @@ selectedProject_id
     // return this.options.filter(option => option.emp_name.toLowerCase().includes(filterValue));
     //return this.options.filter(option => option.employee_firstname.toLowerCase().indexOf(filterValue) === 0)
   }
+  private _projectfilter(value: string): ProjectInterface[] {
+    const filterValue = value.toLowerCase();
+    // console.log("Filtering ",filterValue);
+    
+    // return this.options.filter(option => option.emp_name.toLowerCase().includes(filterValue));
+    return this.projectoptions.filter(option => option.project.project_name.toLowerCase().indexOf(filterValue) === 0)
+  }
   filterOptions() {
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
@@ -170,28 +155,14 @@ selectedProject_id
         map(employee_firstname => employee_firstname ? this._filter(employee_firstname) : this.options.slice())
       );
   }
-  displayFn(user?: any): any | undefined {
-    
-    
-    if (user !== null) {
-      this.selectedDeveloper_id = user.employee.employee_id
 
-      this.assignedProjects = user.projects;
-      // fetch assigned projects
-      // this.ProjectService
-      //   .getAssignedProject(user.employee.employee_id.toString())
-      //   .subscribe(response => {
-      //     // this.incomingProject.project_id = response.project_id;
-      //     // localStorage.setItem("pid", response.project_id.toString());
-      //     // // this.assignedprojects.length=0
-      //     // this.assignedprojects[0].project_id = response.project_id;
-      //     // this.assignedprojects[0].title = response.title;
-          
-          console.log(user);
-
-      //   });
-    }
-    return user ? user.employee.employee_firstname : undefined;
+  projectfilterOptions() {
+    this.projectfilteredOptions = this.projectmyControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value : value.project.project_name),
+        map(project_name => project_name ? this._projectfilter(project_name) : this.projectoptions.slice())
+      );
   }
 
 

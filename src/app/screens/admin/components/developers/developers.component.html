@@ -19,9 +19,9 @@
   </mat-form-field> 
   
   <mat-form-field class="example-full-width">
-    <input type="text" placeholder="Assign Project" aria-label="Number" matInput [formControl]="projectmyControl" [matAutocomplete]="auto">
+    <input type="text" placeholder="Assign Project" matInput [formControl]="projectmyControl" [matAutocomplete]="auto">
     <mat-autocomplete #auto="matAutocomplete" [displayWith]="projectdisplayFn.bind(this)">
-      <mat-option *ngFor="let project of projectfilteredOptions | async" [value]="projectoptions">
+      <mat-option *ngFor="let project of projectfilteredOptions | async" [value]="project">
         {{project.project.project_name}}
       </mat-option>
     </mat-autocomplete>
@@ -39,6 +39,12 @@
   <br />
   <p>Assigned New Project</p>
 
+  <mat-chip-list *ngFor="let project of assignedNewProject">
+    <mat-chip  [selectable]="selectable"
+    [removable]="removable" (removed)="remove(project)" >{{project.project_name}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>  
+  </mat-chip-list>  
    <!-- <button type="submit" id="submit"  class="form-control mb-4" >Save</button>  -->
   
   

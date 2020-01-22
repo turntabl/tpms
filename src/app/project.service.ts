@@ -8,7 +8,7 @@ import { ProjectInterface } from './screens/project-interface';
 })
 
 export class ProjectService {
-  private projectUrl = 'http://employee.services.turntabl.io';
+  private projectUrl = 'http://employmentprofilingapp-env.dbqsnkfqpq.us-east-2.elasticbeanstalk.com/';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
