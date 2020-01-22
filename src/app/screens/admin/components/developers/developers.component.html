@@ -34,17 +34,17 @@
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>  
   </mat-chip-list>  
-</div>
+
+ 
   
-  <br />
-  <p>Assigned New Project</p>
 
   <mat-chip-list *ngFor="let project of assignedNewProject">
     <mat-chip  [selectable]="selectable"
-    [removable]="removable" (removed)="remove(project)" >{{project.project_name}}
+    [removable]="removable" (removed)="remove_one(project)" >{{project.project_name}}
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>  
   </mat-chip-list>  
+</div>
    <!-- <button type="submit" id="submit"  class="form-control mb-4" >Save</button>  -->
   
   
