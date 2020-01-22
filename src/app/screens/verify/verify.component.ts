@@ -21,8 +21,12 @@ export class VerifyComponent implements OnInit {
   role: any;
   ngOnInit() {
     // console.log(this.activatedRoute.snapshot.params.name);
-    this.appservice.currentMessage.subscribe(name => (this.userName = name));
-    // this.cookie.set("ttemail", "James");
+    this.appservice.currentMessage.subscribe(name => {
+      // console.log("Printing verified name | ",name)
+      this.userName = name
+    });
+  
+    // this.cookie.set("ttemail", " ");
     this.cookieAvailable = this.cookie.check("ttemail");
     if (this.cookieAvailable == true) {
       this.appservice
