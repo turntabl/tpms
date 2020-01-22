@@ -9,7 +9,7 @@ import ProjectModel from "../models/ProjectModel";
 export class AppService {
   private messageSource = new BehaviorSubject("");
   currentMessage = this.messageSource.asObservable();
-  private developerService = "http://employementprofilingapp-env.snvx8mbkdw.us-east-2.elasticbeanstalk.com";
+  private developerService = "http://employmentprofilingapp-env.dbqsnkfqpq.us-east-2.elasticbeanstalk.com";
   constructor(private http: HttpClient) {}
 
   changeMessage(message: string) {
