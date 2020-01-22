@@ -32,7 +32,7 @@ export class VerifyComponent implements OnInit {
       this.appservice
         .getEmployeeRole(this.cookie.get("ttemail"))
         .subscribe(response => {
-          // console.log("Response", response[0].emp_role);
+          console.log("Response from server | ", response);
           if(response.code == "00"){
             var employee_fullname = response.data.employee.employee_firstname + " " + response.data.employee.employee_lastname;
             var employee_id = response.data.employee.employee_id;
