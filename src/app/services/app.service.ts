@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Employee } from "../employee";
 import ProjectModel from "../models/ProjectModel";
 @Injectable({
@@ -19,6 +19,13 @@ export class AppService {
     return this.http.get<any>(
       this.developerService + "/v1/api/login/" + email
     );
+  }
+  addEmployee(requestBody: any): Observable<any> {
+    let body = JSON.stringify(requestBody);
+    let headers = new HttpHeaders({'Content-Type':'application/json'});
+   
+    return this.http.post<any>(
+      this.developerService + '/v1/api/employee',body,{headers: headers} );
   }
   getLoggedHours(): Observable<ProjectModel[]> {
     return this.http.get<ProjectModel[]>(this.developerService + "log");
