@@ -21,9 +21,6 @@ export class ProjectService {
    
     return this.http.post<any>(
       this.projectUrl + '/v1/api/project',body,{headers: headers} );
-
-      
-
   }
 
   getProject(): Observable<any> {

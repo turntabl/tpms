@@ -34,6 +34,52 @@ export class VerifyComponent implements OnInit {
         .subscribe(response => {
           console.log("Response from server | ", response);
           if(response.code == "00"){
+            console.log("Checking User existence | ", response.data);
+            if(response.data.isEmpty()) {
+              var employee_email = this.cookie.get("ttemail");
+              let requestData = {
+                "employee_address": "",
+                "employee_dev_level": "",
+                "employee_email": employee_email,
+                "employee_firstname": "",
+                "employee_gender": "",
+                "employee_lastname": "",
+                "employee_phonenumber": "",
+                "employee_role": "developer",
+                "employee_status": "",
+                "employee_tech_stack": [
+                  
+                ]
+              }
+
+              this.appservice
+                .addEmployee(requestData)
+                .subscribe(response => {
+                  console.log("Adding new user | ", response);
+                  if(response.code === "00"){
+                    this.appservice
+                    .getEmployeeRole(employee_email)
+                    .subscribe(response => {
+                      console.log("Getting  new user details after employee creation | ", response);
+                      if(response.code === "00"){
+                        var employee_fullname = response.data.employee.employee_firstname + " " + response.data.employee.employee_lastname;
+                        var employee_id = response.data.employee.employee_id;
+
+                        localStorage.setItem("username", employee_fullname);
+                        localStorage.setItem("userData", JSON.stringify(response.data));
+                        localStorage.setItem("empId", employee_id.toString());
+                        this.isLoading = false;
+                        this.router.navigate(["developer/projects"]);
+
+                      }else{
+                        console.log(response)
+                      }
+                    })
+                  }else{
+                    console.log(response);
+                  }
+                })
+          } else {
             var employee_fullname = response.data.employee.employee_firstname + " " + response.data.employee.employee_lastname;
             var employee_id = response.data.employee.employee_id;
             switch (response.data.employee.employee_role) {
@@ -57,8 +103,8 @@ export class VerifyComponent implements OnInit {
               default:
                 break;
             }
-          }else{
-
+          }
+            
           }
           
         });
