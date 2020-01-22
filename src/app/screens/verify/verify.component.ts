@@ -35,7 +35,7 @@ export class VerifyComponent implements OnInit {
           console.log("Response from server | ", response);
           if(response.code == "00"){
             console.log("Checking User existence | ", response.data);
-            if(response.data === "{}") {
+            if(response.data === {}) {
               var employee_email = this.cookie.get("ttemail");
               let requestData = {
                 "employee_address": "",
