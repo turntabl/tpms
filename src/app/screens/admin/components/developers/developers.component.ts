@@ -22,7 +22,7 @@ export class DevelopersComponent implements OnInit {
     // {value: 'Francis Billa'},
     // {value: 'Francis Billa'}
   ];
-  // devselected = 'option2';
+
   
 selectedDeveloper_id
 
@@ -36,17 +36,13 @@ assignedNewProject =[]
     // {value: 'TCMS'},
     // {value: 'DBMS'}
   ];
-  // projselected = 'option2';
-
-  // assignedprojects = [
-  //   { project_id: 1, title: "Some" },
-  //   { project_id: 2, title: "djsd" },
 
 
-  // ];
+
+
   assignedprojects = [{ project_id: 1, title: "Devs projects appear here" }]
 
-  // incomingProject = { project_id: 2, title: "" };
+
 
 
 
@@ -109,6 +105,14 @@ assignedNewProject =[]
     
   }
 
+  remove_one(dev: ProjectInterface): void {
+    const index = this.assignedNewProject.indexOf(dev);
+
+    if (index >= 0) {
+      this.assignedNewProject.splice(index, 1);
+    }
+    
+  }
     
   displayFn(user?: any): any | undefined {
     if (user !== null) {

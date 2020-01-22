@@ -107,7 +107,8 @@ export class ProjectsComponent implements OnInit {
       });
     }
 
-   
+    myFilter: any
+
       onSubmit() {
        
         
