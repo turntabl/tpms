@@ -22,7 +22,7 @@ export class VerifyComponent implements OnInit {
   ngOnInit() {
     // console.log(this.activatedRoute.snapshot.params.name);
     this.appservice.currentMessage.subscribe(name => {
-      // console.log("Printing verified name | ",name)
+       console.log("Printing verified name | ",name)
       this.userName = name
     });
   
