@@ -3,6 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 import {NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 
+
 import { MatTableDataSource } from '@angular/material/table';
 import {
   FormGroup,
@@ -107,8 +108,7 @@ export class ProjectsComponent implements OnInit {
       });
     }
 
-    myFilter: any
-
+   
       onSubmit() {
        
         
