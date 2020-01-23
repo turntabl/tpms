@@ -98,23 +98,24 @@ assignedNewProject =[]
 
 
   }
-  // remove(dev: ProjectInterface): void {
-  //   const index = this.assignedProjects.indexOf(dev);
+  remove(dev) {
+    console.log("Printing remove project | ",dev)
+    // const index = this.assignedProjects.indexOf(dev);
 
-  //   if (index >= 0) {
-  //     this.assignedProjects.splice(index, 1);
-  //   }
+    // if (index >= 0) {
+    //   this.assignedProjects.splice(index, 1);
+    // }
     
-  // }
+  }
 
-  // remove_one(dev: ProjectInterface): void {
-  //   const index = this.assignedNewProject.indexOf(dev);
+  remove_one(dev: ProjectInterface): void {
+    const index = this.assignedNewProject.indexOf(dev);
 
-  //   if (index >= 0) {
-  //     this.assignedNewProject.splice(index, 1);
-  //   }
+    if (index >= 0) {
+      this.assignedNewProject.splice(index, 1);
+    }
     
-  // }
+  }
     
   displayFn(user?: any): any | undefined {
     if (user !== null) {
