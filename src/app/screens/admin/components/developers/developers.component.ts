@@ -97,6 +97,8 @@ assignedNewProject =[]
     this.updateNewProjects()
 
 
+
+    
   }
   remove(dev: any) {
     console.log("Printing remove project | ",dev)
