@@ -26,7 +26,7 @@ export class VerifyComponent implements OnInit {
       this.userName = name
     });
   
-    this.cookie.set("ttemail", "ali.fuseini@turntabl.io");
+    // this.cookie.set("ttemail", "ali.fuseini@turntabl.io");
     this.cookieAvailable = this.cookie.check("ttemail");
     if (this.cookieAvailable == true) {
       this.appservice
