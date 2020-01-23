@@ -4,7 +4,5 @@ export class Data {
     total_volunteering_hours:number;
     vacation: string;
     sick:string;
-    // logged_date =
- 
 }
 
