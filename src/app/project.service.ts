@@ -23,13 +23,20 @@ export class ProjectService {
       this.projectUrl + '/v1/api/project',body,{headers: headers} );
   }
 
+  
+  assignProjectToEmployee(project_id,employee_id): Observable<any> {
+    return this.http.get<any>(
+      this.projectUrl + '/v1/api/project/'+project_id+'/assign/employee/' + employee_id
+    );
+  }
+
   getProject(): Observable<any> {
     return this.http.get<any>(this.projectUrl + '/v1/api/projects');
   }
 
   getAssignedProject(employee_id: string): Observable<any> {
     return this.http.get<any>(
-      this.projectUrl + 'v1/api/project//assign/employee/' + employee_id
+      this.projectUrl + '/v1/api/projects/assigned/employee/' + employee_id
     );
   }
 

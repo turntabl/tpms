@@ -118,7 +118,7 @@ export class ProjectsComponent implements OnInit {
           project_end_date: formValues.project_end_date,
           project_name: formValues.project_name,
           project_start_date: formValues.project_start_date,
-          project_status: "ACTIVE",
+         
           project_tech_stack: formValues.project_tech_stack
         }
         console.log("Printing request data | ",requestData)

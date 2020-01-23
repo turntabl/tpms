@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ApplicationRef } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -53,11 +53,11 @@ assignedNewProject =[]
   projectmyControl = new FormControl();
   projectoptions: Array<any> = [];
   projectfilteredOptions: Observable<any>;
-  assignedProjects: Array<any> 
+  assignedProjects: any 
   // assignedProjects: Array<ProjectInterface> = []
 
 
-  constructor(private ProjectService: ProjectService, private devService: AppService) { }
+  constructor(private ProjectService: ProjectService, private devService: AppService,private cdr: ApplicationRef) { }
 
   developerObservable: Observable<Employee[]>;
   devs = [];
@@ -65,7 +65,7 @@ assignedNewProject =[]
   projectsObservable: Observable<ProjectInterface[]>;
   project = [];
 
-  assignedObservable: Observable<any>;
+  assignedObservable: Observable<any[]>;
   assign = [];
 
   ngOnInit() {
@@ -94,31 +94,33 @@ assignedNewProject =[]
 
     this.projectfilterOptions()
 
+    this.updateNewProjects()
+
 
   }
-  remove(dev: ProjectInterface): void {
-    const index = this.assignedProjects.indexOf(dev);
+  // remove(dev: ProjectInterface): void {
+  //   const index = this.assignedProjects.indexOf(dev);
 
-    if (index >= 0) {
-      this.assignedProjects.splice(index, 1);
-    }
+  //   if (index >= 0) {
+  //     this.assignedProjects.splice(index, 1);
+  //   }
     
-  }
+  // }
 
-  remove_one(dev: ProjectInterface): void {
-    const index = this.assignedNewProject.indexOf(dev);
+  // remove_one(dev: ProjectInterface): void {
+  //   const index = this.assignedNewProject.indexOf(dev);
 
-    if (index >= 0) {
-      this.assignedNewProject.splice(index, 1);
-    }
+  //   if (index >= 0) {
+  //     this.assignedNewProject.splice(index, 1);
+  //   }
     
-  }
+  // }
     
   displayFn(user?: any): any | undefined {
     if (user !== null) {
       this.selectedDeveloper_id = user.employee.employee_id
       this.assignedProjects = user.projects;
-          // console.log(user);
+      console.log("Printing user projects | ", user.projects);
     }
     return user ? user.employee.employee_firstname : undefined;
   }
@@ -128,12 +130,42 @@ assignedNewProject =[]
 
     if (project !== null) {
       this.selectedProject_id =project.project.project_id
-      this.assignedNewProject.push(project.project)
+      this.assignProjectToEmployee(this.selectedDeveloper_id,this.selectedProject_id);
       // console.log("Printing project | ",project);
     }   
     return project ? project.project.project_name : undefined;
   }
 
+  assignProjectToEmployee(employee_id,project_id){
+
+    this.ProjectService
+    .assignProjectToEmployee(project_id,employee_id)
+    .subscribe(response => {
+      console.log("Assign Project | ", response)
+      if(response.code === "00"){
+        this.updateNewProjects();
+      }else{
+        console.log(response);
+      }
+    
+    });
+
+  }
+
+  updateNewProjects(){
+    
+    this.ProjectService
+        .getAssignedProject(this.selectedDeveloper_id)
+        .subscribe(response => {
+          console.log("Printing projects | ", response.data.projects);
+          if(response.code === "00"){
+            this.assignedProjects = response.data.projects;
+          }else{
+            console.log(response)
+          }
+        
+        });
+  }
 
 
 
