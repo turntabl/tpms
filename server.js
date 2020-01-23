@@ -37,6 +37,8 @@ passport.use(
       console.log("profile", profile);
       console.log("assertion", profile.getAssertion.toString());
       userEmail = profile.nameID;
+      userProfile = profile;
+      
       return done(null, {
         email: profile.email,
         name: profile.name
@@ -77,6 +79,8 @@ app.post(
   function (req, res) {
     // sets a cookie called ttemail and sets its max age to 1 day
     res.cookie('ttemail', userEmail, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
+    res.cookie('userProfile', userProfile, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
+    
     res.redirect("https://tpms-ui.herokuapp.com");
   }
 );
