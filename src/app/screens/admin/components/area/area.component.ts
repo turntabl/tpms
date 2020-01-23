@@ -12,13 +12,14 @@ import { HttpClient } from '@angular/common/http';
   // styleUrls: ['./area.component.scss']
 })
 export class AreaComponent implements OnInit {
-  url = 'https://developerservice03.herokuapp.com/report';  
+  url = 'https://employee.services.turntabl.io/v1/api/getlogged';  
   data: Data[];  
-  Dates = [];  
+  Dates = []; 
   Project = [];  
   Volunteer=[];
   Sick=[];
   Vacation=[];
+  current_date=new Date();
   // Linechart = [];  
 
   chartOptions: {};
@@ -34,7 +35,7 @@ export class AreaComponent implements OnInit {
   ngOnInit() {
     this.httpClient.get(this.url).subscribe((result: Data[]) => {  
       result.forEach(x => {  
-        this.Dates.push(x.logged_date);  
+        this.Dates.push(x.end_date);  
         this.Project.push(x.total_project_hours);
         this.Volunteer.push(x.total_volunteering_hours);
         this.Sick.push(x.sick);
@@ -52,7 +53,7 @@ export class AreaComponent implements OnInit {
          },
          xAxis:{
           //  categories: ['2020-01-08', '2020-01-09', '2020-01-10', '2020-01-11', '2020-01-12', '2020-01-13', '2020-01-14'],
-         categories:this.Dates,
+         categories:this.current_date,
           tickmarkPlacement: 'on',
            title: {
               enabled: false
@@ -113,12 +114,27 @@ export class AreaComponent implements OnInit {
 
     HC_exporting(Highcharts);
 
+  //   function Last7Days () {
+  //     var result = [];
+  //     for (var i=0; i<7; i++) {
+  //         var d = new Date();
+  //         d.setDate(d.getDate() - i);
+  //         result.push(d)
+  //     }
+  
+  //     return(result.join(','));
+  // }
+//   function getCurrentDate()
+// {
+//  return this.current_date 
+// }
+
     setTimeout(() => {
-      window.dispatchEvent(
-        new Event('resize')
-      );
-    }, 300);
+      // Last7Days()
+    }, 3000);
+   
   }); 
+  
   }
 
 }

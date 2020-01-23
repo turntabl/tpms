@@ -23,7 +23,7 @@ export class ReportComponent implements OnInit {
   ngOnInit() {  
     this.httpClient.get(this.url).subscribe((result: Data[]) => {  
       result.forEach(x => {  
-        this.Dates.push(x.logged_date);  
+        this.Dates.push(x.end_date);  
         this.Project.push(x.total_project_hours);
         this.Volunteer.push(x.total_volunteering_hours);
         this.Sick.push(x.sick);
