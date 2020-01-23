@@ -28,6 +28,8 @@ export class VerifyComponent implements OnInit {
   
 
     // this.cookie.set("ttemail", "ali.fuseini@turntabl.io");
+    // this.cookie.set("userFirstName", "Ali");
+    // this.cookie.set("userlastName", "Fuseni");
     
     console.log("Printing userFirstName | ",this.cookie.get("userFirstName"));
     console.log("Printing userlastName | ",this.cookie.get("userlastName"));
