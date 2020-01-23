@@ -26,10 +26,11 @@ export class VerifyComponent implements OnInit {
       this.userName = name
     });
   
-    
+
     // this.cookie.set("ttemail", "ali.fuseini@turntabl.io");
     
     console.log("Printing userFirstName | ",this.cookie.get("userFirstName"));
+    console.log("Printing userlastName | ",this.cookie.get("userlastName"));
     this.cookieAvailable = this.cookie.check("ttemail");
     if (this.cookieAvailable == true) {
       this.appservice
@@ -41,13 +42,15 @@ export class VerifyComponent implements OnInit {
             console.log("Checking User existence Size | ", Object.keys(response.data).length);
             if(Object.keys(response.data).length === 0) {
               var employee_email = this.cookie.get("ttemail");
+              var employee_firstname = this.cookie.get("userFirstName");
+              var employee_lastname = this.cookie.get("userlastName");
               let requestData = {
                 "employee_address": "",
                 "employee_dev_level": "",
                 "employee_email": employee_email,
-                "employee_firstname": "",
+                "employee_firstname": employee_firstname,
                 "employee_gender": "",
-                "employee_lastname": "",
+                "employee_lastname": employee_lastname,
                 "employee_phonenumber": "",
                 "employee_role": "developer",
                 "employee_status": "",
