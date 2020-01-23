@@ -98,13 +98,21 @@ assignedNewProject =[]
 
 
   }
-  remove(dev) {
+  remove(dev: any) {
     console.log("Printing remove project | ",dev)
-    // const index = this.assignedProjects.indexOf(dev);
-
-    // if (index >= 0) {
-    //   this.assignedProjects.splice(index, 1);
-    // }
+    console.log("Printing remove project_id | ",dev.project_id)
+    console.log("Printing remove employee_id | ",this.selectedDeveloper_id)
+    this.ProjectService
+    .removeProjectFromEmployee(dev.project_id,this.selectedDeveloper_id)
+    .subscribe(response => {
+      console.log("Printing response | ", response)
+      if(response.code === "00"){
+        this.updateNewProjects();
+      }else{
+        console.log(response);
+      }
+    
+    });
     
   }
 
@@ -166,6 +174,8 @@ assignedNewProject =[]
           }
         
         });
+
+
   }
 
 
