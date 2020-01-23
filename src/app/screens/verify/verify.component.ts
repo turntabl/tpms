@@ -28,7 +28,7 @@ export class VerifyComponent implements OnInit {
   
     // this.cookie.set("ttemail", "ali.fuseini@turntabl.io");
     
-    console.log("Printing userProfile | ",this.cookie.get("userProfile"));
+    console.log("Printing userFirstName | ",this.cookie.get("userFirstName"));
     this.cookieAvailable = this.cookie.check("ttemail");
     if (this.cookieAvailable == true) {
       this.appservice
