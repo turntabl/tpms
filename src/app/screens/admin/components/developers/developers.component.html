@@ -28,6 +28,7 @@
   </mat-form-field> 
   <div id ="selectedProject">
    <p>Selected project: {{currproj}}</p>
+   
   <mat-chip-list *ngFor="let project of assignedProjects">
     <mat-chip  [selectable]="selectable"
     [removable]="removable" (removed)="remove(project)" >{{project.project_name}}
@@ -38,12 +39,12 @@
  
   
 
-  <mat-chip-list *ngFor="let project of assignedNewProject">
+  <!-- <mat-chip-list *ngFor="let project of assignedNewProject">
     <mat-chip  [selectable]="selectable"
     [removable]="removable" (removed)="remove_one(project)" >{{project.project_name}}
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>  
-  </mat-chip-list>  
+  </mat-chip-list>   -->
 </div>
    <!-- <button type="submit" id="submit"  class="form-control mb-4" >Save</button>  -->
   
