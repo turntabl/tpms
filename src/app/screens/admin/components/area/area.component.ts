@@ -52,7 +52,7 @@ export class AreaComponent implements OnInit {
          },
          xAxis:{
           //  categories: ['2020-01-08', '2020-01-09', '2020-01-10', '2020-01-11', '2020-01-12', '2020-01-13', '2020-01-14'],
-         categories:this.current_date,
+         categories:this.Dates,
           tickmarkPlacement: 'on',
            title: {
               enabled: false
