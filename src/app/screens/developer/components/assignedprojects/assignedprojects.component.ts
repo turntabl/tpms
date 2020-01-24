@@ -9,6 +9,12 @@ import { Projectlogging } from 'src/app/projectlogging';
 import { ProjectloggingService } from 'src/app/projectlogging.service';
 import { ProjectService } from 'src/app/project.service';
 
+
+export interface Food {
+  value: string;
+  viewValue: string;
+}
+
 export interface PeriodicElement {
   title: string;
   description: string;
@@ -33,17 +39,20 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './assignedprojects.component.html',
   styleUrls: ['./assignedprojects.component.css']
 })
+
+
 export class AssignedprojectsComponent implements OnInit {
   incomingProject = { project_id: 2, title: '' };
   showAlert: boolean = false;
+  userProjects: any
 
   hourform = new FormGroup({
     project_hours: new FormControl(''),
     volunteering_hours: new FormControl(''),
     vacation: new FormControl(''),
     sick: new FormControl(''),
-    emp_id: new FormControl(localStorage.getItem('empId')),
-    project_id: new FormControl(localStorage.getItem('pid')),
+    emp_id: new FormControl(),
+    project_id: new FormControl(),
     logged_date: new FormControl(new Date().toISOString().slice(0, 10)),
   });
   constructor(
@@ -51,6 +60,7 @@ export class AssignedprojectsComponent implements OnInit {
     private projectService: ProjectService
   ) {}
   newProject = '';
+  assignedprojects =[{title: "tpms"}]
   displayedColumns: string[] = [
     'Web Services',
     'Volunteering',
@@ -65,15 +75,26 @@ export class AssignedprojectsComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  ngOnInit() {
-    this.projectService
-      .getAssignedProject(localStorage.getItem('empId'))
-      .subscribe(response => {
-        // this.incomingProject.project_id = response.project_id;
-        localStorage.setItem('pid', response.project_id.toString());
-        this.incomingProject.title = response.title;
-      });
 
+
+  ngOnInit() {
+    
+    var userData = JSON.parse(localStorage.getItem("userProjects"))
+    console.log("User Data | ",userData);
+    
+    if(userData === null){
+      this.userProjects = [];
+    }else{
+      this.userProjects = userData;
+    }
+    // this.projectService
+    //   .getAssignedProject(localStorage.getItem('empId'))
+    //   .subscribe(response => {
+    //     // this.incomingProject.project_id = response.project_id;
+    //     localStorage.setItem('pid', response.project_id.toString());
+    //     this.incomingProject.title = response.title;
+    //   });
+    
   }
 
   sickFieldChecked(event) {
@@ -127,14 +148,51 @@ export class AssignedprojectsComponent implements OnInit {
   logsuccess() {}
   onSubmit() {
     // console.log(this.hourform.value);
-    this.plog.loghours(this.hourform.value).subscribe(() => {
-      setTimeout(() => {
+    console.log("Logging proect hours | ",this.hourform.value);
+
+      var employee_firstname = this.userProjects[0].employee_firstname;
+      var employee_lastname = this.userProjects[0].employee_lastname;
+      var employee_email = this.userProjects[0].employee_email;
+      var employee_id = this.userProjects[0].employee_id;
+      var project_hours = this.hourform.value.project_hours;
+      var project_id = this.hourform.value.project_id.project_id;
+      var project_date = this.hourform.value.logged_date;
+
+      let requestData = {
+        employee_firstname:employee_firstname,
+        employee_lastname:employee_lastname,
+        employee_email:employee_email,
+        employee_id:employee_id,
+        project_hours:project_hours,
+        project_id:project_id,
+        project_date:project_date
+
+      }
+      console.log("Printing requestData | ",requestData);
+
+    this.plog.
+    logproject(requestData)
+    .subscribe(response => {
+      console.log("Response from server | ",requestData);
+      if(response.code === "00"){
+        this.showAlert = true;
+      }else{
         this.showAlert = false;
-      }, 3000);
-      this.showAlert = true;
+      }
     });
-   // alert('Successfully submitted');
-    this.hourform.reset();
+  //  // alert('Successfully submitted');
+  //   // this.hourform.reset();
+  //   this.plog.logsick(this.hourform.value).subscribe(()=>{
+      
+  //   });
+  //   // this.hourform.reset();
+  //   this.plog.logvacation(this.hourform.value).subscribe(()=>{
+  //     setTimeout(() => {
+  //       this.showAlert = false;
+  //     }, 3000);
+  //     this.showAlert = true;
+  //   });
+  //   this.hourform.reset();
   }
 
   myFilter = (d: Date): boolean => {
@@ -142,4 +200,6 @@ export class AssignedprojectsComponent implements OnInit {
     // Prevent Saturday and Sunday from being selected.
     return day !== 0 && day !== 6;
   }
+
+
 }
