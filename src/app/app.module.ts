@@ -2,10 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-<<<<<<< HEAD
-import {NgbModule, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-=======
->>>>>>> cea5a78dcb3f0489f3ab701fc5290c9e0b08d86a
 import {FormControl} from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -107,7 +103,7 @@ import { CommonModule } from '@angular/common';
     
 
   ],
-  providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}, CookieService,NgbActiveModal ],
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}, CookieService ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
