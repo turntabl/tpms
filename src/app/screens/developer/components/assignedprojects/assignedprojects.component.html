@@ -66,7 +66,7 @@
 
     <mat-form-field>
       <!-- <mat-label>Assigned Project</mat-label> -->
-      <mat-select style="font-size: xx-medium;">
+      <mat-select formControlName="project_id" style="font-size: xx-medium;">
         <!-- <mat-option>None</mat-option>        -->
         <mat-option *ngFor="let project of userProjects" [value]="project">
           {{project.project_name}}
