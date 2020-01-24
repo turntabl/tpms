@@ -2,7 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+<<<<<<< HEAD
 import {NgbModule, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+=======
+>>>>>>> cea5a78dcb3f0489f3ab701fc5290c9e0b08d86a
 import {FormControl} from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -49,7 +52,6 @@ import {MatListModule} from '@angular/material/list';
 
 
 import { ViewChild, HostListener, AfterViewInit, ChangeDetectorRef } from '@angular/core';
-import { ReportComponent } from './screens/admin/components/report/report.component';
 import { AreaComponent } from './screens/admin/components/area/area.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { CommonModule } from '@angular/common';
@@ -73,7 +75,6 @@ import { CommonModule } from '@angular/common';
     NavigationComponent,
     VerifyComponent,
     NavComponent,
-    ReportComponent,
     AreaComponent,
 
   ],

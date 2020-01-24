@@ -12,17 +12,17 @@ import { HttpClient } from '@angular/common/http';
   // styleUrls: ['./area.component.scss']
 })
 export class AreaComponent implements OnInit {
-  url = 'https://developerservice03.herokuapp.com/report';  
+  url = 'https://employee.services.turntabl.io/v1/api/getlogged';  
   data: Data[];  
-  Dates = [];  
+  Dates = []; 
   Project = [];  
   Volunteer=[];
   Sick=[];
   Vacation= [];
-  // Linechart = [];  
+
 
   chartOptions: {};
-  // @Input() series: any = [];
+ 
 
   Highcharts = Highcharts;
 
@@ -33,86 +33,12 @@ export class AreaComponent implements OnInit {
 
   ngOnInit() {
     this.httpClient.get(this.url).subscribe((result: Data[]) => {  
-      // console.log("result |",result);
       result.forEach(x => {  
-        this.Dates.push(x.logged_date);  
-        this.Project.push(x.total_project_hours);
-        this.Volunteer.push(x.total_volunteering_hours);
-        // this.Sick.push(x.logged_date);
-        
-     
-        // this.Vacation.push(x.vacation);  
-      }); 
-      var sickData=[
-        {
-          "isTrue":true,
-          "logged_date":"2020-01-01"
-        },
-        {
-          "isTrue":true,
-          "logged_date":"2020-01-02"
-        },
-        {
-          "isTrue":true
-        },
-        {
-          "isTrue":true
-        },
-        {
-          "isTrue":true
-        },
-        {
-          "isTrue":false
-        }
-      ]
-
-      var vacData=[
-        {
-          "isTrue":false,
-          "logged_date":"2020-01-01"
-        },
-        {
-          "isTrue":true,
-          "logged_date":"2020-01-02"
-        },
-        {
-          "isTrue":true
-        },
-        {
-          "isTrue":true
-        },
-        {
-          "isTrue":false
-        },
-        {
-          "isTrue":true
-        }
-      ]
-      // sickData.filter(sick => {
-      //   if(sick.isTrue === true){
-      //       this.Sick.push(8)
-      //   }else{
-      //     this.Sick.push(0);
-      //   }
-      // })
-     
-      vacData.filter(onVac => {
-        if(onVac.isTrue === true){
-            this.Vacation.push(8)
-            this.Dates.push(onVac.logged_date)
-        }else{
-          this.Vacation.push(0);
-        }
-      })
-      sickData.filter(sick => {
-        if(sick.isTrue === true){
-            this.Sick.push(8)
-            this.Dates.push(sick.logged_date)
-        }else{
-          this.Sick.push(0);
-        }
-      })
-      // console.log("sick data | ",this.Sick)
+        this.Dates.push(x.log_date);  
+        this.Project.push(x.project_hours);
+        this.Sick.push(x.vacation_hours);
+        this.Vacation.push(x.sick_hours);  
+      });  
      this. chartOptions = {   
          chart: {
             type: "area"
@@ -186,12 +112,12 @@ export class AreaComponent implements OnInit {
 
     HC_exporting(Highcharts);
 
+
     setTimeout(() => {
-      window.dispatchEvent(
-        new Event('resize')
-      );
-    }, 300);
+    }, 3000);
+   
   }); 
+  
   }
 
 }

@@ -79,7 +79,7 @@ export class AssignedprojectsComponent implements OnInit {
 
   ngOnInit() {
     
-    var userData = JSON.parse(localStorage.getItem("userData"))
+    var userData = JSON.parse(localStorage.getItem("userProjects"))
     console.log("User Data | ",userData);
     
     if(userData === null){
@@ -148,13 +148,24 @@ export class AssignedprojectsComponent implements OnInit {
   logsuccess() {}
   onSubmit() {
     // console.log(this.hourform.value);
-    this.plog.loghours(this.hourform.value).subscribe(() => {
+    this.plog.logproject(this.hourform.value).subscribe(() => {
+    });
+   // alert('Successfully submitted');
+    // this.hourform.reset();
+    this.plog.logsick(this.hourform.value).subscribe(()=>{
+      
+    });
+    // this.hourform.reset();
+    this.plog.logvacation(this.hourform.value).subscribe(()=>{
       setTimeout(() => {
         this.showAlert = false;
       }, 3000);
       this.showAlert = true;
     });
+<<<<<<< HEAD
   //  alert('Successfully submitted');
+=======
+>>>>>>> cea5a78dcb3f0489f3ab701fc5290c9e0b08d86a
     this.hourform.reset();
   }
 

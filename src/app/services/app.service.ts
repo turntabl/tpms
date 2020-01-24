@@ -10,6 +10,7 @@ export class AppService {
   private messageSource = new BehaviorSubject("");
   currentMessage = this.messageSource.asObservable();
   private developerService = "https://employee.services.turntabl.io";
+  private projectServiceUrl = "https://project.services.turntabl.io";
   constructor(private http: HttpClient) {}
 
   changeMessage(message: string) {
@@ -20,6 +21,13 @@ export class AppService {
       this.developerService + "/v1/api/login/" + email
     );
   }
+
+  getEmployeepProjects(employee_id): Observable<any> {
+    return this.http.get<any>(
+      this.projectServiceUrl + "/v1/api/projects/assigned/employee/" + employee_id
+    );
+  }
+
   addEmployee(requestBody: any): Observable<any> {
     let body = JSON.stringify(requestBody);
     let headers = new HttpHeaders({'Content-Type':'application/json'});
