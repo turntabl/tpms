@@ -10,9 +10,9 @@ import {CookieService} from 'ngx-cookie-service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './screens/admin/components/dashboard/dashboard.component';
+// import { DashboardComponent } from './screens/admin/components/dashboard/dashboard.component';
 import { DashboardComponent as Dev } from './screens/developer/components/dashboard/dashboard.component';
-import { CardComponent } from './screens/admin/components/card/card.component';
+// import { CardComponent } from './screens/admin/components/card/card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HoursComponent } from './screens/developer/components/hours/hours.component';
 import { HourComponent } from './screens/admin/components/hour/hour.component';
@@ -24,7 +24,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
-import { AddprojectComponent } from './screens/admin/components/addproject/addproject.component';
+// import { AddprojectComponent } from './screens/admin/components/addproject/addproject.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 
 
@@ -59,13 +59,13 @@ import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
+    // DashboardComponent,
     Dev,
-    CardComponent,
+    // CardComponent,
     HoursComponent,
     HourComponent,
     ProjectsComponent,
-    AddprojectComponent,
+    // AddprojectComponent,
     AssignedprojectsComponent,
     NavigationComponent,
     VerifyComponent,
@@ -99,8 +99,6 @@ import { CommonModule } from '@angular/common';
     MatAutocompleteModule,
     MatListModule,
     HighchartsChartModule
-    
-
   ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}, CookieService ],
   bootstrap: [AppComponent]

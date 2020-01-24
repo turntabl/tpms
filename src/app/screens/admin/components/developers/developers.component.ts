@@ -28,23 +28,9 @@ selectedDeveloper_id
 
 selectedProject_id
 assignedNewProject =[]
-
   selectable = true;
   removable = true;
-  projects = [
-    // {value: 'TPMS'},
-    // {value: 'TCMS'},
-    // {value: 'DBMS'}
-  ];
-
-
-
-
   assignedprojects = [{ project_id: 1, title: "Devs projects appear here" }]
-
-
-
-
 
   myControl = new FormControl();
   options: Array<any> = [];
@@ -54,8 +40,6 @@ assignedNewProject =[]
   projectoptions: Array<any> = [];
   projectfilteredOptions: Observable<any>;
   assignedProjects: any 
-  // assignedProjects: Array<ProjectInterface> = []
-
 
   constructor(private ProjectService: ProjectService, private devService: AppService,private cdr: ApplicationRef) { }
 
