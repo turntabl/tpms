@@ -8,7 +8,7 @@ import { ProjectInterface } from './screens/project-interface';
 })
 
 export class ProjectService {
-  private projectUrl = 'https://employee.services.turntabl.io';
+  private projectUrl = 'https://project.services.turntabl.io';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
