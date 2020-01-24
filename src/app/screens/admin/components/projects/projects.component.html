@@ -1,136 +1,55 @@
-<div class="container-fluid">
+<div
+    class="container-fluid">
 
-  <!-- Page Heading -->
-  <div class="d-sm-flex align-items-center justify-content-between mb-4">
-
-    <h1 style="font-weight: bolder; color: rgb(15, 15, 15);">All Project<hr class="type_9"> </h1>
-
-
-    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal"
-      data-target="#modalSubscriptionForm"><i class="fas fa-download fa-sm text-white-50"></i> Add New Project</a>
-  </div>
-  <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="showSucessAlert">
-     {{successMsg}}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="alert alert-dange alert-dismissible fade show" role="alert" *ngIf="showErrorAlert">
-    {{ errorMsg }}
-   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-     <span aria-hidden="true">&times;</span>
-   </button>
- </div>
-
-  <div class="modal fade" id="modalSubscriptionForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header text-center">
-
-          <h4 id ="ph4" style="font-weight: bolder; color: rgb(90, 80, 80);">Add Project</h4>
-          
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            
-          </button>
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 style="font-weight: bolder; color: rgb(15, 15, 15);">All Projects<hr class="type_9"></h1>
+            <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-target="#modalSubscriptionForm" data-toggle="modal" href="#">
+                <i class="fas fa-download fa-sm text-white-50"></i>Add New Project</a>
         </div>
+        <div *ngIf="showSucessAlert" class="alert alert-success alert-dismissible fade show" role="alert">{{successMsg}}
+            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div *ngIf="showErrorAlert" class="alert alert-dange alert-dismissible fade show" role="alert"> {{ errorMsg }}
+            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalSubscriptionForm" role="dialog" tabindex="-1">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
 
-        <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+                        <h4 id="ph4" style="font-weight: bolder; color: rgb(90, 80, 80);">Add Project</h4>
 
-          <div class="modal-body mx-1">
-            <div class="md-form mb-3">
-              <!-- <i class="fas fa-tasks prefix grey-text"></i> -->
-              <input type="text" id="form1" class="form-control validate" formControlName="project_name" placeholder=" Title"><br />
-             
-              <!-- <mat-form-field>
-                <mat-label>Select Stack</mat-label>
-                <mat-select  formControlName="project_tech_stack"  multiple>
-                  <mat-option *ngFor="let topping of toppingList" [value]="topping.tech_id">
-                    {{topping.tech_name}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field> -->
-              
-              <br />
-              <br />
-             
-              
+                        <button aria-label="Close" class="close" data-dismiss="modal" type="button"></button>
+                    </div>
 
-              <!-- <mat-form-field>
-    
-                <input matInput ng-model-options="{timezone: null}" [matDatepickerFilter]="myFilter" [matDatepicker]="picker" placeholder="Project Start Date" formControlName="project_start_date">
-                <mat-datepicker-toggle  matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-                
-              </mat-form-field>
-              <br />
-              <br />
-              <mat-form-field>
-    
-                <input matInput ng-model-options="{timezone: null}" [matDatepickerFilter]="myFilter" [matDatepicker]="picker2" placeholder="Project End Date" formControlName="project_end_date">
-                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                <mat-datepicker #picker2></mat-datepicker>
-                
-              </mat-form-field>
-          -->
-            
-            </div>  
-                    
+                    <form (ngSubmit)="onSubmit()" [formGroup]="projectForm">
 
-            <div style="margin-top: 20px; margin-bottom: 20px;">
-              <button type="submit" class="btn btn-primary btn-lg btn-block" data-backdrop="false" value="true">Submit</button>
+                        <div class="modal-body mx-1">
+                            <div class="md-form mb-3">
+                                <input class="form-control validate" formControlName="project_name" id="form1" placeholder=" Title" type="text"><br/>
+                                    <br/>
+                                    <br/>
+                                </div>
+                                <div style="margin-top: 20px; margin-bottom: 20px;">
+                                    <button class="btn btn-primary btn-lg btn-block" data-backdrop="false" type="submit" value="true">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
 
-  <!-- Content Row -->
-  <!-- <app-card></app-card> -->
-   <mat-tab-group>   
-    <mat-tab label="PROJECT">
-      <div *ngFor="let project of projects" style="margin:20px">
-      </div>
-      <div class="container-fluid" style="margin-bottom:50px;">
-        <!-- <mat-form-field>
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-        </mat-form-field>
-
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-          Title Column -->
-           <!-- <ng-container matColumnDef="title"> 
-            <th mat-header-cell *matHeaderCellDef style="font-size: xx-large;">Project Title </th>
-            <td mat-cell *matCellDef="let incomingProject"> {{incomingProject.title}} </td>
-          -->
-          <!-- </ng-container>  -->
-         
-           <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr> 
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>  -->
-
-        <!-- </table> -->
-
-
-      </div>
-    </mat-tab>
-
-  </mat-tab-group>
-  <!-- Content Row -->
-
-
-  <!-- Content Row -->
-  <div class="row">
-    <!-- Content Column -->
-    <div class="col-lg-6 mb-4">
-
-
-
-      <div class="col-lg-6 mb-4">
-
-
-      </div>
-    </div>
-
-  </div>
-</div>
+            <!-- Content Row -->
+            <mat-tab-group>
+                <mat-tab label="PROJECT">
+                    <div *ngFor="let project of projects" style="margin:20px"></div>
+                    <div class="container-fluid" style="margin-bottom:50px;"></div>
+                </mat-tab>
+            </mat-tab-group>
+            <!--End of Content Row -->
+        </div>

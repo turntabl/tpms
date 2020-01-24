@@ -25,8 +25,6 @@ export class ProjectsComponent implements OnInit {
 
   projectForm = new FormGroup({
   project_name: new FormControl(''),
-
-
   });
 
 
@@ -49,14 +47,6 @@ export class ProjectsComponent implements OnInit {
       this.showErrorAlert = true;
       this.errorMsg = "Error"
     }
-    
-    // var formValues = this.projectForm.value;
-    // let requestData = { project_name: formValues.project_name,}
-    // this.ProjectService
-    //   .addNewProject(requestData)
-    //   .subscribe(response =>{
-    //     console.log(response)
-    //   })
     
   }
 

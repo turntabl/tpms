@@ -9,10 +9,9 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-area',
   templateUrl: './area.component.html',
-  // styleUrls: ['./area.component.scss']
 })
 export class AreaComponent implements OnInit {
-  url = 'https://employee.services.turntabl.io/v1/api/getlogged';  
+  url = 'https://project.services.turntabl.io/v1/api/getlogged';  
   data: Data[];  
   Dates = []; 
   Project = [];  
@@ -26,8 +25,6 @@ export class AreaComponent implements OnInit {
 
   Highcharts = Highcharts;
 
-
-  
 
   constructor(private httpClient: HttpClient) { }  
 
@@ -50,7 +47,6 @@ export class AreaComponent implements OnInit {
            text: 'Total logged hours per day'
          },
          xAxis:{
-          //  categories: ['2020-01-08', '2020-01-09', '2020-01-10', '2020-01-11', '2020-01-12', '2020-01-13', '2020-01-14'],
          categories:this.Dates,
           tickmarkPlacement: 'on',
            title: {
@@ -89,22 +85,18 @@ export class AreaComponent implements OnInit {
          series: [
             {
                name: 'Projects',
-              //  data: [502, 635, 809, 947, 1402, 3634, 5268]
               data: this.Project,
             }, 
             {
                name: 'Volunteering',
-              //  data: [106, 107, 111, 133, 221, 767, 1766]
               data: this.Volunteer,
             }, 
             {
                name: 'Vacation',
-              //  data: [163, 203, 276, 408, 547, 729, 628]
               data: this.Vacation,
             }, 
             {
                name: 'Sick',
-              //  data: [18, 31, 54, 156, 339, 818, 1201]
               data: this.Sick,
             }
          ]
