@@ -7,10 +7,9 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-area',
   templateUrl: './area.component.html',
-  // styleUrls: ['./area.component.scss']
 })
 export class AreaComponent implements OnInit {
-  url = 'https://employee.services.turntabl.io/v1/api/getlogged';  
+  url = 'https://project.services.turntabl.io/v1/api/getlogged';  
   data: Data[];  
   Dates = []; 
   Project = [];  
@@ -19,8 +18,17 @@ export class AreaComponent implements OnInit {
   Vacation= [];
 
 
+<<<<<<< HEAD
    chartOptions: {};
    Highcharts = Highcharts;
+=======
+  chartOptions: {};
+ 
+
+  Highcharts = Highcharts;
+
+
+>>>>>>> a3b533f395b7209706dde3d243d8c80421f7c50b
   constructor(private httpClient: HttpClient) { }  
 
   ngOnInit() {
@@ -42,9 +50,15 @@ export class AreaComponent implements OnInit {
            text: 'Total logged hours per day'
          },
          xAxis:{
+<<<<<<< HEAD
             categories:this.Dates,
             tickmarkPlacement: 'on',
             title: {
+=======
+         categories:this.Dates,
+          tickmarkPlacement: 'on',
+           title: {
+>>>>>>> a3b533f395b7209706dde3d243d8c80421f7c50b
               enabled: false
            }
          },
@@ -78,6 +92,7 @@ export class AreaComponent implements OnInit {
          },
          series: [
             {
+<<<<<<< HEAD
                 name: 'Projects',
                 data: this.Project,
             }, 
@@ -92,6 +107,22 @@ export class AreaComponent implements OnInit {
             {
                name: 'Sick',
                data: this.Sick,
+=======
+               name: 'Projects',
+              data: this.Project,
+            }, 
+            {
+               name: 'Volunteering',
+              data: this.Volunteer,
+            }, 
+            {
+               name: 'Vacation',
+              data: this.Vacation,
+            }, 
+            {
+               name: 'Sick',
+              data: this.Sick,
+>>>>>>> a3b533f395b7209706dde3d243d8c80421f7c50b
             }
          ]
       };
