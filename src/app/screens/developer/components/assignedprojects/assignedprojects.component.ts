@@ -85,7 +85,7 @@ export class AssignedprojectsComponent implements OnInit {
     if(userData === null){
       this.userProjects = [];
     }else{
-      this.userProjects = userData.projects;
+      this.userProjects = userData;
     }
     // this.projectService
     //   .getAssignedProject(localStorage.getItem('empId'))

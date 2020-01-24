@@ -23,6 +23,7 @@ export class AppService {
   }
 
   getEmployeepProjects(employee_id): Observable<any> {
+    console.log("employee id | ",employee_id)
     return this.http.get<any>(
       this.projectServiceUrl + "/v1/api/projects/assigned/employee/" + employee_id
     );

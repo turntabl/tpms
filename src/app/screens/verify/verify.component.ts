@@ -41,8 +41,7 @@ export class VerifyComponent implements OnInit {
           console.log("Response from server | ", response);
           if(response.code == "00"){
             console.log("Checking User existence | ", response.data);
-            var employee_fullname = response.data.employee.employee_firstname + " " + response.data.employee.employee_lastname;
-            var employee_id = response.data.employee.employee_id;
+            var existtingUserData = response.data;
             console.log("Checking User existence Size | ", Object.keys(response.data).length);
             if(Object.keys(response.data).length === 0) {
               var employee_email = this.cookie.get("ttemail");
@@ -65,9 +64,9 @@ export class VerifyComponent implements OnInit {
                 .subscribe(response => {
                   console.log("Adding new user | ", response);
                   if(response.code === "00"){
-                    var employee_id = response.code.data;
+                    var emp_id = response.data;
                     this.appservice
-                    .getEmployeepProjects(employee_id)
+                    .getEmployeepProjects(emp_id)
                     .subscribe(response => {
                       console.log("Getting  new user details after employee creation | ", response);
                       if(response.code === "00"){
@@ -75,7 +74,7 @@ export class VerifyComponent implements OnInit {
                         
                         localStorage.setItem("username", employee_fullname);
                         localStorage.setItem("userProjects", JSON.stringify(response.data));
-                        localStorage.setItem("empId", employee_id.toString());
+                        localStorage.setItem("empId", emp_id.toString());
                         this.isLoading = false;
                         this.router.navigate(["developer/projects"]);
 
@@ -88,12 +87,16 @@ export class VerifyComponent implements OnInit {
                   }
                 })
           } else {
+            console.log("Printing existtingUserData | ", existtingUserData);
+          
+            var employee_id = existtingUserData.employee_id;
             this.appservice
               .getEmployeepProjects(employee_id)
               .subscribe(response => {
                 console.log("Getting employee projects | ", response);
                 if(response.code === "00"){
-                  switch (response.data.employee.employee_role) {
+                  var employee_fullname = existtingUserData.employee_firstname + " " + existtingUserData.employee_lastname;
+                  switch (existtingUserData.employee_role) {
                     case "ADMINISTRATOR":
                       // this.appservice.changeMessage(response[0].emp_name);
       
