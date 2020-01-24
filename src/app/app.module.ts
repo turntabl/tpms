@@ -9,12 +9,6 @@ import {CookieService} from 'ngx-cookie-service';
 
 //components
 import { AppComponent } from './app.component';
-<<<<<<< HEAD
-// import { DashboardComponent } from './screens/admin/components/dashboard/dashboard.component';
-import { DashboardComponent as Dev } from './screens/developer/components/dashboard/dashboard.component';
-// import { CardComponent } from './screens/admin/components/card/card.component';
-=======
->>>>>>> a3b533f395b7209706dde3d243d8c80421f7c50b
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProjectsComponent } from './screens/admin/components/projects/projects.component';
 import { AreaComponent } from './screens/admin/components/area/area.component';
@@ -29,10 +23,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
-<<<<<<< HEAD
-// import { AddprojectComponent } from './screens/admin/components/addproject/addproject.component';
-=======
->>>>>>> a3b533f395b7209706dde3d243d8c80421f7c50b
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { DevelopersComponent } from './screens/admin/components/developers/developers.component';
 import { AssignedprojectsComponent } from './screens/developer/components/assignedprojects/assignedprojects.component';
@@ -50,18 +40,8 @@ import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
-<<<<<<< HEAD
-    // DashboardComponent,
-    Dev,
-    // CardComponent,
-    HoursComponent,
-    HourComponent,
-    ProjectsComponent,
-    // AddprojectComponent,
-=======
     ProjectsComponent,
     DevelopersComponent,
->>>>>>> a3b533f395b7209706dde3d243d8c80421f7c50b
     AssignedprojectsComponent,
     NavigationComponent,
     VerifyComponent,
