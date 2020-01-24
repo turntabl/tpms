@@ -4,8 +4,6 @@ import HC_exporting from 'highcharts/modules/exporting';
 import { Data } from 'src/app/data';
 import { HttpClient } from '@angular/common/http';  
 
-
-
 @Component({
   selector: 'app-area',
   templateUrl: './area.component.html',
@@ -21,14 +19,8 @@ export class AreaComponent implements OnInit {
   Vacation= [];
 
 
-  chartOptions: {};
- 
-
-  Highcharts = Highcharts;
-
-
-  
-
+   chartOptions: {};
+   Highcharts = Highcharts;
   constructor(private httpClient: HttpClient) { }  
 
   ngOnInit() {
@@ -50,20 +42,18 @@ export class AreaComponent implements OnInit {
            text: 'Total logged hours per day'
          },
          xAxis:{
-          //  categories: ['2020-01-08', '2020-01-09', '2020-01-10', '2020-01-11', '2020-01-12', '2020-01-13', '2020-01-14'],
-         categories:this.Dates,
-          tickmarkPlacement: 'on',
-           title: {
+            categories:this.Dates,
+            tickmarkPlacement: 'on',
+            title: {
               enabled: false
            }
          },
          yAxis : {
-           title: {
+             title: {
               text: 'Hours'
            },
-           labels: {
-              formatter: function () {
-                 return this.value;
+          labels: {
+              formatter: function () {return this.value;
               }
            }
          },
@@ -88,24 +78,20 @@ export class AreaComponent implements OnInit {
          },
          series: [
             {
-               name: 'Projects',
-              //  data: [502, 635, 809, 947, 1402, 3634, 5268]
-              data: this.Project,
+                name: 'Projects',
+                data: this.Project,
             }, 
             {
                name: 'Volunteering',
-              //  data: [106, 107, 111, 133, 221, 767, 1766]
-              data: this.Volunteer,
+               data: this.Volunteer,
             }, 
             {
                name: 'Vacation',
-              //  data: [163, 203, 276, 408, 547, 729, 628]
-              data: this.Vacation,
+               data: this.Vacation,
             }, 
             {
                name: 'Sick',
-              //  data: [18, 31, 54, 156, 339, 818, 1201]
-              data: this.Sick,
+               data: this.Sick,
             }
          ]
       };
