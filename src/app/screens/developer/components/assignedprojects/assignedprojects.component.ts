@@ -51,8 +51,8 @@ export class AssignedprojectsComponent implements OnInit {
     volunteering_hours: new FormControl(''),
     vacation: new FormControl(''),
     sick: new FormControl(''),
-    emp_id: new FormControl(localStorage.getItem('empId')),
-    project_id: new FormControl(localStorage.getItem('pid')),
+    emp_id: new FormControl(),
+    project_id: new FormControl(),
     logged_date: new FormControl(new Date().toISOString().slice(0, 10)),
   });
   constructor(
@@ -148,21 +148,51 @@ export class AssignedprojectsComponent implements OnInit {
   logsuccess() {}
   onSubmit() {
     // console.log(this.hourform.value);
-    this.plog.logproject(this.hourform.value).subscribe(() => {
-    });
-   // alert('Successfully submitted');
-    // this.hourform.reset();
-    this.plog.logsick(this.hourform.value).subscribe(()=>{
-      
-    });
-    // this.hourform.reset();
-    this.plog.logvacation(this.hourform.value).subscribe(()=>{
-      setTimeout(() => {
+    console.log("Logging proect hours | ",this.hourform.value);
+
+      var employee_firstname = this.userProjects[0].employee_firstname;
+      var employee_lastname = this.userProjects[0].employee_lastname;
+      var employee_email = this.userProjects[0].employee_email;
+      var employee_id = this.userProjects[0].employee_id;
+      var project_hours = this.hourform.value.project_hours;
+      var project_id = this.hourform.value.project_id.project_id;
+      var project_date = this.hourform.value.logged_date;
+
+      let requestData = {
+        employee_firstname:employee_firstname,
+        employee_lastname:employee_lastname,
+        employee_email:employee_email,
+        employee_id:employee_id,
+        project_hours:project_hours,
+        project_id:project_id,
+        project_date:project_date
+
+      }
+      console.log("Printing requestData | ",requestData);
+
+    this.plog.
+    logproject(requestData)
+    .subscribe(response => {
+      console.log("Response from server | ",requestData);
+      if(response.code === "00"){
+        this.showAlert = true;
+      }else{
         this.showAlert = false;
-      }, 3000);
-      this.showAlert = true;
+      }
     });
-    this.hourform.reset();
+  //  // alert('Successfully submitted');
+  //   // this.hourform.reset();
+  //   this.plog.logsick(this.hourform.value).subscribe(()=>{
+      
+  //   });
+  //   // this.hourform.reset();
+  //   this.plog.logvacation(this.hourform.value).subscribe(()=>{
+  //     setTimeout(() => {
+  //       this.showAlert = false;
+  //     }, 3000);
+  //     this.showAlert = true;
+  //   });
+  //   this.hourform.reset();
   }
 
   myFilter = (d: Date): boolean => {

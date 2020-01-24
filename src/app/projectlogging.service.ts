@@ -26,7 +26,7 @@ export class ProjectloggingService {
   logproject(data: any):Observable<any>{
     let body = JSON.stringify(data);
     let headers = new HttpHeaders({'Content-Type':'application/json'});
-    return this.http.post<any>(this.projectsUrl + '/v1/api/logproject', body,{headers: headers});
+    return this.http.post<any>(this.projectsUrl + '/v1/api/addloggedproject', body,{headers: headers});
   }
   logsick(data: any):Observable<any>{
     let body = JSON.stringify(data);
