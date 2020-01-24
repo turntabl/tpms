@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
-
 @Injectable({
   providedIn: "root"
 })
@@ -36,11 +35,11 @@ export class AppService {
     return this.http.post<any>(
       this.developerService + '/v1/api/employee',body,{headers: headers} );
   }
-  getLoggedHours(): Observable<any> {
-    return this.http.get<any>(this.developerService + "log");
+  getLoggedHours(): Observable<any[]> {
+    return this.http.get<any[]>(this.developerService + "log");
   }
-  getLoggedHoursForDev(empId: string): Observable<any> {
-    return this.http.get<any>(
+  getLoggedHoursForDev(empId: string): Observable<any[]> {
+    return this.http.get<any[]>(
       this.developerService + "projectlogged/dev/" + empId
     );
   }
