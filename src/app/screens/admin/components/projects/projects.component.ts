@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl} from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProjectService } from 'src/app/project.service';
+// import { ToastService } from 'ng-uikit-pro-standard';
+
+declare var $: any;
+
 
 @Component({
   selector: 'app-projects',
@@ -10,7 +15,12 @@ import { ProjectService } from 'src/app/project.service';
 
 export class ProjectsComponent implements OnInit {
 
-  constructor(private ProjectService: ProjectService,) {
+  showSucessAlert: Boolean
+  successMsg: string;
+  showErrorAlert:Boolean
+  errorMsg: string
+
+  constructor(private ProjectService: ProjectService,public activeModal: NgbActiveModal) {
   }
 
   projectForm = new FormGroup({
@@ -26,9 +36,28 @@ export class ProjectsComponent implements OnInit {
       });
     }
 
-  onSubmit() { var formValues = this.projectForm.value;
-        let requestData = { project_name: formValues.project_name,}
-       this.ProjectService
-      .addNewProject(requestData) }
+  onSubmit() { 
+  
+    $("#modalSubscriptionForm").modal("hide"); 
+    $('.modal-backdrop').remove();
+    
+    var test = true
+    if(test == true){
+      this.showSucessAlert = true;
+      this.successMsg = "Success"
+    }else{
+      this.showErrorAlert = true;
+      this.errorMsg = "Error"
+    }
+    
+    // var formValues = this.projectForm.value;
+    // let requestData = { project_name: formValues.project_name,}
+    // this.ProjectService
+    //   .addNewProject(requestData)
+    //   .subscribe(response =>{
+    //     console.log(response)
+    //   })
+    
+  }
 
 }

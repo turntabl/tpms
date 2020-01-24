@@ -2,8 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormControl} from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 // Cookie stuff
 import {CookieService} from 'ngx-cookie-service';
@@ -51,6 +52,8 @@ import { ViewChild, HostListener, AfterViewInit, ChangeDetectorRef } from '@angu
 import { ReportComponent } from './screens/admin/components/report/report.component';
 import { AreaComponent } from './screens/admin/components/area/area.component';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { CommonModule } from '@angular/common';
+
 
 
 
@@ -75,7 +78,10 @@ import { HighchartsChartModule } from 'highcharts-angular';
 
   ],
   imports: [
+    CommonModule,
+    BrowserAnimationsModule,
     BrowserModule,
+    ToastrModule.forRoot(),
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
@@ -96,15 +102,11 @@ import { HighchartsChartModule } from 'highcharts-angular';
     MatSelectModule,
     MatAutocompleteModule,
     MatListModule,
-    HighchartsChartModule,
-
+    HighchartsChartModule
     
 
-
-
-
   ],
-  providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}, CookieService ],
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}, CookieService,NgbActiveModal ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

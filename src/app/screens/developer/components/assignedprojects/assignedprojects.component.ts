@@ -154,7 +154,7 @@ export class AssignedprojectsComponent implements OnInit {
       }, 3000);
       this.showAlert = true;
     });
-   // alert('Successfully submitted');
+  //  alert('Successfully submitted');
     this.hourform.reset();
   }
 
