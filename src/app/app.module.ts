@@ -66,7 +66,6 @@ import { CommonModule } from '@angular/common';
     HourComponent,
     ProjectsComponent,
     AddprojectComponent,
-     DevelopersComponent,
     AssignedprojectsComponent,
     NavigationComponent,
     VerifyComponent,
