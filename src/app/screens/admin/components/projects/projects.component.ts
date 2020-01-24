@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl} from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProjectService } from 'src/app/project.service';
 // import { ToastService } from 'ng-uikit-pro-standard';
 
@@ -20,7 +19,7 @@ export class ProjectsComponent implements OnInit {
   showErrorAlert:Boolean
   errorMsg: string
 
-  constructor(private ProjectService: ProjectService,public activeModal: NgbActiveModal) {
+  constructor(private ProjectService: ProjectService) {
   }
 
   projectForm = new FormGroup({
