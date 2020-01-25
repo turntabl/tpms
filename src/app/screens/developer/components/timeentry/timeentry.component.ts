@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormGroup, FormControl } from '@angular/forms';
 
-import { ProjectloggingService } from 'src/app/projectlogging.service';
-import { ProjectService } from 'src/app/project.service';
+import { ProjectloggingService } from 'src/app/services/projectlogging.service';
+import { ProjectService } from 'src/app/services/project.service';
 
 
 export interface Data {
@@ -17,13 +17,12 @@ const ELEMENT_DATA: Data[] = [
 ];
 
 @Component({
-  selector: 'app-assignedprojects',
-  templateUrl: './assignedprojects.component.html',
-  styleUrls: ['./assignedprojects.component.css']
+  selector: 'app-timeentry',
+  templateUrl: './timeentry.component.html',
+  styleUrls: ['./timeentry.component.css']
 })
+export class TimeentryComponent implements OnInit {
 
-
-export class AssignedprojectsComponent implements OnInit {
   incomingProject = { project_id: 2, title: '' };
   showAlert: boolean = false;
   userProjects: any
@@ -144,3 +143,5 @@ logsuccess() {}
 
 
 }
+
+

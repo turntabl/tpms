@@ -1,0 +1,65 @@
+<div class="container-fluid">
+    <div class="alert alert-primary alert-dismissible fade show" role="alert" *ngIf="showAlert">Hours successfully submitted
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div> 
+    <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 50px;">
+      <h3 style="font-weight: bolder; color: black;">Log Project Hours <hr></h3>
+    </div>
+     <br/>
+  
+    <div class="container-fluid">
+      <form action="" [formGroup]="hourform" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+          <input matInput ng-model-options="{timezone: null}" [matDatepickerFilter]="myFilter" [matDatepicker]="picker" placeholder="Choose date to log hours" formControlName="logged_date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>   
+        </mat-form-field>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <br />
+          <ng-container matColumnDef="Projects">
+      <th mat-header-cell *matHeaderCellDef style="font-size: xx-medium;">
+  
+      <mat-form-field>
+        <mat-select formControlName="project_id" style="font-size: xx-medium;">
+          <mat-option *ngFor="let project of userProjects" [value]="project">
+            {{project.project_name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </th>
+            <td mat-cell *matCellDef="let element"> <input required="" placeholder="hours" autofocus type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" min="0" max="9"
+                id="form3" formControlName="project_hours" class="form-control validate"></td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Volunteering">
+            <th mat-header-cell *matHeaderCellDef style="font-size: xx-large;">Volunteering</th>
+            <td mat-cell *matCellDef="let element">
+              <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" min="0" max="9" id="form3" formControlName="volunteering_hours" class="form-control validate"
+                placeholder="hours"></td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Sick">
+            <th mat-header-cell *matHeaderCellDef style="font-size: xx-large;">&nbsp;&nbsp;Sick</th> 
+            <td mat-cell *matCellDef="let element"> <input type="radio" ng-model="checkboxModel" value="sick" formControlName="sick"  (ngModelChange)="sickFieldChecked($event)" ng-click='uncheck($event)'
+                formControlName="sick" id="form3" class="form-control validate"> </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Vacation">
+            <th mat-header-cell *matHeaderCellDef style="font-size: xx-large;"> Vacation </th>
+            <td mat-cell *matCellDef="let element"><input type="radio" ng-model="checkboxModel" value="vacation" formControlName="vacation" (ngModelChange)="vacationFieldChecked($event)" ng-click='uncheck($event)'
+                id="form3" class="form-control validate"></td>
+          </ng-container>
+         
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+         </table>
+        <br/>
+        <button type="submit" id="submit" class="form-control mb-4" (ngModelChange)="submitChecked($event)" value="true">Submit</button>
+      </form>
+      <br/>
+    </div>
+    <br />
+  
+  </div>

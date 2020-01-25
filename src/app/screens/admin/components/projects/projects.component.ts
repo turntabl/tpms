@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl} from '@angular/forms';
-import { ProjectService } from 'src/app/project.service';
+import { ProjectService } from 'src/app/services/project.service';
 // import { ToastService } from 'ng-uikit-pro-standard';
 
 declare var $: any;

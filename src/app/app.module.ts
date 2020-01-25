@@ -25,7 +25,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { DevelopersComponent } from './screens/admin/components/developers/developers.component';
-import { AssignedprojectsComponent } from './screens/developer/components/assignedprojects/assignedprojects.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule, MatInputModule, MatNativeDateModule,MAT_DATE_LOCALE } from '@angular/material';
@@ -35,6 +34,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatListModule} from '@angular/material/list';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { CommonModule } from '@angular/common';
+import { TimeentryComponent } from './screens/developer/components/timeentry/timeentry.component';
 
 
 @NgModule({
@@ -42,11 +42,11 @@ import { CommonModule } from '@angular/common';
     AppComponent,
     ProjectsComponent,
     DevelopersComponent,
-    AssignedprojectsComponent,
     NavigationComponent,
     VerifyComponent,
     NavComponent,
     AreaComponent,
+    TimeentryComponent
 
   ],
   imports: [

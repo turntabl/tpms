@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
-import { Data } from 'src/app/data';
+import { Data } from 'src/app/interfaces/data';
 import { HttpClient } from '@angular/common/http';  
 
 
