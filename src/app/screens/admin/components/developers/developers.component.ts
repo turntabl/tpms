@@ -1,11 +1,11 @@
 import { Component, OnInit, ChangeDetectorRef, ApplicationRef } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { FormControl} from '@angular/forms';
+import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ProjectService } from 'src/app/services/project.service';
 import { Employee } from 'src/app/interfaces/employee';
-import { AppService } from 'src/app/services/app.service';
-import { ProjectInterface } from 'src/app/interfaces/project-interface';
+import { Project } from 'src/app/interfaces/project';
+import { EmployeeService } from 'src/app/services/employee.service';
 
 @Component({
   selector: 'app-developers',
@@ -40,19 +40,19 @@ assignedNewProject =[]
   projectfilteredOptions: Observable<any>;
   assignedprojects: any 
 
-  constructor(private ProjectService: ProjectService, private devService: AppService,private cdr: ApplicationRef) { }
+  constructor(private ProjectService: ProjectService, private employeeService: EmployeeService,private cdr: ApplicationRef) { }
 
   developerObservable: Observable<Employee[]>;
   devs = [];
 
-  projectsObservable: Observable<ProjectInterface[]>;
+  projectsObservable: Observable<Project[]>;
   project = [];
 
   assignedObservable: Observable<any[]>;
   assign = [];
 
   ngOnInit() {
-    this.devService.getDevelopers().subscribe(response => {
+    this.employeeService.getDevelopers().subscribe(response => {
       console.log("Response from server | ",response)
       if(response.code === "00"){
         this.options = response.data;
@@ -89,7 +89,7 @@ assignedNewProject =[]
     });  
   }
 
-  remove_one(dev: ProjectInterface): void {
+  remove_one(dev: Project): void {
     const index = this.assignedNewProject.indexOf(dev);
 
     if (index >= 0) {
@@ -134,7 +134,7 @@ assignedNewProject =[]
   updateNewProjects(){
     
     this.ProjectService
-        .getAssignedProject(this.selectedDeveloper_id)
+        .getAssignedProjects(this.selectedDeveloper_id)
         .subscribe(response => {
           console.log("Printing projects | ", response.data.projects);
           if(response.code === "00"){
@@ -150,7 +150,7 @@ assignedNewProject =[]
     const filterValue = value.toLowerCase();
     return this.options.filter(option => option.employee.employee_firstname.toLowerCase().indexOf(filterValue) === 0)
   }
-  private _projectfilter(value: string): ProjectInterface[] {
+  private _projectfilter(value: string): Project[] {
     const filterValue = value.toLowerCase();
     return this.projectoptions.filter(option => option.project.project_name.toLowerCase().indexOf(filterValue) === 0)
   }
@@ -175,7 +175,7 @@ assignedNewProject =[]
   currproj: string;
   devMethod(emp) {
     this.ProjectService
-      .getAssignedProject(emp.employee_id)
+      .getAssignedProjects(emp.employee_id)
       .subscribe(response => {
         this.timeentry[0].project_id = response.project_id;
         this.timeentry[0].title = response.title;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { AppService } from "src/app/services/app.service";
+import { EmployeeService } from 'src/app/services/employee.service';
 
 @Component({
   selector: "app-navigation",
@@ -9,7 +9,7 @@ import { AppService } from "src/app/services/app.service";
 
 export class NavigationComponent implements OnInit {
   userName: string = "";
-  constructor(private appservice: AppService) { }
+  constructor(private employeeService: EmployeeService) { }
 
   ngOnInit() {
     this.userName = localStorage.getItem("username");

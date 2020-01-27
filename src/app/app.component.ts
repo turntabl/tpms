@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { AppService } from "./services/app.service";
+import { EmployeeService } from './services/employee.service';
 
 @Component({
   selector: "app-root",
@@ -9,8 +9,8 @@ import { AppService } from "./services/app.service";
 export class AppComponent {
   title = "tpms";
   userName: String;
-  constructor(private appService: AppService) {
-    this.appService.currentMessage.subscribe(
+  constructor(private employeeService: EmployeeService) {
+    this.employeeService.currentMessage.subscribe(
       name => (this.userName = name)
     );
   }

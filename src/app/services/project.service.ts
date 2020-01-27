@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ProjectInterface } from '../interfaces/project-interface';
+import { Project } from '../interfaces/project';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class ProjectService {
   };
 
   constructor(private http: HttpClient) {}
-  //  adding project to db
+
   addNewProject(requestBody: any): Observable<any> {
     let body = JSON.stringify(requestBody);
     let headers = new HttpHeaders({'Content-Type':'application/json'});
@@ -22,7 +22,6 @@ export class ProjectService {
     return this.http.post<any>(
       this.projectUrl + '/v1/api/project',body,{headers: headers} );
   }
-
   
   assignProjectToEmployee(project_id,employee_id): Observable<any> {
     return this.http.get<any>(
@@ -34,15 +33,14 @@ export class ProjectService {
     return this.http.get<any>(this.projectUrl + '/v1/api/projects');
   }
 
-  getAssignedProject(employee_id: string): Observable<any> {
+  getAssignedProjects(employee_id: string): Observable<any> {
     return this.http.get<any>(
       this.projectUrl + '/v1/api/projects/assigned/employee/' + employee_id
     );
   }
 
-
-  assignProjecttoDev(project_id: number, body:number): Observable<ProjectInterface[]> {
-      return this.http.post<ProjectInterface[]>(this.projectUrl + "/projects/assign/"+ project_id,body);
+  assignProjecttoDev(project_id: number, body:number): Observable<Project[]> {
+      return this.http.post<Project[]>(this.projectUrl + "/projects/assign/"+ project_id,body);
   }
 
   removeProjectFromEmployee( project_id,employee_id):Observable<any>{
@@ -52,5 +50,11 @@ export class ProjectService {
 
   }
  
+  getProjectByEmployeeId(employee_id): Observable<any> {
+    console.log("employee id | ",employee_id)
+    return this.http.get<any>(
+      this.projectUrl + "/v1/api/projects/assigned/employee/" + employee_id
+    );
+  }
 
 }

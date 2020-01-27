@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { AppService } from "src/app/services/app.service";
+import { Router } from "@angular/router";
 import { CookieService } from "ngx-cookie-service";
+import { EmployeeService } from 'src/app/services/employee.service';
+import { ProjectService } from 'src/app/services/project.service';
 @Component({
   selector: "app-verify",
   templateUrl: "./verify.component.html",
@@ -14,19 +15,19 @@ export class VerifyComponent implements OnInit {
   cookieAvailable: boolean;
   constructor(
     private router: Router,
-    private appservice: AppService,
-    private activatedRoute: ActivatedRoute,
-    private cookie: CookieService
-  ) {}
+    private cookie: CookieService,
+    private projectService: ProjectService,
+    private employeeService: EmployeeService
+      ) {}
   role: any;
   ngOnInit() {
-    this.appservice.currentMessage.subscribe(name => {
+    this.employeeService.currentMessage.subscribe(name => {
       this.userName = name
     });
 
     this.cookieAvailable = this.cookie.check("ttemail");
     if (this.cookieAvailable == true) {
-      this.appservice
+      this.employeeService
         .getEmployeeRole(this.cookie.get("ttemail"))
         .subscribe(response => {
           if(response.code == "00"){
@@ -47,39 +48,32 @@ export class VerifyComponent implements OnInit {
                 "employee_status": ""
               }
 
-              this.appservice
+              this.employeeService
                 .addEmployee(requestData)
                 .subscribe(response => {
                   console.log("Adding new user | ", response);
                   if(response.code === "00"){
                     var emp_id = response.data;
-                    this.appservice
-                    .getEmployeepProjects(emp_id)
+                    this.projectService
+                    .getProjectByEmployeeId(emp_id)
                     .subscribe(response => {
-                      console.log("Getting  new user details after employee creation | ", response);
                       if(response.code === "00"){
                         var employee_fullname = employee_firstname + " " + employee_lastname;
-                        
                         localStorage.setItem("username", employee_fullname);
                         localStorage.setItem("userProjects", JSON.stringify(response.data));
                         localStorage.setItem("empId", emp_id.toString());
                         this.isLoading = false;
                         this.router.navigate(["developer/projects"]);
 
-                      }else{
-                        console.log(response)
                       }
                     })
-                  }else{
-                    console.log(response);
                   }
                 })
           } else {
-            console.log("Printing existtingUserData | ", existtingUserData);
           
             var employee_id = existtingUserData.employee_id;
-            this.appservice
-              .getEmployeepProjects(employee_id)
+            this.projectService
+              .getProjectByEmployeeId(employee_id)
               .subscribe(response => {
                 console.log("Getting employee projects | ", response);
                 if(response.code === "00"){
@@ -102,8 +96,6 @@ export class VerifyComponent implements OnInit {
                     default:
                       break;
                   }
-                }else{
-                  console.log(response)
                 }
               })         
           } 
@@ -113,5 +105,5 @@ export class VerifyComponent implements OnInit {
       this.isLoading = false;
     }
   }
-  reauth() { this.router.navigate(["/logout"]);}
+  logout() { this.router.navigate(["/logout"]);}
 }

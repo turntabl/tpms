@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { AppService } from "src/app/services/app.service";
+import { EmployeeService } from 'src/app/services/employee.service';
 
 @Component({
   selector: "app-nav",
@@ -7,11 +7,11 @@ import { AppService } from "src/app/services/app.service";
   styleUrls: ["./nav.component.css"]
 })
 export class NavComponent implements OnInit {
-  userName: string = "dot";
-  constructor(private appservice: AppService) {}
+  userName: string = "";
+  constructor(private employeeService: EmployeeService) {}
 
   ngOnInit() {
-    this.appservice.currentMessage.subscribe(
+    this.employeeService.currentMessage.subscribe(
       newName => (this.userName = newName)
     );
     this.userName = localStorage.getItem("username");

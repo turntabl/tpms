@@ -11,9 +11,9 @@ import {CookieService} from 'ngx-cookie-service';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProjectsComponent } from './screens/admin/components/projects/projects.component';
-import { NavigationComponent } from './screens/admin/navigation/navigation.component';
+import { NavigationComponent  as adminNavigation} from './screens/admin/navigation/navigation.component';
 import { VerifyComponent } from './screens/verify/verify.component';
-import { NavComponent } from './screens/developer/nav/nav.component';
+import { NavComponent as developerNavigation } from './screens/developer/nav/nav.component';
 
 
 // Material
@@ -42,9 +42,9 @@ import { ReportComponent } from '../app/screens/admin/components/report/report.c
     AppComponent,
     ProjectsComponent,
     DevelopersComponent,
-    NavigationComponent,
+    adminNavigation,
     VerifyComponent,
-    NavComponent,
+    developerNavigation,
     TimeentryComponent,
     ReportComponent
 

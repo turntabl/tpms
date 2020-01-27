@@ -9,12 +9,11 @@ export class EmployeeService {
   private messageSource = new BehaviorSubject("");
   currentMessage = this.messageSource.asObservable();
   private developerService = "https://employee.services.turntabl.io";
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
   changeMessage(message: string) {
     this.messageSource.next(message);
   }
-  
   getEmployeeRole(email: string): Observable<any> {
     return this.http.get<any>(
       this.developerService + "/v1/api/login/" + email
@@ -28,7 +27,14 @@ export class EmployeeService {
     return this.http.post<any>(
       this.developerService + '/v1/api/employee',body,{headers: headers} );
   }
-
+  getLoggedHours(): Observable<any[]> {
+    return this.http.get<any[]>(this.developerService + "log");
+  }
+  getLoggedHoursForDev(empId: string): Observable<any[]> {
+    return this.http.get<any[]>(
+      this.developerService + "projectlogged/dev/" + empId
+    );
+  }
   getDevelopers(): Observable<any> {
     return this.http.get<any>(this.developerService + "/v1/api/employees");
   }

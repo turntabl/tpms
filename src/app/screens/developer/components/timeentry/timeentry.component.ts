@@ -120,7 +120,7 @@ logsuccess() {}
         project_date:project_date
       }
 
-    this.plog. logproject(requestData) .subscribe(response => {
+    this.plog.logproject(requestData) .subscribe(response => {
       if(response.code === "00"){
         this.showAlert = true;
       }else{
@@ -129,9 +129,6 @@ logsuccess() {}
     });
   }
 
-  myFilter = (d: Date): boolean => {const day = d.getDay();
-       return day !== 0 && day !== 6;
-  }
 }
 
 
