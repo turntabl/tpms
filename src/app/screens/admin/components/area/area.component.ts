@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './area.component.html',
 })
 export class AreaComponent implements OnInit {
-  url = 'https://project.services.turntabl.io/v1/api/getlogged';  
+  url = 'https://project.services.turntabl.io/v1/api/getloggedproject';  
   data: Data[];  
   Dates = []; 
   Project = [];  
@@ -20,7 +20,7 @@ export class AreaComponent implements OnInit {
   Vacation= [];
 
 
-  chartOptions: {};
+  chartOptions={};
  
 
   Highcharts = Highcharts;
@@ -29,12 +29,12 @@ export class AreaComponent implements OnInit {
   constructor(private httpClient: HttpClient) { }  
 
   ngOnInit() {
-    this.httpClient.get(this.url).subscribe((result: Data[]) => {  
-      result.forEach(x => {  
-        this.Dates.push(x.log_date);  
+    this.httpClient.get(this.url).subscribe((result: Data[]) => {Array.prototype.forEach(element => { 
+    });(x => {  
+        this.Dates.push(x.project_date);  
         this.Project.push(x.project_hours);
-        this.Sick.push(x.vacation_hours);
-        this.Vacation.push(x.sick_hours);  
+        // this.Sick.push(x.vacation_hours);
+        // this.Vacation.push(x.sick_hours);  
       });  
      this. chartOptions = {   
          chart: {
@@ -86,19 +86,19 @@ export class AreaComponent implements OnInit {
             {
                name: 'Projects',
               data: this.Project,
-            }, 
-            {
-               name: 'Volunteering',
-              data: this.Volunteer,
-            }, 
-            {
-               name: 'Vacation',
-              data: this.Vacation,
-            }, 
-            {
-               name: 'Sick',
-              data: this.Sick,
             }
+            // {
+            //    name: 'Volunteering',
+            //   data: this.Volunteer,
+            // }, 
+            // {
+            //    name: 'Vacation',
+            //   data: this.Vacation,
+            // }, 
+            // {
+            //    name: 'Sick',
+            //   data: this.Sick,
+            // }
          ]
       };
 
