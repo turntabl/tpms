@@ -75,8 +75,6 @@ import { TimeentryComponent } from './screens/developer/components/timeentry/tim
     MatAutocompleteModule,
     MatListModule,
     HighchartsChartModule
-    
-
   ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}, CookieService ],
   bootstrap: [AppComponent]

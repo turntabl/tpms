@@ -7,7 +7,6 @@ import { NavigationComponent } from "./screens/admin/navigation/navigation.compo
 import { NavComponent } from "./screens/developer/nav/nav.component";
 import { AreaComponent } from './screens/admin/components/area/area.component';
 import { TimeentryComponent } from './screens/developer/components/timeentry/timeentry.component';
-  
 
 const routes: Routes = [
   { path: '', component: VerifyComponent },

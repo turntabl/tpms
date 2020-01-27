@@ -15,13 +15,6 @@ export class ProjectloggingService {
   };
 
   constructor( private http: HttpClient) { }
-
-  // getaddhours (): Observable<Projectlogging[]> {
-  //   return this.http.get<Projectlogging[]>(this.projectsUrl)
-  //   }
-  // loghours(data: Projectlogging):Observable<Projectlogging>{
-  //   return this.http.post<Projectlogging>(this.projectsUrl, data);
-  // }
   logproject(data: any):Observable<any>{
     let body = JSON.stringify(data);
     let headers = new HttpHeaders({'Content-Type':'application/json'});

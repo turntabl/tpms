@@ -4,8 +4,6 @@ import HC_exporting from 'highcharts/modules/exporting';
 import { Data } from 'src/app/interfaces/data';
 import { HttpClient } from '@angular/common/http';  
 
-
-
 @Component({
   selector: 'app-area',
   templateUrl: './area.component.html',
@@ -19,13 +17,8 @@ export class AreaComponent implements OnInit {
   Sick=[];
   Vacation= [];
 
-
   chartOptions: {};
- 
-
   Highcharts = Highcharts;
-
-
   constructor(private httpClient: HttpClient) { }  
 
   ngOnInit() {
@@ -54,18 +47,17 @@ export class AreaComponent implements OnInit {
            }
          },
          yAxis : {
-           title: {
+              title: {
               text: 'Hours'
            },
-           labels: {
-              formatter: function () {
-                 return this.value;
+          labels: {
+              formatter: function () {return this.value;
               }
            }
          },
          tooltip : {
-           shared: true,
-           valueSuffix: ' Hours'
+              shared: true,
+              valueSuffix: ' Hours'
          },
          plotOptions : {
            area: {
@@ -74,8 +66,8 @@ export class AreaComponent implements OnInit {
               lineWidth: 1,
               
               marker: {
-                 lineWidth: 1,
-                 lineColor: '#666666'
+              lineWidth: 1,
+              lineColor: '#666666'
               }
            }
          },
@@ -85,31 +77,27 @@ export class AreaComponent implements OnInit {
          series: [
             {
                name: 'Projects',
-              data: this.Project,
+               data: this.Project,
             }, 
             {
                name: 'Volunteering',
-              data: this.Volunteer,
+               data: this.Volunteer,
             }, 
             {
                name: 'Vacation',
-              data: this.Vacation,
+               data: this.Vacation,
             }, 
             {
                name: 'Sick',
-              data: this.Sick,
+               data: this.Sick,
             }
          ]
       };
 
     HC_exporting(Highcharts);
-
-
     setTimeout(() => {
     }, 3000);
    
-  }); 
-  
+    }); 
   }
-
 }
