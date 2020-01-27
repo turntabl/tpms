@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl} from '@angular/forms';
-import { ProjectService } from 'src/app/project.service';
+import { ProjectService } from 'src/app/services/project.service';
 // import { ToastService } from 'ng-uikit-pro-standard';
 
 declare var $: any;
@@ -13,6 +13,8 @@ declare var $: any;
 })
 
 export class ProjectsComponent implements OnInit {
+  columnsToDisplay = ['name'];
+  dataSource = [];
 
   showSucessAlert: Boolean
   successMsg: string;
@@ -28,25 +30,44 @@ export class ProjectsComponent implements OnInit {
 
 
   ngOnInit() {
-    this.ProjectService.getProject().subscribe(response => {
-      
+    this.getProjects();
+  }
+
+  getProjects(){
+    this.ProjectService
+      .getProject()
+      .subscribe(response => {
+        console.log("Printing response | ",response )
+        if(response.code === "00"){
+          this.dataSource = response.data;
+        }else{
+          this.dataSource = [];
+        }  
       });
-    }
+  }
 
   onSubmit() { 
-  
-    $("#modalSubscriptionForm").modal("hide"); 
-    $('.modal-backdrop').remove();
     
-    var test = true
-    if(test == true){
-      this.showSucessAlert = true;
-      this.successMsg = "Success"
-    }else{
-      this.showErrorAlert = true;
-      this.errorMsg = "Error"
+    var formValues = this.projectForm.value;
+    let requestData = { 
+      project_name: formValues.project_name
     }
-    
-  }
+    console.log("Printing requestData | ",requestData)
+
+   this.ProjectService
+   .addNewProject(requestData) 
+   .subscribe(response =>{
+     if(response.code === "00"){
+       this.getProjects();
+      $("#modalSubscriptionForm").modal("hide");
+      $('.modal-backdrop').remove();
+      this.projectForm.reset();
+      
+     }else{
+      $("#modalSubscriptionForm").modal("hide");
+      $('.modal-backdrop').remove();
+     }
+   })
+}
 
 }

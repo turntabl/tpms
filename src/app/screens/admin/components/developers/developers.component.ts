@@ -2,8 +2,8 @@ import { Component, OnInit, ChangeDetectorRef, ApplicationRef } from '@angular/c
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { ProjectService } from 'src/app/project.service';
-import { Employee } from 'src/app/employee';
+import { ProjectService } from 'src/app/services/project.service';
+import { Employee } from 'src/app/interfaces/employee';
 import { AppService } from 'src/app/services/app.service';
 import { ProjectInterface } from 'src/app/screens/project-interface';
 
@@ -26,7 +26,15 @@ selectedProject_id
 assignedNewProject =[]
   selectable = true;
   removable = true;
+<<<<<<< HEAD
   assignedprojects = [{ project_id: 1, title: "Devs projects appear here" }]
+=======
+  projects = [
+  
+  ];
+
+  timeentry = []
+>>>>>>> 0a67d4f8470ddd1c173f4eccaa769fbfe8e8c3a9
 
   myControl = new FormControl();
   options: Array<any> = [];
@@ -35,7 +43,7 @@ assignedNewProject =[]
   projectmyControl = new FormControl();
   projectoptions: Array<any> = [];
   projectfilteredOptions: Observable<any>;
-  assignedProjects: any 
+  assignedprojects: any 
 
   constructor(private ProjectService: ProjectService, private devService: AppService,private cdr: ApplicationRef) { }
 
@@ -98,7 +106,7 @@ assignedNewProject =[]
   displayFn(user?: any): any | undefined {
     if (user !== null) {
       this.selectedDeveloper_id = user.employee.employee_id
-      this.assignedProjects = user.projects;
+      this.timeentry = user.projects;
     }
     return user ? user.employee.employee_firstname : undefined;
   }
@@ -135,7 +143,7 @@ assignedNewProject =[]
         .subscribe(response => {
           console.log("Printing projects | ", response.data.projects);
           if(response.code === "00"){
-            this.assignedProjects = response.data.projects;
+            this.timeentry = response.data.projects;
           }else{
             console.log(response)
           }
@@ -176,8 +184,8 @@ assignedNewProject =[]
     this.ProjectService
       .getAssignedProject(emp.employee_id)
       .subscribe(response => {
-        this.assignedprojects[0].project_id = response.project_id;
-        this.assignedprojects[0].title = response.title;
+        this.timeentry[0].project_id = response.project_id;
+        this.timeentry[0].title = response.title;
       });
   }
 
