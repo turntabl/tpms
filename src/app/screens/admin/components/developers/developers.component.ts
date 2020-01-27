@@ -5,7 +5,8 @@ import { map, startWith } from 'rxjs/operators';
 import { ProjectService } from 'src/app/services/project.service';
 import { Employee } from 'src/app/interfaces/employee';
 import { AppService } from 'src/app/services/app.service';
-import { ProjectInterface } from 'src/app/screens/project-interface';
+import { ProjectInterface } from 'src/app/interfaces/project-interface';
+// import { ProjectInterface } from 'src/app/screens/project-interface';
 
 
 @Component({
@@ -26,15 +27,11 @@ selectedProject_id
 assignedNewProject =[]
   selectable = true;
   removable = true;
-<<<<<<< HEAD
-  assignedprojects = [{ project_id: 1, title: "Devs projects appear here" }]
-=======
   projects = [
   
   ];
 
   timeentry = []
->>>>>>> 0a67d4f8470ddd1c173f4eccaa769fbfe8e8c3a9
 
   myControl = new FormControl();
   options: Array<any> = [];
