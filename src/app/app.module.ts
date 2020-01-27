@@ -11,7 +11,6 @@ import {CookieService} from 'ngx-cookie-service';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProjectsComponent } from './screens/admin/components/projects/projects.component';
-import { AreaComponent } from './screens/admin/components/area/area.component';
 import { NavigationComponent } from './screens/admin/navigation/navigation.component';
 import { VerifyComponent } from './screens/verify/verify.component';
 import { NavComponent } from './screens/developer/nav/nav.component';
@@ -35,6 +34,7 @@ import {MatListModule} from '@angular/material/list';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { CommonModule } from '@angular/common';
 import { TimeentryComponent } from './screens/developer/components/timeentry/timeentry.component';
+import { ReportComponent } from '../app/screens/admin/components/report/report.component';
 
 
 @NgModule({
@@ -45,8 +45,8 @@ import { TimeentryComponent } from './screens/developer/components/timeentry/tim
     NavigationComponent,
     VerifyComponent,
     NavComponent,
-    AreaComponent,
-    TimeentryComponent
+    TimeentryComponent,
+    ReportComponent
 
   ],
   imports: [

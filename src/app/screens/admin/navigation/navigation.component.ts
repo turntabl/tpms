@@ -6,9 +6,10 @@ import { AppService } from "src/app/services/app.service";
   templateUrl: "./navigation.component.html",
   styleUrls: ["./navigation.component.css"]
 })
+
 export class NavigationComponent implements OnInit {
   userName: string = "";
-  constructor(private appservice: AppService) {}
+  constructor(private appservice: AppService) { }
 
   ngOnInit() {
     this.userName = localStorage.getItem("username");
