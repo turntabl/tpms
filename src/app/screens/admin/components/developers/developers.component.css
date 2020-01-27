@@ -31,12 +31,11 @@
   .example-full-width {
     width: 100%;
   }
-
-
+  
   .container {
     display: flex;
     margin-bottom: 200px;
   }
   .container > div {
-    flex: 1; /*grow*/
+    flex: 1; 
   }

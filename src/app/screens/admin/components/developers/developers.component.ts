@@ -6,8 +6,6 @@ import { ProjectService } from 'src/app/services/project.service';
 import { Employee } from 'src/app/interfaces/employee';
 import { AppService } from 'src/app/services/app.service';
 import { ProjectInterface } from 'src/app/interfaces/project-interface';
-// import { ProjectInterface } from 'src/app/screens/project-interface';
-
 
 @Component({
   selector: 'app-developers',
@@ -146,10 +144,8 @@ assignedNewProject =[]
           }
         
         });
-
-
-  }
-
+      }
+      
   private _filter(value: string): Employee[] {
     const filterValue = value.toLowerCase();
     return this.options.filter(option => option.employee.employee_firstname.toLowerCase().indexOf(filterValue) === 0)

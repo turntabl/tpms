@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormGroup, FormControl } from '@angular/forms';
-
 import { ProjectloggingService } from 'src/app/services/projectlogging.service';
 import { ProjectService } from 'src/app/services/project.service';
-
 
 export interface Data {
   title: string;
@@ -65,8 +63,7 @@ export class TimeentryComponent implements OnInit {
     }else{
       this.userProjects = userData;
     }
-    
-  }
+   }
 
   sickFieldChecked(event) {
     if (event == 'sick') {
@@ -103,8 +100,6 @@ export class TimeentryComponent implements OnInit {
     }
   }
 
-
-
 logsuccess() {}
   onSubmit() {
       var employee_firstname = this.userProjects[0].employee_firstname;
@@ -123,7 +118,6 @@ logsuccess() {}
         project_hours:project_hours,
         project_id:project_id,
         project_date:project_date
-
       }
 
     this.plog. logproject(requestData) .subscribe(response => {
@@ -133,15 +127,11 @@ logsuccess() {}
         this.showAlert = false;
       }
     });
- 
   }
 
   myFilter = (d: Date): boolean => {const day = d.getDay();
-    // Prevent Saturday and Sunday from being selected.
-    return day !== 0 && day !== 6;
+       return day !== 0 && day !== 6;
   }
-
-
 }
 
 
