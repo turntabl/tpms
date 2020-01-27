@@ -5,8 +5,7 @@ import { map, startWith } from 'rxjs/operators';
 import { ProjectService } from 'src/app/services/project.service';
 import { Employee } from 'src/app/interfaces/employee';
 import { AppService } from 'src/app/services/app.service';
-import { ProjectInterface } from 'src/app/screens/project-interface';
-
+import { ProjectInterface } from 'src/app/interfaces/project-interface';
 
 @Component({
   selector: 'app-developers',
@@ -24,7 +23,6 @@ selectedDeveloper_id
 
 selectedProject_id
 assignedNewProject =[]
-
   selectable = true;
   removable = true;
   projects = [
@@ -42,7 +40,7 @@ assignedNewProject =[]
   projectfilteredOptions: Observable<any>;
   assignedprojects: any 
 
-  constructor(private ProjectService: ProjectService, private devService: AppService) { }
+  constructor(private ProjectService: ProjectService, private devService: AppService,private cdr: ApplicationRef) { }
 
   developerObservable: Observable<Employee[]>;
   devs = [];
@@ -146,10 +144,8 @@ assignedNewProject =[]
           }
         
         });
-
-
-  }
-
+      }
+      
   private _filter(value: string): Employee[] {
     const filterValue = value.toLowerCase();
     return this.options.filter(option => option.employee.employee_firstname.toLowerCase().indexOf(filterValue) === 0)

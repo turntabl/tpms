@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl} from '@angular/forms';
 import { ProjectService } from 'src/app/services/project.service';
-// import { ToastService } from 'ng-uikit-pro-standard';
 
 declare var $: any;
-
-
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
@@ -48,7 +45,7 @@ export class ProjectsComponent implements OnInit {
 
   onSubmit() { 
     
-    var formValues = this.projectForm.value;
+    var formValues  = this.projectForm.value;
     let requestData = { 
       project_name: formValues.project_name
     }
@@ -61,13 +58,12 @@ export class ProjectsComponent implements OnInit {
        this.getProjects();
       $("#modalSubscriptionForm").modal("hide");
       $('.modal-backdrop').remove();
-      this.projectForm.reset();
+        this.projectForm.reset();
       
      }else{
       $("#modalSubscriptionForm").modal("hide");
       $('.modal-backdrop').remove();
      }
    })
-}
-
+  }
 }
