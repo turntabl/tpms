@@ -68,7 +68,7 @@ export class DevelopersComponent implements OnInit {
 
     this.projectfilterOptions()
 
-    this.updateNewProjects()
+    this.removeProjectAssignedToDeveloper()
     
   }
   remove(dev: any) {
@@ -76,7 +76,7 @@ export class DevelopersComponent implements OnInit {
     .removeProjectFromEmployee(dev.project_id,this.selectedDeveloper_id)
     .subscribe(response => {
       if(response.code === "00"){
-        this.updateNewProjects();
+        this.removeProjectAssignedToDeveloper();
       }else{
         console.log(response);
       }
@@ -92,7 +92,7 @@ export class DevelopersComponent implements OnInit {
     
   }
     
-  displayFn(user?: any): any | undefined {
+  displayDeveloperName(user?: any): any | undefined {
     if (user !== null) {
       this.selectedDeveloper_id = user.employee.employee_id
       this.assignedproject = user.projects;
@@ -114,7 +114,7 @@ export class DevelopersComponent implements OnInit {
     .assignProjectToEmployee(project_id,employee_id)
     .subscribe(response => {
       if(response.code === "00"){
-        this.updateNewProjects();
+        this.removeProjectAssignedToDeveloper();
       }else{
         console.log(response);
       }
@@ -123,7 +123,7 @@ export class DevelopersComponent implements OnInit {
 
   }
 
-  updateNewProjects(){
+  removeProjectAssignedToDeveloper(){
     
     this.ProjectService
         .getAssignedProjects(this.selectedDeveloper_id)
@@ -162,19 +162,19 @@ export class DevelopersComponent implements OnInit {
         map(project_name => project_name ? this._projectfilter(project_name) : this.projectoptions.slice())
       );
   }
-  curremp: string;
-  currproj: string;
-  devMethod(emp) {
+  currentEmployee: string;
+  assignedProject: string;
+  getProjectAssignedToDeveloper(employee) {
     this.ProjectService
-      .getAssignedProjects(emp.employee_id)
+      .getAssignedProjects(employee.employee_id)
       .subscribe(response => {
         this.assignedproject[0].project_id = response.project_id;
         this.assignedproject[0].title = response.title;
       });
   }
 
-  projMethod(proj) {
-    this.ProjectService.assignProjecttoDev(proj.project_id, this.currentDevsId).subscribe(response => {
+  assignProjectToDeveloper(project) {
+    this.ProjectService.assignProjecttoDev(project.project_id, this.currentDevsId).subscribe(response => {
     });
   }
 }
