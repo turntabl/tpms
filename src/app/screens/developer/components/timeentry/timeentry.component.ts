@@ -58,7 +58,6 @@ export class TimeentryComponent implements OnInit {
   ngOnInit() {
     
     var userData = JSON.parse(localStorage.getItem("userProjects"))
-    console.log("User Data | ",userData);
     
     if(userData === null){
       this.userProjects = [];

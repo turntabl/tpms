@@ -29,16 +29,16 @@ assignedNewProject =[]
   
   ];
 
-  timeentry = []
+  assignedproject = []
 
-  myControl = new FormControl();
+  developerControl = new FormControl();
   options: Array<any> = [];
   filteredOptions: Observable<any>;
 
-  projectmyControl = new FormControl();
+  projectControl = new FormControl();
   projectoptions: Array<any> = [];
   projectfilteredOptions: Observable<any>;
-  assignedprojects: any 
+  
 
   constructor(private ProjectService: ProjectService, private employeeService: EmployeeService,private cdr: ApplicationRef) { }
 
@@ -53,7 +53,6 @@ assignedNewProject =[]
 
   ngOnInit() {
     this.employeeService.getDevelopers().subscribe(response => {
-      console.log("Response from server | ",response)
       if(response.code === "00"){
         this.options = response.data;
         
@@ -62,7 +61,6 @@ assignedNewProject =[]
       }
     });
     this.ProjectService.getProject().subscribe(response => {
-      console.log("Response from server | ",response)
       if(response.code === "00"){
         this.projectoptions = response.data;
       }else{
@@ -101,7 +99,7 @@ assignedNewProject =[]
   displayFn(user?: any): any | undefined {
     if (user !== null) {
       this.selectedDeveloper_id = user.employee.employee_id
-      this.timeentry = user.projects;
+      this.assignedproject = user.projects;
     }
     return user ? user.employee.employee_firstname : undefined;
   }
@@ -120,7 +118,6 @@ assignedNewProject =[]
     this.ProjectService
     .assignProjectToEmployee(project_id,employee_id)
     .subscribe(response => {
-      console.log("Assign Project | ", response)
       if(response.code === "00"){
         this.updateNewProjects();
       }else{
@@ -136,9 +133,8 @@ assignedNewProject =[]
     this.ProjectService
         .getAssignedProjects(this.selectedDeveloper_id)
         .subscribe(response => {
-          console.log("Printing projects | ", response.data.projects);
           if(response.code === "00"){
-            this.timeentry = response.data.projects;
+            this.assignedproject = response.data.projects;
           }else{
             console.log(response)
           }
@@ -155,7 +151,7 @@ assignedNewProject =[]
     return this.projectoptions.filter(option => option.project.project_name.toLowerCase().indexOf(filterValue) === 0)
   }
   filterOptions() {
-    this.filteredOptions = this.myControl.valueChanges
+    this.filteredOptions = this.developerControl.valueChanges
       .pipe(
         startWith(''),
         map(value => typeof value === 'string' ? value : value.employee.employee_firstname),
@@ -164,7 +160,7 @@ assignedNewProject =[]
   }
 
   projectfilterOptions() {
-    this.projectfilteredOptions = this.projectmyControl.valueChanges
+    this.projectfilteredOptions = this.projectControl.valueChanges
       .pipe(
         startWith(''),
         map(value => typeof value === 'string' ? value : value.project.project_name),
@@ -177,8 +173,8 @@ assignedNewProject =[]
     this.ProjectService
       .getAssignedProjects(emp.employee_id)
       .subscribe(response => {
-        this.timeentry[0].project_id = response.project_id;
-        this.timeentry[0].title = response.title;
+        this.assignedproject[0].project_id = response.project_id;
+        this.assignedproject[0].title = response.title;
       });
   }
 

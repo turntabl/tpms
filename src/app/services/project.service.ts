@@ -30,7 +30,7 @@ export class ProjectService {
   }
 
   getProject(): Observable<any> {
-    return this.http.get<any>(this.projectUrl + '/v1/api/projects');
+    return this.http.get<any>(this.projectUrl + '/v1/api/projects')
   }
 
   getAssignedProjects(employee_id: string): Observable<any> {
@@ -51,7 +51,6 @@ export class ProjectService {
   }
  
   getProjectByEmployeeId(employee_id): Observable<any> {
-    console.log("employee id | ",employee_id)
     return this.http.get<any>(
       this.projectUrl + "/v1/api/projects/assigned/employee/" + employee_id
     );

@@ -34,7 +34,6 @@ export class ProjectsComponent implements OnInit {
     this.ProjectService
       .getProject()
       .subscribe(response => {
-        console.log("Printing response | ",response )
         if(response.code === "00"){
           this.dataSource = response.data;
         }else{
@@ -49,7 +48,6 @@ export class ProjectsComponent implements OnInit {
     let requestData = { 
       project_name: formValues.project_name
     }
-    console.log("Printing requestData | ",requestData)
 
    this.ProjectService
    .addNewProject(requestData) 
@@ -59,10 +57,6 @@ export class ProjectsComponent implements OnInit {
       $("#modalSubscriptionForm").modal("hide");
       $('.modal-backdrop').remove();
         this.projectForm.reset();
-      
-     }else{
-      $("#modalSubscriptionForm").modal("hide");
-      $('.modal-backdrop').remove();
      }
    })
   }
