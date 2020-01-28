@@ -47,7 +47,7 @@ export class DevelopersComponent implements OnInit {
      });
     this.filterOptions()
 
-    this.projectfilterOptions()
+    this.projectFilterOptions()
 
     this.removeProjectAssignedToDeveloper()
     
@@ -106,7 +106,7 @@ export class DevelopersComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.options.filter(option => option.employee.employee_firstname.toLowerCase().indexOf(filterValue) === 0)
   }
-  private _projectfilter(value: string): Project[] {
+  private projectFilter(value: string): Project[] {
     const filterValue = value.toLowerCase();
     return this.projectoptions.filter(option => option.project.project_name.toLowerCase().indexOf(filterValue) === 0)
   }
@@ -119,12 +119,12 @@ export class DevelopersComponent implements OnInit {
       );
   }
 
-  projectfilterOptions() {
+  projectFilterOptions() {
     this.projectfilteredOptions = this.projectControl.valueChanges
       .pipe(
         startWith(''),
         map(value => typeof value === 'string' ? value : value.project.project_name),
-        map(project_name => project_name ? this._projectfilter(project_name) : this.projectoptions.slice())
+        map(project_name => project_name ? this.projectFilter(project_name) : this.projectoptions.slice())
       );
   }
   currentEmployee: string;
