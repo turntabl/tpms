@@ -18,7 +18,7 @@ export class VerifyComponent implements OnInit {
     private cookie: CookieService,
     private projectService: ProjectService,
     private employeeService: EmployeeService) {}
-    
+
   role: any;
 
   ngOnInit() {
@@ -106,5 +106,5 @@ export class VerifyComponent implements OnInit {
       this.isLoading = false;
     }
   }
-  logout() { this.router.navigate(["/logout"]);}
+  reauth() { this.router.navigate(["/logout"]);}
 }
