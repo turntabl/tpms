@@ -40,7 +40,7 @@ passport.use(
       res.cookie('ttemail', userEmail, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
       res.cookie('userFirstName', userFirstName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
       res.cookie('userlastName', userlastName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
-
+      res.redirect("https://tpms-ui.herokuapp.com");
       return done(null, {
         email: profile.email,
         displayName: profile.cn,
@@ -81,12 +81,12 @@ app.post(
     failureFlash: false
   }),
   
-  function (res) {
-  //   res.cookie('ttemail', userEmail, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
-  //   res.cookie('userFirstName', userFirstName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
-  //   res.cookie('userlastName', userlastName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
-    res.redirect("https://tpms-ui.herokuapp.com");
-  }
+//   function (res) {
+//     res.cookie('ttemail', userEmail, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
+//     res.cookie('userFirstName', userFirstName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
+//     res.cookie('userlastName', userlastName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
+//     res.redirect("https://tpms-ui.herokuapp.com");
+//   }
 );
 
 app.all("*", function (req, res, next) {
