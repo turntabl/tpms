@@ -25,11 +25,13 @@ export class VerifyComponent implements OnInit {
     this.employeeService.developerName.subscribe(name => {
       this.userName = name
     });
+
     this.cookieAvailable = this.cookie.check("ttemail");
     if (this.cookieAvailable == true) {
       this.employeeService
         .getEmployeeRole(this.cookie.get("ttemail"))
-        .subscribe(response => {  
+        .subscribe(response => {
+          if(response.code == "00"){
             var existtingUserData = response.data;
             if(Object.keys(response.data).length === 0) {
               var employee_email = this.cookie.get("ttemail");
@@ -50,23 +52,29 @@ export class VerifyComponent implements OnInit {
               this.employeeService
                 .addEmployee(requestData)
                 .subscribe(response => {
+                  if(response.code === "00"){
                     var emp_id = response.data;
                     this.projectService
                     .getProjectByEmployeeId(emp_id)
                     .subscribe(response => {
+                      if(response.code === "00"){
                         var employee_fullname = employee_firstname + " " + employee_lastname;
                         localStorage.setItem("username", employee_fullname);
                         localStorage.setItem("userProjects", JSON.stringify(response.data));
                         localStorage.setItem("empId", emp_id.toString());
                         this.isLoading = false;
                         this.router.navigate(["developer/projects"]);
-                    })     
+                      }
+                    })
+                  }
                 })
-          } else {        
+          } else {
+          
             var employee_id = existtingUserData.employee_id;
             this.projectService
               .getProjectByEmployeeId(employee_id)
               .subscribe(response => {
+                if(response.code === "00"){
                   var employee_fullname = existtingUserData.employee_firstname + " " + existtingUserData.employee_lastname;
                   switch (existtingUserData.employee_role) {
                     case "ADMINISTRATOR":      
@@ -85,13 +93,15 @@ export class VerifyComponent implements OnInit {
                       break;
                     default:
                       break;
-                  }        
+                  }
+                }
               })         
-          }                  
+          } 
+          }          
         });
     } else {
       this.isLoading = false;
     }
   }
-  logout() { this.router.navigate(["/logout"]);}
+  reauth() { this.router.navigate(["/logout"]);}
 }

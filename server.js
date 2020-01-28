@@ -1,12 +1,13 @@
 const express = require("express");
 const path = require("path");
-const samlStrategy = require("passport-saml").Strategy;
+const SamlStrategy = require("passport-saml").Strategy;
 const passport = require("passport");
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
-const userEmail = "";
+let userEmail = "";
 const app = express();
+
 app.use(express.static(__dirname + "/dist/tpms"));
 
 app.use(cookieParser());
@@ -22,15 +23,17 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(
-  new samlStrategy(
+  new SamlStrategy(
     {
       protocol: "https://",
       entryPoint: process.env.ENTRY_POINT, 
       issuer: process.env.ISSUER, 
-      path: "/auth/saml/callback", 
+      path: "/auth/saml/callback",
       cert: process.env.CERT
     },
     function (profile, done) {
+      console.log("profile", profile);
+      console.log("assertion", profile.getAssertion.toString());
       userEmail = profile.nameID;
       userFirstName = profile["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"]
       userlastName = profile["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"]
@@ -64,7 +67,6 @@ app.get("/logout", function (req, res) {
   res.clearCookie('ttemail')
   req.logout();
   res.redirect("https://turntabl.io");
-  
 });
 
 app.post(
@@ -75,9 +77,12 @@ app.post(
     failureFlash: false
   }),
   function (req, res) {
+    // sets a cookie called ttemail and sets its max age to 1 day
     res.cookie('ttemail', userEmail, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
     res.cookie('userFirstName', userFirstName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
     res.cookie('userlastName', userlastName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
+    
+    
     res.redirect("https://tpms-ui.herokuapp.com");
   }
 );
@@ -89,7 +94,7 @@ app.all("*", function (req, res, next) {
     res.redirect("/login");
   }
 });
-app.get("*", function (req, res) {
+app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname + "/dist/tpms/index.html"));
 });
 
