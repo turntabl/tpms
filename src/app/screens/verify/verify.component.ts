@@ -52,7 +52,6 @@ export class VerifyComponent implements OnInit {
               this.employeeService
                 .addEmployee(requestData)
                 .subscribe(response => {
-                  console.log("Adding new user | ", response);
                   if(response.code === "00"){
                     var emp_id = response.data;
                     this.projectService
@@ -76,7 +75,6 @@ export class VerifyComponent implements OnInit {
             this.projectService
               .getProjectByEmployeeId(employee_id)
               .subscribe(response => {
-                console.log("Getting employee projects | ", response);
                 if(response.code === "00"){
                   var employee_fullname = existtingUserData.employee_firstname + " " + existtingUserData.employee_lastname;
                   switch (existtingUserData.employee_role) {

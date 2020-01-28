@@ -1,3 +1,4 @@
+//Install express server
 const express = require("express");
 const path = require("path");
 const SamlStrategy = require("passport-saml").Strategy;
@@ -5,7 +6,7 @@ const passport = require("passport");
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
-const userEmail = "";
+let userEmail = "";
 const app = express();
 
 app.use(express.static(__dirname + "/dist/tpms"));
@@ -32,10 +33,11 @@ passport.use(
       cert: process.env.CERT
     },
     function (profile, done) {
-
+  
       userEmail = profile.nameID;
       userFirstName = profile["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"]
       userlastName = profile["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"]
+     
       return done(null, {
         email: profile.email,
         displayName: profile.cn,
@@ -75,7 +77,6 @@ app.post(
     failureRedirect: "/error",
     failureFlash: false
   }),
-  
   function (res) {
     res.cookie('ttemail', userEmail, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
     res.cookie('userFirstName', userFirstName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
@@ -92,5 +93,9 @@ app.all("*", function (req, res, next) {
     res.sendFile(path.join(__dirname + "/dist/tpms/index.html"));
   }
 });
+// app.get("/*", function (req, res) {
+//   res.sendFile(path.join(__dirname + "/dist/tpms/index.html"));
+// });
 
+// Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8081);
