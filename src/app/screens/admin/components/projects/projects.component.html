@@ -9,8 +9,7 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div *ngIf="showErrorAlert" class="alert alert-dange alert-dismissible fade show" role="alert">
-            {{ errorMsg }}
+        <div *ngIf="showErrorAlert" class="alert alert-dange alert-dismissible fade show" role="alert"> {{ errorMsg }}
             <button aria-label="Close" class="close" data-dismiss="alert" type="button">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -42,19 +41,15 @@
                 </div>
             </div>
             <div style="margin-bottom:50px;margin-top:20px;">
-                <table [dataSource]="dataSource" mat-table="mat-table">
+                <table mat-table [dataSource]="dataSource">
 
                     <ng-container matColumnDef="name">
-                        <th *matHeaderCellDef="*matHeaderCellDef" mat-header-cell="mat-header-cell">
-                            Project Name
-                        </th>
-                        <td *matCellDef="let element" mat-cell="mat-cell">
-                            {{element.project_name}}
-                        </td>
+                      <th mat-header-cell *matHeaderCellDef> Project Name </th>
+                      <td mat-cell *matCellDef="let element"> {{element.project_name}} </td>
                     </ng-container>
-
-                    <tr *matHeaderRowDef="columnsToDisplay" mat-header-row="mat-header-row"></tr>
-                    <tr *matRowDef="let row; columns: columnsToDisplay;" mat-row="mat-row"></tr>
-                </table>
-            </div>
+                    
+                    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+                    <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+                  </table>
+            </div>          
         </div>
