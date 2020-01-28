@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 })
 export class EmployeeService {
   private messageSource = new BehaviorSubject("");
-  currentMessage = this.messageSource.asObservable();
+  developerName = this.messageSource.asObservable();
   private developerService = "https://employee.services.turntabl.io";
   constructor(private http: HttpClient) {}
 

@@ -22,16 +22,14 @@ export class VerifyComponent implements OnInit {
   role: any;
 
   ngOnInit() {
-    this.employeeService.currentMessage.subscribe(name => {
+    this.employeeService.developerName.subscribe(name => {
       this.userName = name
     });
-
     this.cookieAvailable = this.cookie.check("ttemail");
     if (this.cookieAvailable == true) {
       this.employeeService
         .getEmployeeRole(this.cookie.get("ttemail"))
-        .subscribe(response => {
-          if(response.code == "00"){
+        .subscribe(response => {  
             var existtingUserData = response.data;
             if(Object.keys(response.data).length === 0) {
               var employee_email = this.cookie.get("ttemail");
@@ -62,13 +60,9 @@ export class VerifyComponent implements OnInit {
                         localStorage.setItem("empId", emp_id.toString());
                         this.isLoading = false;
                         this.router.navigate(["developer/projects"]);
-
-                     
-                    })
-                  
+                    })     
                 })
-          } else {
-          
+          } else {        
             var employee_id = existtingUserData.employee_id;
             this.projectService
               .getProjectByEmployeeId(employee_id)
@@ -91,15 +85,13 @@ export class VerifyComponent implements OnInit {
                       break;
                     default:
                       break;
-                  }
-        
+                  }        
               })         
-          } 
-          }          
+          }                  
         });
     } else {
       this.isLoading = false;
     }
   }
-  reauth() { this.router.navigate(["/logout"]);}
+  logout() { this.router.navigate(["/logout"]);}
 }

@@ -20,14 +20,14 @@ const ELEMENT_DATA: Data[] = [
   templateUrl: './timeentry.component.html',
   styleUrls: ['./timeentry.component.css']
 })
+
 export class TimeentryComponent implements OnInit {
   dateSort=''
 
-  incomingProject = { project_id: 2, title: '' };
-  showAlert: boolean = false;
+  successMessage: boolean = false;
   userProjects: any
 
-  hourform = new FormGroup({
+    timeEntry = new FormGroup({
     project_hours: new FormControl(''),
     volunteering_hours: new FormControl(''),
     vacation: new FormControl(''),
@@ -37,10 +37,10 @@ export class TimeentryComponent implements OnInit {
     logged_date: new FormControl(new Date().toISOString().slice(0, 10)),
   });
   constructor(
-    private plog: ProjectloggingService,
+    private projectLog: ProjectloggingService,
     private projectService: ProjectService
   ) {}
-  newProject = '';
+ 
   assignedprojects =[{title: "tpms"}]
   displayedColumns: string[] = [
     'Projects',
@@ -49,7 +49,7 @@ export class TimeentryComponent implements OnInit {
     'Vacation'
   ];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
-  dummy = [];
+
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -59,45 +59,46 @@ export class TimeentryComponent implements OnInit {
     
     var userData = JSON.parse(localStorage.getItem("userProjects"))
     
-    if(userData === null){
+    if(this.userProjects = userData){
       this.userProjects = [];
-    }else{
-      this.userProjects = userData;
+    } else{
+      
+      userData === null;
     }
    }
 
-  sickFieldChecked(event) {
+  onSickFieldChecked(event) {
     if (event == 'sick') {
-      this.hourform.controls.vacation.disable();
-      this.hourform.controls.volunteering_hours.disable();
-      this.hourform.controls.project_hours.disable();
+      this.timeEntry.controls.vacation.disable();
+      this.timeEntry.controls.volunteering_hours.disable();
+      this.timeEntry.controls.project_hours.disable();
     }
     else {
-      this.hourform.controls.vacation.enable();
-      this.hourform.controls.volunteering_hours.enable();
-      this.hourform.controls.project_hours.enable();
+      this.timeEntry.controls.vacation.enable();
+      this.timeEntry.controls.volunteering_hours.enable();
+      this.timeEntry.controls.project_hours.enable();
     }
   }
 
-  vacationFieldChecked(event) {
+  onVacationFieldChecked(event) {
     if (event == 'vacation') {
-      this.hourform.controls.sick.disable();
-      this.hourform.controls.volunteering_hours.disable();
-      this.hourform.controls.project_hours.disable();
+      this.timeEntry.controls.sick.disable();
+      this.timeEntry.controls.volunteering_hours.disable();
+      this.timeEntry.controls.project_hours.disable();
     }
     else {
-      this.hourform.controls.sick.enable();
-      this.hourform.controls.volunteering_hours.enable();
-      this.hourform.controls.project_hours.enable();
+      this.timeEntry.controls.sick.enable();
+      this.timeEntry.controls.volunteering_hours.enable();
+      this.timeEntry.controls.project_hours.enable();
     }
   }
 
-  submitChecked(event: string) {
-    if (event === 'true') {
-      this.hourform.controls.vacation.enable();
-      this.hourform.controls.sick.enable();
-      this.hourform.controls.volunteering_hours.enable();
-      this.hourform.controls.project_hours.enable();
+  onSubmitChecked(event: string) {
+    if (event === 'triggered') {
+      this.timeEntry.controls.vacation.enable();
+      this.timeEntry.controls.sick.enable();
+      this.timeEntry.controls.volunteering_hours.enable();
+      this.timeEntry.controls.project_hours.enable();
     }
   }
 
@@ -107,9 +108,9 @@ logsuccess() {}
       var employee_lastname = this.userProjects[0].employee_lastname;
       var employee_email = this.userProjects[0].employee_email;
       var employee_id = this.userProjects[0].employee_id;
-      var project_hours = this.hourform.value.project_hours;
-      var project_id = this.hourform.value.project_id.project_id;
-      var project_date = this.hourform.value.logged_date;
+      var project_hours = this.timeEntry.value.project_hours;
+      var project_id = this.timeEntry.value.project_id.project_id;
+      var project_date = this.timeEntry.value.logged_date;
 
       let requestData = {
         employee_firstname:employee_firstname,
@@ -121,11 +122,11 @@ logsuccess() {}
         project_date:project_date
       }
 
-    this.plog.logproject(requestData) .subscribe(response => {
+    this.projectLog.logproject(requestData) .subscribe(response => {
       if(response.code === "00"){
-        this.showAlert = true;
+        this.successMessage = true;
       }else{
-        this.showAlert = false;
+        this.successMessage = false;
       }
     });
   }

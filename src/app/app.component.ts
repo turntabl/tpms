@@ -10,7 +10,7 @@ export class AppComponent {
   title = "tpms";
   userName: String;
   constructor(private employeeService: EmployeeService) {
-    this.employeeService.currentMessage.subscribe(
+    this.employeeService.developerName.subscribe(
       name => (this.userName = name)
     );
   }

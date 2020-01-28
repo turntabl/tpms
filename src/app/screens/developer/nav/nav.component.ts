@@ -11,8 +11,8 @@ export class NavComponent implements OnInit {
   constructor(private employeeService: EmployeeService) {}
 
   ngOnInit() {
-    this.employeeService.currentMessage.subscribe(
-      newName => (this.userName = newName)
+    this.employeeService.developerName.subscribe(
+      employeeName => (this.userName = employeeName)
     );
     this.userName = localStorage.getItem("username");
 }

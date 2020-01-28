@@ -8,8 +8,8 @@
   <mat-form-field class="example-full-width">
     <input type="text" placeholder="Developer name" matInput [formControl]="developerControl" [matAutocomplete]="dev">
     <mat-autocomplete #dev="matAutocomplete" [displayWith]="displayDeveloperName.bind(this)">
-      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-        {{option.employee.employee_firstname}}  {{option.employee.employee_lastname}}
+      <mat-option *ngFor="let developer of filteredOptions | async" [value]="developer">
+        {{developer.employee.employee_firstname}}  {{developer.employee.employee_lastname}}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field> 
@@ -27,7 +27,7 @@
    
   <mat-chip-list *ngFor="let project of assignedproject">
     <mat-chip  [selectable]="selectable"
-    [removable]="removable" (removed)="remove(project)" >{{project.project_name}}
+    [removable]="removable" (removed)="deleteProject(project)" >{{project.project_name}}
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>  
   </mat-chip-list>  

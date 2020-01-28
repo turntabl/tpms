@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl} from '@angular/forms';
 import { ProjectService } from 'src/app/services/project.service';
 
-declare var $: any;
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
@@ -52,12 +51,9 @@ export class ProjectsComponent implements OnInit {
    this.ProjectService
    .addNewProject(requestData) 
    .subscribe(response =>{
-     if(response.code === "00"){
-       this.getProjects();
-      $("#modalSubscriptionForm").modal("hide");
-      $('.modal-backdrop').remove();
+        this.getProjects();
         this.projectForm.reset();
-     }
    })
   }
 }
+  

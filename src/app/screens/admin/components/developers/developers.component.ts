@@ -15,7 +15,6 @@ import { EmployeeService } from 'src/app/services/employee.service';
 
 export class DevelopersComponent implements OnInit {
   currentDevsId: number
-  developers: Array<any> = [];
 
   
   selectedDeveloper_id
@@ -45,16 +44,16 @@ export class DevelopersComponent implements OnInit {
     this.ProjectService.getProject().subscribe(response => {
        this.projectoptions = response.data; 
      });
-    this.filterOptions()
+    this.filterOutDeveloperFirstnName()
 
     this.projectFilterOptions()
 
     this.removeProjectAssignedToDeveloper()
     
   }
-  remove(dev: any) {
+  deleteProject(developer: Project) {
     this.ProjectService
-    .removeProjectFromEmployee(dev.project_id,this.selectedDeveloper_id)
+    .removeProjectFromEmployee(developer.project_id,this.selectedDeveloper_id)
     .subscribe(response => {
         this.removeProjectAssignedToDeveloper();
     });  
@@ -110,7 +109,7 @@ export class DevelopersComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.projectoptions.filter(option => option.project.project_name.toLowerCase().indexOf(filterValue) === 0)
   }
-  filterOptions() {
+  filterOutDeveloperFirstnName() {
     this.filteredOptions = this.developerControl.valueChanges
       .pipe(
         startWith(''),
