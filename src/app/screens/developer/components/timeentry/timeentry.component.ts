@@ -21,7 +21,7 @@ const ELEMENT_DATA: Data[] = [
   styleUrls: ['./timeentry.component.css']
 })
 export class TimeentryComponent implements OnInit {
-  myFilter=''
+  dateSort=''
 
   incomingProject = { project_id: 2, title: '' };
   showAlert: boolean = false;
