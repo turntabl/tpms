@@ -32,16 +32,15 @@ passport.use(
       path: "/auth/saml/callback", 
       cert: process.env.CERT
     },
-    function (profile, done) {
-  
+    function (res,profile, done) {
+
       userEmail = profile.nameID;
       userFirstName = profile["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"]
       userlastName = profile["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"]
-
       res.cookie('ttemail', userEmail, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
       res.cookie('userFirstName', userFirstName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
       res.cookie('userlastName', userlastName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
-     
+
       return done(null, {
         email: profile.email,
         displayName: profile.cn,
@@ -81,7 +80,11 @@ app.post(
     failureRedirect: "/error",
     failureFlash: false
   }),
+  
   function (res) {
+  //   res.cookie('ttemail', userEmail, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
+  //   res.cookie('userFirstName', userFirstName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
+  //   res.cookie('userlastName', userlastName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
     res.redirect("https://tpms-ui.herokuapp.com");
   }
 );
