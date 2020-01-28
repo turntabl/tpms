@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule} from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ToastrModule } from 'ngx-toastr';
 import {CookieService} from 'ngx-cookie-service';
 
 
@@ -53,7 +52,6 @@ import { ReportComponent } from '../app/screens/admin/components/report/report.c
     CommonModule,
     BrowserAnimationsModule,
     BrowserModule,
-    ToastrModule.forRoot(),
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
