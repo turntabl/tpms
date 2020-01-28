@@ -100,7 +100,6 @@ export class DevelopersComponent implements OnInit {
     return user ? user.employee.employee_firstname : undefined;
   }
 
-
   projectDisplay(project?: any): any | undefined {
     if (project !== null) {
       this.selectedProject_id =project.project.project_id
