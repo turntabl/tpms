@@ -17,9 +17,10 @@ export class VerifyComponent implements OnInit {
     private router: Router,
     private cookie: CookieService,
     private projectService: ProjectService,
-    private employeeService: EmployeeService
-      ) {}
+    private employeeService: EmployeeService) {}
+    
   role: any;
+
   ngOnInit() {
     this.employeeService.currentMessage.subscribe(name => {
       this.userName = name
