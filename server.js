@@ -1,11 +1,11 @@
 const express = require("express");
 const path = require("path");
-const SamlStrategy = require("passport-saml").Strategy;
+const samlStrategy = require("passport-saml").Strategy;
 const passport = require("passport");
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
-let userEmail = "";
+const userEmail = "";
 const app = express();
 app.use(express.static(__dirname + "/dist/tpms"));
 
@@ -22,7 +22,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(
-  new SamlStrategy(
+  new samlStrategy(
     {
       protocol: "https://",
       entryPoint: process.env.ENTRY_POINT, 
