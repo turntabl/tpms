@@ -1,4 +1,3 @@
-//Install express server
 const express = require("express");
 const path = require("path");
 const SamlStrategy = require("passport-saml").Strategy;
@@ -8,7 +7,6 @@ const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
 const userEmail = "";
 const app = express();
-
 app.use(express.static(__dirname + "/dist/tpms"));
 
 app.use(cookieParser());
@@ -66,7 +64,7 @@ app.get("/logout", function (req, res) {
   res.clearCookie('ttemail')
   req.logout();
   res.redirect("https://turntabl.io");
- 
+  
 });
 
 app.post(
@@ -79,7 +77,7 @@ app.post(
   function (req, res) {
     res.cookie('ttemail', userEmail, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
     res.cookie('userFirstName', userFirstName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
-    res.cookie('userlastName', userlastName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false }) 
+    res.cookie('userlastName', userlastName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
     res.redirect("https://tpms-ui.herokuapp.com");
   }
 );
@@ -89,12 +87,10 @@ app.all("*", function (req, res, next) {
     next();
   } else {
     res.redirect("/login");
-    res.sendFile(path.join(__dirname + "/dist/tpms/index.html"));
   }
 });
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname + "/dist/tpms/index.html"));
 });
 
-// Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8081);
