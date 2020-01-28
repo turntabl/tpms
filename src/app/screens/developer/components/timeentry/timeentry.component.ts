@@ -40,7 +40,7 @@ export class TimeentryComponent implements OnInit {
     private projectLog: ProjectloggingService,
     private projectService: ProjectService
   ) {}
- 
+  newProject = '';
   assignedprojects =[{title: "tpms"}]
   displayedColumns: string[] = [
     'Projects',
@@ -59,11 +59,10 @@ export class TimeentryComponent implements OnInit {
     
     var userData = JSON.parse(localStorage.getItem("userProjects"))
     
-    if(this.userProjects = userData){
+    if(userData === null){
       this.userProjects = [];
-    } else{
-      
-      userData === null;
+    }else{
+      this.userProjects = userData;
     }
    }
 
