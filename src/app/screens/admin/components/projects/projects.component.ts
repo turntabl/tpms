@@ -42,7 +42,6 @@ export class ProjectsComponent implements OnInit {
   }
 
   onSubmit() { 
-    
     var formValues  = this.projectForm.value;
     let requestData = { 
       project_name: formValues.project_name
@@ -56,4 +55,3 @@ export class ProjectsComponent implements OnInit {
    })
   }
 }
-  
