@@ -6,7 +6,7 @@ const passport = require("passport");
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
-const userEmail = "";
+let userEmail = "";
 const app = express();
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + "/dist/tpms"));
@@ -16,7 +16,7 @@ app.use(
   cookieSession({
     name: "session",
     keys: ["super secret"],
-    maxAge: 2 * 24 * 60 * 60 * 1000 
+    maxAge: 2 * 24 * 60 * 60 * 1000 // 2 days
   })
 );
 app.use(bodyParser.json());
@@ -27,9 +27,9 @@ passport.use(
   new SamlStrategy(
     {
       protocol: "https://",
-      entryPoint: process.env.ENTRY_POINT, 
-      issuer: process.env.ISSUER,
-      path: "/auth/saml/callback", 
+      entryPoint: process.env.ENTRY_POINT, // SSO URL (Step 2)
+      issuer: process.env.ISSUER, // Entity ID (Step 4)
+      path: "/auth/saml/callback", // ACS URL path (Step 4)
       cert: process.env.CERT
     },
     function (profile, done) {
@@ -37,11 +37,6 @@ passport.use(
       console.log("profile", profile);
       console.log("assertion", profile.getAssertion.toString());
       userEmail = profile.nameID;
-
-          // sets a cookie called ttemail and sets its max age to 1 day
-      res.cookie('ttemail', userEmail, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
-      res.cookie('userFirstName', userFirstName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
-      res.cookie('userlastName', userlastName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
       userFirstName = profile["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"]
       userlastName = profile["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"]
      
@@ -74,6 +69,7 @@ app.get("/logout", function (req, res) {
   res.clearCookie('ttemail')
   req.logout();
   res.redirect("https://turntabl.io");
+  // res.end("You have logged out.");
 });
 
 app.post(
@@ -83,7 +79,13 @@ app.post(
     failureRedirect: "/error",
     failureFlash: false
   }),
-  function (req, res) {    
+  function (req, res) {
+    // sets a cookie called ttemail and sets its max age to 1 day
+    res.cookie('ttemail', userEmail, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
+    res.cookie('userFirstName', userFirstName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
+    res.cookie('userlastName', userlastName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
+    
+    
     res.redirect("https://tpms-ui.herokuapp.com");
   }
 );
@@ -98,5 +100,6 @@ app.all("*", function (req, res, next) {
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname + "/dist/tpms/index.html"));
 });
+
 // Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8081);
