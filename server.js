@@ -33,8 +33,6 @@ passport.use(
       cert: process.env.CERT
     },
     function (profile, done) {
-     
-
       userEmail = profile.nameID;
       userFirstName = profile["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"]
       userlastName = profile["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"]
@@ -68,7 +66,7 @@ app.get("/logout", function (req, res) {
   res.clearCookie('ttemail')
   req.logout();
   res.redirect("https://turntabl.io");
-  // res.end("You have logged out.");
+ 
 });
 
 app.post(
@@ -79,12 +77,9 @@ app.post(
     failureFlash: false
   }),
   function (req, res) {
-    // sets a cookie called ttemail and sets its max age to 1 day
     res.cookie('ttemail', userEmail, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
     res.cookie('userFirstName', userFirstName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
-    res.cookie('userlastName', userlastName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
-    
-    
+    res.cookie('userlastName', userlastName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false }) 
     res.redirect("https://tpms-ui.herokuapp.com");
   }
 );
@@ -97,9 +92,9 @@ app.all("*", function (req, res, next) {
     res.sendFile(path.join(__dirname + "/dist/tpms/index.html"));
   }
 });
-// app.get("/*", function (req, res) {
-//   res.sendFile(path.join(__dirname + "/dist/tpms/index.html"));
-// });
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname + "/dist/tpms/index.html"));
+});
 
 // Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8081);
