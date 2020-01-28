@@ -105,7 +105,7 @@ assignedNewProject =[]
   }
 
 
-  projectdisplayFn(project?: any): any | undefined {
+  projectDisplay(project?: any): any | undefined {
     if (project !== null) {
       this.selectedProject_id =project.project.project_id
       this.assignProjectToEmployee(this.selectedDeveloper_id,this.selectedProject_id);
