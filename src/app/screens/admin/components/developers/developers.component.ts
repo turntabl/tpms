@@ -15,21 +15,18 @@ import { EmployeeService } from 'src/app/services/employee.service';
 
 export class DevelopersComponent implements OnInit {
   currentDevsId: number
-  developers: Array<any> = [
-  ];
+  developers: Array<any> = [];
 
   
-selectedDeveloper_id
+  selectedDeveloper_id
 
-selectedProject_id
-assignedNewProject =[]
+  selectedProject_id
+  assignedNewProject =[];
   selectable = true;
   removable = true;
-  projects = [
-  
-  ];
+  projects = [];
 
-  assignedproject = []
+  assignedproject = [];
 
   developerControl = new FormControl();
   options: Array<any> = [];
@@ -43,7 +40,6 @@ assignedNewProject =[]
   constructor(private ProjectService: ProjectService, private employeeService: EmployeeService,private cdr: ApplicationRef) { }
 
   developerObservable: Observable<Employee[]>;
-  devs = [];
 
   projectsObservable: Observable<Project[]>;
   project = [];
