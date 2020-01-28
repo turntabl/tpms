@@ -8,7 +8,7 @@ const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
 const userEmail = "";
 const app = express();
-
+// Serve only the static files form the dist directory
 app.use(express.static(__dirname + "/dist/tpms"));
 
 app.use(cookieParser());
@@ -37,6 +37,8 @@ passport.use(
       console.log("profile", profile);
       console.log("assertion", profile.getAssertion.toString());
       userEmail = profile.nameID;
+
+          // sets a cookie called ttemail and sets its max age to 1 day
       res.cookie('ttemail', userEmail, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
       res.cookie('userFirstName', userFirstName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
       res.cookie('userlastName', userlastName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
@@ -86,19 +88,17 @@ app.post(
   }
 );
 
-// app.all("*", function (req, res, next) {
-//   if (req.isAuthenticated() || process.env.NODE_ENV !== "production") {
-//     next();
-//   } else {
-//     res.redirect("/login");
-//   }
-// });
-app.get("/*", function (req, res,next) {
+app.all("*", function (req, res, next) {
   if (req.isAuthenticated() || process.env.NODE_ENV !== "production") {
     next();
   } else {
-  res.sendFile(path.join(__dirname + "/dist/tpms/index.html"));
-}});
+    res.redirect("/login");
+  }
+});
+// app.get("/*", function (req, res,next) {
+  
+//   res.sendFile(path.join(__dirname + "/dist/tpms/index.html"));
+// });
 
 // Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8081);
