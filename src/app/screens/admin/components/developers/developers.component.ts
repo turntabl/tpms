@@ -24,7 +24,7 @@ export class DevelopersComponent implements OnInit {
   assignedNewProject =[];
   selectable = true;
   removable = true;
-  projects = [];
+  project = [];
 
   assignedproject = [];
 
@@ -35,35 +35,16 @@ export class DevelopersComponent implements OnInit {
   projectControl = new FormControl();
   projectoptions: Array<any> = [];
   projectfilteredOptions: Observable<any>;
-  
 
   constructor(private ProjectService: ProjectService, private employeeService: EmployeeService,private cdr: ApplicationRef) { }
 
-  developerObservable: Observable<Employee[]>;
-
-  projectsObservable: Observable<Project[]>;
-  project = [];
-
-  assignedObservable: Observable<any[]>;
-  assign = [];
-
   ngOnInit() {
     this.employeeService.getDevelopers().subscribe(response => {
-      if(response.code === "00"){
-        this.options = response.data;
-        
-      }else{
-        console.log(response);
-      }
+        this.options = response.data; 
     });
     this.ProjectService.getProject().subscribe(response => {
-      if(response.code === "00"){
-        this.projectoptions = response.data;
-      }else{
-        console.log(response);
-      }
-    
-    });
+       this.projectoptions = response.data; 
+     });
     this.filterOptions()
 
     this.projectfilterOptions()
@@ -75,11 +56,7 @@ export class DevelopersComponent implements OnInit {
     this.ProjectService
     .removeProjectFromEmployee(dev.project_id,this.selectedDeveloper_id)
     .subscribe(response => {
-      if(response.code === "00"){
         this.removeProjectAssignedToDeveloper();
-      }else{
-        console.log(response);
-      }
     });  
   }
 
@@ -113,31 +90,19 @@ export class DevelopersComponent implements OnInit {
     this.ProjectService
     .assignProjectToEmployee(project_id,employee_id)
     .subscribe(response => {
-      if(response.code === "00"){
         this.removeProjectAssignedToDeveloper();
-      }else{
-        console.log(response);
-      }
-    
     });
-
   }
 
   removeProjectAssignedToDeveloper(){
-    
     this.ProjectService
         .getAssignedProjects(this.selectedDeveloper_id)
         .subscribe(response => {
-          if(response.code === "00"){
             this.assignedproject = response.data.projects;
-          }else{
-            console.log(response)
-          }
-        
         });
       }
       
-  private _filter(value: string): Employee[] {
+  private filterDeveloperName(value: string): Employee[] {
     const filterValue = value.toLowerCase();
     return this.options.filter(option => option.employee.employee_firstname.toLowerCase().indexOf(filterValue) === 0)
   }
@@ -150,7 +115,7 @@ export class DevelopersComponent implements OnInit {
       .pipe(
         startWith(''),
         map(value => typeof value === 'string' ? value : value.employee.employee_firstname),
-        map(employee_firstname => employee_firstname ? this._filter(employee_firstname) : this.options.slice())
+        map(employee_firstname => employee_firstname ? this.filterDeveloperName(employee_firstname) : this.options.slice())
       );
   }
 

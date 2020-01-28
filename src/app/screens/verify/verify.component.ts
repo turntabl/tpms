@@ -52,12 +52,10 @@ export class VerifyComponent implements OnInit {
               this.employeeService
                 .addEmployee(requestData)
                 .subscribe(response => {
-                  if(response.code === "00"){
                     var emp_id = response.data;
                     this.projectService
                     .getProjectByEmployeeId(emp_id)
                     .subscribe(response => {
-                      if(response.code === "00"){
                         var employee_fullname = employee_firstname + " " + employee_lastname;
                         localStorage.setItem("username", employee_fullname);
                         localStorage.setItem("userProjects", JSON.stringify(response.data));
@@ -65,9 +63,9 @@ export class VerifyComponent implements OnInit {
                         this.isLoading = false;
                         this.router.navigate(["developer/projects"]);
 
-                      }
+                     
                     })
-                  }
+                  
                 })
           } else {
           
@@ -75,7 +73,6 @@ export class VerifyComponent implements OnInit {
             this.projectService
               .getProjectByEmployeeId(employee_id)
               .subscribe(response => {
-                if(response.code === "00"){
                   var employee_fullname = existtingUserData.employee_firstname + " " + existtingUserData.employee_lastname;
                   switch (existtingUserData.employee_role) {
                     case "ADMINISTRATOR":      
@@ -95,7 +92,7 @@ export class VerifyComponent implements OnInit {
                     default:
                       break;
                   }
-                }
+        
               })         
           } 
           }          
