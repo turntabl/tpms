@@ -4,6 +4,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ProjectloggingService } from 'src/app/services/projectlogging.service';
 import { ProjectService } from 'src/app/services/project.service';
 
+
 export interface Data {
   title: string;
  
@@ -20,6 +21,7 @@ const ELEMENT_DATA: Data[] = [
   styleUrls: ['./timeentry.component.css']
 })
 export class TimeentryComponent implements OnInit {
+  myFilter=''
 
   incomingProject = { project_id: 2, title: '' };
   showAlert: boolean = false;
