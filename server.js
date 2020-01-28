@@ -95,11 +95,12 @@ app.all("*", function (req, res, next) {
     next();
   } else {
     res.redirect("/login");
+    res.sendFile(path.join(__dirname + "/dist/tpms/index.html"));
   }
 });
-app.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname + "/dist/tpms/index.html"));
-});
+// app.get("/*", function (req, res) {
+//   res.sendFile(path.join(__dirname + "/dist/tpms/index.html"));
+// });
 
 // Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8081);
