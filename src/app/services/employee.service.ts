@@ -6,13 +6,13 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
   providedIn: 'root'
 })
 export class EmployeeService {
-  private messageSource = new BehaviorSubject("");
-  developerName = this.messageSource.asObservable();
+  private employeeName = new BehaviorSubject("");
+  developerName = this.employeeName.asObservable();
   private developerService = "https://employee.services.turntabl.io";
   constructor(private http: HttpClient) {}
 
-  changeMessage(message: string) {
-    this.messageSource.next(message);
+  changeMessage(name: string) {
+    this.employeeName.next(name);
   }
   getEmployeeRole(email: string): Observable<any> {
     return this.http.get<any>(
