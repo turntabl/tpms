@@ -1,7 +1,7 @@
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule} from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule} from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import {CookieService} from 'ngx-cookie-service';
 
@@ -61,7 +61,6 @@ import { ReportComponent } from '../app/screens/admin/components/report/report.c
     MatButtonModule,
     MatIconModule,
     MatChipsModule,
-    HttpClientModule,
     MatTableModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
