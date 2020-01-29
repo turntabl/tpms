@@ -3,6 +3,6 @@ sudo: false
 node_js:
   - 10
 install:
-  - cd istanbul-mocha && npm install && cd ..
+  - npm install
 script:
-  - cd istanbul-mocha && npm test
+  - npm test
