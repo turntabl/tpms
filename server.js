@@ -5,19 +5,12 @@ const passport = require("passport");
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
-let userEmail = "";
 const app = express();
+let userEmail = "";
 
 app.use(express.static(__dirname + "/dist/tpms"));
 
 app.use(cookieParser());
-app.use(
-  cookieSession({
-    name: "session",
-    keys: ["super secret"],
-    maxAge: 2 * 24 * 60 * 60 * 1000 
-  })
-);
 app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
@@ -91,6 +84,10 @@ app.all("*", function (req, res, next) {
 });
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname + "/dist/tpms/index.html"));
+});
+
+app.get('/backend', (req, res) => {
+  res.json({url: process.env.PROJECT})
 });
 
 app.listen(process.env.PORT || 8081);
