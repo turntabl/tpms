@@ -1,13 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ProjectloggingService } from 'src/app/services/projectlogging.service';
+import { MatTableDataSource } from '@angular/material/table';
 
+
+export interface Data {
+  title: string;
+ 
+}
+const ELEMENT_DATA: Data[] = [
+  {
+    title: 'Projects',
+  }
+];
 
 @Component({
   selector: 'app-timeentry',
   templateUrl: './timeentry.component.html',
   styleUrls: ['./timeentry.component.css']
 })
+
+
 
 export class TimeentryComponent implements OnInit {
   dateSort=''
@@ -31,6 +44,11 @@ export class TimeentryComponent implements OnInit {
     'Sick',
     'Vacation'
   ];
+
+  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
 
   ngOnInit() {

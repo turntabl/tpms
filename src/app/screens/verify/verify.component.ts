@@ -48,8 +48,7 @@ export class VerifyComponent implements OnInit {
                 "employee_role": "developer",
                 "employee_status": ""
               }
-
-              this.employeeService
+             this.employeeService
                 .addEmployee(requestData)
                 .subscribe(response => {
                   if(response.code === "00"){
