@@ -33,8 +33,8 @@ export class ReportComponent implements OnInit {
       }); (x => {
         this.Dates.push(x.project_date);
         this.Project.push(x.project_hours);
-        // this.Sick.push(x.vacation_hours);
-        // this.Vacation.push(x.sick_hours);
+        this.Sick.push(x.vacation_hours);
+        this.Vacation.push(x.sick_hours);
       });
       this.chartOptions = {
         chart: {
