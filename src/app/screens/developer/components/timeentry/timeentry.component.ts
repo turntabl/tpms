@@ -4,11 +4,11 @@ import { ProjectloggingService } from 'src/app/services/projectlogging.service';
 import { MatTableDataSource } from '@angular/material/table';
 
 
-export interface Data {
+export interface Project {
   title: string;
  
 }
-const ELEMENT_DATA: Data[] = [
+const project: Project[] = [
   {
     title: 'Projects',
   }
@@ -45,9 +45,9 @@ export class TimeentryComponent implements OnInit {
     'Vacation'
   ];
 
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  projects = new MatTableDataSource(project);
   applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.projects.filter = filterValue.trim().toLowerCase();
   }
 
 
