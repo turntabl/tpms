@@ -40,7 +40,4 @@ module.exports = function (config) {
 };
 if (process.env.TRAVIS) {
   configuration.browsers = ['chromeTravisCi']
-}
-module.exports = function (config) {
-  config.set(configuration);
 };
