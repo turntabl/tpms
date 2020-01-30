@@ -1,19 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ProjectloggingService } from 'src/app/services/projectlogging.service';
-import { ProjectService } from 'src/app/services/project.service';
 
-
-export interface Data {
-  title: string;
- 
-}
-const ELEMENT_DATA: Data[] = [
-  {
-    title: 'Projects',
-  }
-];
 
 @Component({
   selector: 'app-timeentry',
@@ -23,93 +11,83 @@ const ELEMENT_DATA: Data[] = [
 
 export class TimeentryComponent implements OnInit {
   dateSort=''
-
   successMessage: boolean = false;
-  userProjects: any
+  employeeProjects: any
 
-    timeEntry = new FormGroup({
+    time_entry = new FormGroup({
     project_hours: new FormControl(''),
     volunteering_hours: new FormControl(''),
     vacation: new FormControl(''),
     sick: new FormControl(''),
-    emp_id: new FormControl(),
+    employee_id: new FormControl(),
     project_id: new FormControl(),
     logged_date: new FormControl(new Date().toISOString().slice(0, 10)),
   });
-  constructor(
-    private projectLog: ProjectloggingService,
-    private projectService: ProjectService
-  ) {}
-  newProject = '';
-  assignedprojects =[{title: "tpms"}]
+  constructor(private projectLog: ProjectloggingService ) {}
+
   displayedColumns: string[] = [
     'Projects',
     'Volunteering',
     'Sick',
     'Vacation'
   ];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
 
-
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
 
   ngOnInit() {
     
-    var userData = JSON.parse(localStorage.getItem("userProjects"))
+    var employeeResults = JSON.parse(localStorage.getItem("userProjects"))
     
-    if(userData === null){
-      this.userProjects = [];
+    if(employeeResults === null){
+      this.employeeProjects = [];
     }else{
-      this.userProjects = userData;
+      this.employeeProjects = employeeResults;
     }
    }
 
   onSickFieldChecked(event) {
     if (event == 'sick') {
-      this.timeEntry.controls.vacation.disable();
-      this.timeEntry.controls.volunteering_hours.disable();
-      this.timeEntry.controls.project_hours.disable();
+      this.time_entry.controls.vacation.disable();
+      this.time_entry.controls.volunteering_hours.disable();
+      this.time_entry.controls.project_hours.disable();
     }
     else {
-      this.timeEntry.controls.vacation.enable();
-      this.timeEntry.controls.volunteering_hours.enable();
-      this.timeEntry.controls.project_hours.enable();
+      this.time_entry.controls.vacation.enable();
+      this.time_entry.controls.volunteering_hours.enable();
+      this.time_entry.controls.project_hours.enable();
     }
   }
 
   onVacationFieldChecked(event) {
     if (event == 'vacation') {
-      this.timeEntry.controls.sick.disable();
-      this.timeEntry.controls.volunteering_hours.disable();
-      this.timeEntry.controls.project_hours.disable();
+      this.time_entry.controls.sick.disable();
+      this.time_entry.controls.volunteering_hours.disable();
+      this.time_entry.controls.project_hours.disable();
     }
     else {
-      this.timeEntry.controls.sick.enable();
-      this.timeEntry.controls.volunteering_hours.enable();
-      this.timeEntry.controls.project_hours.enable();
+      this.time_entry.controls.sick.enable();
+      this.time_entry.controls.volunteering_hours.enable();
+      this.time_entry.controls.project_hours.enable();
     }
   }
 
   onSubmitChecked(event: string) {
     if (event === 'triggered') {
-      this.timeEntry.controls.vacation.enable();
-      this.timeEntry.controls.sick.enable();
-      this.timeEntry.controls.volunteering_hours.enable();
-      this.timeEntry.controls.project_hours.enable();
+      this.time_entry.controls.vacation.enable();
+      this.time_entry.controls.sick.enable();
+      this.time_entry.controls.volunteering_hours.enable();
+      this.time_entry.controls.project_hours.enable();
     }
   }
 
 logsuccess() {}
   onSubmit() {
-      var employee_firstname = this.userProjects[0].employee_firstname;
-      var employee_lastname = this.userProjects[0].employee_lastname;
-      var employee_email = this.userProjects[0].employee_email;
-      var employee_id = this.userProjects[0].employee_id;
-      var project_hours = this.timeEntry.value.project_hours;
-      var project_id = this.timeEntry.value.project_id.project_id;
-      var project_date = this.timeEntry.value.logged_date;
+      var employee_firstname = this.employeeProjects[0].employee_firstname;
+      var employee_lastname = this.employeeProjects[0].employee_lastname;
+      var employee_email = this.employeeProjects[0].employee_email;
+      var employee_id = this.employeeProjects[0].employee_id;
+      var project_hours = this.time_entry.value.project_hours;
+      var project_id = this.time_entry.value.project_id.project_id;
+      var project_date = this.time_entry.value.logged_date;
 
       let requestData = {
         employee_firstname:employee_firstname,

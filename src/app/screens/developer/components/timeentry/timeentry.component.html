@@ -10,7 +10,7 @@
      <br/>
   
     <div class="container-fluid">
-      <form action="" [formGroup]="timeEntry" (ngSubmit)="onSubmit()">
+      <form action="" [formGroup]="time_entry" (ngSubmit)="onSubmit()">
         <mat-form-field>
           <input matInput ng-model-options="{timezone: null}" [matDatepickerFilter]="dateSort" [matDatepicker]="picker" placeholder="Choose date to log hours" formControlName="logged_date">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -23,7 +23,7 @@
   
       <mat-form-field>
         <mat-select formControlName="project_id" style="font-size: xx-medium;">
-          <mat-option *ngFor="let project of userProjects" [value]="project">
+          <mat-option *ngFor="let project of employeeProjects" [value]="project">
             {{project.project_name}}
           </mat-option>
         </mat-select>

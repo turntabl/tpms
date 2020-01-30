@@ -12,25 +12,22 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ReportComponent implements OnInit {
 
-  url = 'https://project.services.turntabl.io/v1/api/getloggedproject';
+  chartApi = 'https://project.services.turntabl.io/v1/api/getloggedproject';
+
   data: Report[];
   Dates = [];
   Project = [];
   Volunteer = [];
   Sick = [];
   Vacation = [];
-
-
   chartOptions = {};
-
-
   Highcharts = Highcharts;
+
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-    this.httpClient.get(this.url).subscribe((result: Report[]) => {
-      Array.prototype.forEach(element => {
-      }); (x => {
+    this.httpClient.get(this.chartApi).subscribe((result: Report[]) => {
+      Array.prototype.forEach(element => {}); (x => {
         this.Dates.push(x.project_date);
         this.Project.push(x.project_hours);
         this.Sick.push(x.vacation_hours);

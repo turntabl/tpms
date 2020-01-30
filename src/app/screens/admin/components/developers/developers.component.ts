@@ -15,16 +15,13 @@ import { EmployeeService } from 'src/app/services/employee.service';
 
 export class DevelopersComponent implements OnInit {
   currentDevsId: number
-
-  
   selectedDeveloper_id
-
+  userDetails
   selectedProject_id
   assignedNewProject =[];
   selectable = true;
   removable = true;
   project = [];
-
   assignedproject = [];
 
   developerControl = new FormControl();
@@ -35,7 +32,7 @@ export class DevelopersComponent implements OnInit {
   projectoptions: Array<any> = [];
   projectfilteredOptions: Observable<any>;
 
-  constructor(private ProjectService: ProjectService, private employeeService: EmployeeService,private cdr: ApplicationRef) { }
+  constructor(private ProjectService: ProjectService, private employeeService: EmployeeService) { }
 
   ngOnInit() {
     this.employeeService.getDevelopers().subscribe(response => {
@@ -47,73 +44,85 @@ export class DevelopersComponent implements OnInit {
     this.filterOutDeveloperFirstnName()
 
     this.projectFilterOptions()
-
-    this.removeProjectAssignedToDeveloper()
     
   }
   deleteProject(developer: Project) {
     this.ProjectService
     .removeProjectFromEmployee(developer.project_id,this.selectedDeveloper_id)
     .subscribe(response => {
-        this.removeProjectAssignedToDeveloper();
+      this.getProjectAssignedToDeveloper();
     });  
   }
 
   remove_one(dev: Project): void {
     const index = this.assignedNewProject.indexOf(dev);
-
     if (index >= 0) {
       this.assignedNewProject.splice(index, 1);
-    }
-    
+    }  
   }
     
   displayDeveloperName(user?: any): any | undefined {
     if (user !== null) {
-      this.selectedDeveloper_id = user.employee.employee_id
-      this.assignedproject = user.projects;
+      this.selectedDeveloper_id = user.employee_id
+      this.userDetails = user;
+      this.getProjectAssignedToDeveloperById(user.employee_id)
     }
-    return user ? user.employee.employee_firstname : undefined;
+    return user ? user.employee_firstname : undefined;
   }
 
   projectDisplay(project?: any): any | undefined {
     if (project !== null) {
-      this.selectedProject_id =project.project.project_id
-      this.assignProjectToEmployee(this.selectedDeveloper_id,this.selectedProject_id);
+      this.selectedProject_id =project.project_id
+      this.assignProjectToEmployee(this.selectedDeveloper_id,this.selectedProject_id,this.userDetails );
     }   
-    return project ? project.project.project_name : undefined;
+    return project ? project.project_name : undefined;
   }
 
-  assignProjectToEmployee(employee_id,project_id){
-
+  assignProjectToEmployee(employee_id,project_id,userDetails ){
+    let requestData = {
+        "employee_email": userDetails.employee_email,
+        "employee_firstname": userDetails.employee_firstname,
+        "employee_id": employee_id,
+        "employee_lastname": userDetails.employee_lastname,
+        "project_id": project_id
+    }
+   
     this.ProjectService
-    .assignProjectToEmployee(project_id,employee_id)
-    .subscribe(response => {
-        this.removeProjectAssignedToDeveloper();
+    .assignProjectToEmployee(requestData)
+    .subscribe(response => {     
+        this.getProjectAssignedToDeveloper();
     });
   }
 
-  removeProjectAssignedToDeveloper(){
+  getProjectAssignedToDeveloper(){
     this.ProjectService
         .getAssignedProjects(this.selectedDeveloper_id)
         .subscribe(response => {
-            this.assignedproject = response.data.projects;
+            this.assignedproject = response.data;
+        });
+      }
+  
+  getProjectAssignedToDeveloperById(employee_id){
+    this.ProjectService
+        .getAssignedProjects(employee_id)
+        .subscribe(response => {
+            this.assignedproject = response.data;
         });
       }
       
   private filterDeveloperName(value: string): Employee[] {
     const filterValue = value.toLowerCase();
-    return this.options.filter(option => option.employee.employee_firstname.toLowerCase().indexOf(filterValue) === 0)
+    return this.options.filter(option => option.employee_firstname.toLowerCase().indexOf(filterValue) === 0)
   }
   private projectFilter(value: string): Project[] {
     const filterValue = value.toLowerCase();
-    return this.projectoptions.filter(option => option.project.project_name.toLowerCase().indexOf(filterValue) === 0)
+    return this.projectoptions.filter(option => option.project_name.toLowerCase().indexOf(filterValue) === 0)
   }
   filterOutDeveloperFirstnName() {
     this.filteredOptions = this.developerControl.valueChanges
       .pipe(
         startWith(''),
-        map(value => typeof value === 'string' ? value : value.employee.employee_firstname),
+        map(value => typeof value === 'string' ? value : value.employee_firstname),
         map(employee_firstname => employee_firstname ? this.filterDeveloperName(employee_firstname) : this.options.slice())
       );
   }
@@ -122,23 +131,10 @@ export class DevelopersComponent implements OnInit {
     this.projectfilteredOptions = this.projectControl.valueChanges
       .pipe(
         startWith(''),
-        map(value => typeof value === 'string' ? value : value.project.project_name),
+        map(value => typeof value === 'string' ? value : value.project_name),
         map(project_name => project_name ? this.projectFilter(project_name) : this.projectoptions.slice())
       );
   }
-  currentEmployee: string;
-  assignedProject: string;
-  getProjectAssignedToDeveloper(employee) {
-    this.ProjectService
-      .getAssignedProjects(employee.employee_id)
-      .subscribe(response => {
-        this.assignedproject[0].project_id = response.project_id;
-        this.assignedproject[0].title = response.title;
-      });
-  }
+ 
 
-  assignProjectToDeveloper(project) {
-    this.ProjectService.assignProjecttoDev(project.project_id, this.currentDevsId).subscribe(response => {
-    });
-  }
 }
