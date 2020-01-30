@@ -19,28 +19,4 @@ script:
   - npm run test -- --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-# language: node_js
-# sudo: false
-# node_js:
-#   - 10
-# before_install:
-#   - export CHROME_BIN=chromium-browser
-# services:
-#   - xvfb
-# script:
-#   - npm install
-#   - npm test
   

@@ -104,5 +104,5 @@ export class VerifyComponent implements OnInit {
       this.isLoading = false;
     }
   }
-  reauth() { this.router.navigate(["/logout"]);}
+  logout() { this.router.navigate(["/logout"]);}
 }
