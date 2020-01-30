@@ -31,7 +31,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    // frameworks: ['mocha'],
+    frameworks: ['jasmine'],
     browsers: ['Chrome'],
     singleRun: false,
     restartOnFileChange: true
