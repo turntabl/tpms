@@ -21,7 +21,6 @@ export class ProjectloggingService {
     return this.http.post<any>( sessionStorage.getItem('url') + '/v1/api/addloggedproject', body,{headers: headers});
   }
   logsick(data: any):Observable<any>{
-
     let body = JSON.stringify(data);
     let headers = new HttpHeaders({'Content-Type':'application/json'});
     return this.http.post<any>( sessionStorage.getItem('url') + '/v1/api/addloggedsick', body,{headers: headers});
@@ -34,5 +33,6 @@ export class ProjectloggingService {
   getLoggedHours(): Observable<any[]> {
     return this.http.get<any[]>( sessionStorage.getItem('url') + '/v1/api/getloggedhours');
   }
+
 
 }
