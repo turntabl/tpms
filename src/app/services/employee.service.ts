@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 export class EmployeeService {
   private messageSource = new BehaviorSubject("");
   currentMessage = this.messageSource.asObservable();
-  
+
   constructor(private http: HttpClient)  {this.http.get<any>(window.location.origin +'/employee_service').
   subscribe(res =>{sessionStorage.setItem('url',res.url)
   })}
