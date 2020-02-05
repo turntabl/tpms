@@ -5,18 +5,12 @@ language: node_js
 node_js:
   - '10'
 
-before_install:
-  - export CHROME_BIN=chromium-browser
-
 cache:
   directories:
     - ./node_modules
 
 install:
   - npm install
-
-script:
-  - npm run test -- --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
 
 
   
