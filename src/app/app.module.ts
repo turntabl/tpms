@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import {CookieService} from 'ngx-cookie-service';
 
-
 //components
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,7 +12,6 @@ import { ProjectsComponent } from './screens/admin/components/projects/projects.
 import { NavigationComponent  as adminNavigation} from './screens/admin/navigation/navigation.component';
 import { VerifyComponent } from './screens/verify/verify.component';
 import { NavComponent as developerNavigation } from './screens/developer/nav/nav.component';
-
 
 // Material
 import { MatTabsModule } from '@angular/material/tabs';
@@ -34,7 +32,6 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { CommonModule } from '@angular/common';
 import { TimeentryComponent } from './screens/developer/components/timeentry/timeentry.component';
 import { ReportComponent } from '../app/screens/admin/components/report/report.component';
-
 
 @NgModule({
   declarations: [
