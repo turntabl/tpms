@@ -81,6 +81,14 @@ app.all("*", function (req, res, next) {
     res.redirect("/login");
   }
 });
+app.get('/employee_service',(req, res) => {
+  res.json({url: process.env.EMPLOYEE})
+});
+
+app.get('/project_service',(req, res) => {
+  res.json({url: process.env.PROJECT})
+});
+
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname + "/dist/tpms/index.html"));
 });
