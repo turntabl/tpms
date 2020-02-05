@@ -1,14 +1,12 @@
-//Install express server
 const express = require("express");
 const path = require("path");
 const SamlStrategy = require("passport-saml").Strategy;
 const passport = require("passport");
-
+const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
-
+let userEmail = "";
 const app = express();
-// Serve only the static files form the dist directory
 app.use(express.static(__dirname + "/dist/tpms"));
 
 app.use(cookieParser());
@@ -16,10 +14,10 @@ app.use(
   cookieSession({
     name: "session",
     keys: ["super secret"],
-    maxAge: 2 * 24 * 60 * 60 * 1000 // 2 days
+    maxAge: 2 * 24 * 60 * 60 * 1000 
   })
 );
-
+app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -27,67 +25,81 @@ passport.use(
   new SamlStrategy(
     {
       protocol: "https://",
-      entryPoint: process.env.ENTRY_POINT, // SSO URL (Step 2)
-      issuer: process.env.ISSUER, // Entity ID (Step 4)
-      path: "/auth/saml/callback" ,  // ACS URL path (Step 4)
+      entryPoint: process.env.ENTRY_POINT, 
+      issuer: process.env.ISSUER, 
+      path: "/auth/saml/callback", 
       cert: process.env.CERT
     },
-    function(profile, done) {
-      // Parse user profile data
-      done(null, {
+    function (profile, done) {
+      userEmail = profile.nameID;
+      userFirstName = profile["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"]
+      userlastName = profile["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"]
+     
+      return done(null, {
         email: profile.email,
-        name: profile.name
+        displayName: profile.cn,
+        firstName: profile.givenName,
+        lastName: profile.sn
       });
     }
   )
 );
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   done(null, user);
 });
 
-passport.deserializeUser(function(user, done) {
+passport.deserializeUser(function (user, done) {
   done(null, user);
 });
 
 app.get(
   "/login",
   passport.authenticate("saml", {
-    successRedirect: "/admin",
+    successRedirect: "/",
     failureRedirect: "/login"
   })
 );
 
-app.get("/logout", function(req, res) {
+app.get("/logout", function (req, res) {
+  res.clearCookie('ttemail')
   req.logout();
-  res.end("You have logged out.");
+  res.redirect("https://turntabl.io");
+  
 });
 
 app.post(
   "/auth/saml/callback",
+  bodyParser.urlencoded({ extended: false }),
   passport.authenticate("saml", {
-    failureRedirect: "/",
-    successRedirect:"/home",
-    failureFlash: true
+    failureRedirect: "/error",
+    failureFlash: false
   }),
-  function(req, res) {
-    res.redirect("/");
+  function (req, res) {
+    res.cookie('ttemail', userEmail, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
+    res.cookie('userFirstName', userFirstName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
+    res.cookie('userlastName', userlastName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
+    res.redirect("https://tpms-ui.herokuapp.com");
   }
 );
 
-app.all("*", function(req, res, next) {
+
+app.get('/employee_service',(req, res) => {
+  res.json({url: process.env.EMPLOYEE})
+});
+
+app.get('/project_service',(req, res) => {
+  res.json({url: process.env.PROJECT})
+});
+
+app.all("*", function (req, res, next) {
   if (req.isAuthenticated() || process.env.NODE_ENV !== "production") {
     next();
   } else {
     res.redirect("/login");
   }
 });
-app.get("/home", function(req, res) {
-  res.redirect("https://tpms-ui.herokuapp.com/admin");
-  // res.sendFile(path.join(__dirname+'/dist/tpms/index.html'));
-});
-app.get("/*", function(req, res) {
+app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname + "/dist/tpms/index.html"));
 });
 
-// Start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 8081);
