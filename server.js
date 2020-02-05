@@ -82,6 +82,14 @@ app.post(
   }
 );
 
+app.get('/employee_service',(req, res) => {
+  res.json({url: process.env.EMPLOYEE})
+});
+
+app.get('/project_service',(req, res) => {
+  res.json({url: process.env.PROJECT})
+});
+
 app.all("*", function (req, res, next) {
   if (req.isAuthenticated() || process.env.NODE_ENV !== "production") {
     next();
