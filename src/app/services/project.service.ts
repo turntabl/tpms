@@ -7,14 +7,14 @@ import { Project } from '../interfaces/project';
 })
 
 export class ProjectService {
- 
-  httpOptions = {
+   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
   constructor(private http: HttpClient)  {this.http.get<any>(window.location.origin +'/project_service').
   subscribe(res =>{sessionStorage.setItem('url',res.url)
-  })}
+  })
+}
 
   addNewProject(requestBody: any): Observable<any> {
     let body = JSON.stringify(requestBody);
@@ -41,7 +41,7 @@ export class ProjectService {
   }
 
   assignProjecttoDev(project_id: number, body:number): Observable<Project[]> {
-      return this.http.post<Project[]>(sessionStorage.getItem('url') + "/projects/assign/"+ project_id,body);
+    return this.http.post<Project[]>(sessionStorage.getItem('url') + "/projects/assign/"+ project_id,body);
   }
 
   removeProjectFromEmployee( project_id,employee_id):Observable<any>{
