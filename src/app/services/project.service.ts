@@ -42,10 +42,6 @@ export class ProjectService {
     );
   }
 
-  assignProjecttoDev(project_id: number, body:number): Observable<Project[]> {
-      return this.http.post<Project[]>(this.projectUrl + "/projects/assign/"+ project_id,body);
-  }
-
   removeProjectFromEmployee( project_id,employee_id):Observable<any>{
     return this.http.get<any>(
       this.projectUrl + '/v1/api/project/' + project_id + '/remove/employee/'+ employee_id
