@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Project } from '../interfaces/project';
+
 
 @Injectable({
   providedIn: 'root'
@@ -43,10 +43,6 @@ export class ProjectService {
     return this.http.get<any>(
       sessionStorage.getItem('url') + '/v1/api/projects/assigned/employee/' + employee_id
     );
-  }
-
-  assignProjecttoDev(project_id: number, body:number): Observable<Project[]> {
-      return this.http.post<Project[]>(sessionStorage.getItem('url')+ "/projects/assign/"+ project_id,body);
   }
 
   removeProjectFromEmployee( project_id,employee_id):Observable<any>{

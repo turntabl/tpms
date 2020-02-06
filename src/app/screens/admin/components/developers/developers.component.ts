@@ -73,17 +73,14 @@ export class DevelopersComponent implements OnInit {
   projectDisplay(project?: any): any | undefined {
     if (project !== null) {
       this.selectedProject_id =project.project_id
-      this.assignProjectToEmployee(this.selectedDeveloper_id,this.selectedProject_id,this.userDetails );
+      this.assignProjectToEmployee(this.selectedDeveloper_id,this.selectedProject_id );
     }   
     return project ? project.project_name : undefined;
   }
 
-  assignProjectToEmployee(employee_id,project_id,userDetails ){
+  assignProjectToEmployee(employee_id,project_id ){
     let requestData = {
-        "employee_email": userDetails.employee_email,
-        "employee_firstname": userDetails.employee_firstname,
-        "employee_id": employee_id,
-        "employee_lastname": userDetails.employee_lastname,
+        "employee_id": employee_id,  
         "project_id": project_id
     }
    
