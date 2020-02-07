@@ -7,7 +7,7 @@ import { CookieService } from "ngx-cookie-service";
   providedIn: "root"
 })
 export class EmployeeService {
-  private url :string='';
+  private url :string = '';
   private employeeName = new BehaviorSubject("");
   developerName = this.employeeName.asObservable();
 
