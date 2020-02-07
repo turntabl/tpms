@@ -14,13 +14,13 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(
+
   cookieSession({
     name: "session",
     keys: ["super secret"],
     maxAge: 2 * 24 * 60 * 60 * 1000 
   })
-);
+
 passport.use(
   new samlStrategy(
     {
@@ -105,10 +105,6 @@ app.all("*", function(req, res, next) {
   } else {
     res.redirect("/login");
   }
-});
-
-app.get("/project_service", (req, res) => {
-  res.cookie({ url: process.env.PROJECT });
 });
 
 app.get("/*", function(req, res) {
