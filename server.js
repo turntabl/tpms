@@ -94,7 +94,7 @@ app.post(
       secure: true,
       httpOnly: false
     });
-    res.redirect("process.env.REDIRECT");
+    res.redirect(process.env.REDIRECT);
   }
 );
 
