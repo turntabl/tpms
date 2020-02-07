@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Injectable({
@@ -8,22 +9,21 @@ import { Observable } from 'rxjs';
 })
 
 export class ProjectService {
-  
+  private url : string
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(private http: HttpClient) {this.http.get<any>(window.location.origin +'/project_service').
-  subscribe(res =>{sessionStorage.setItem('url',res.url)
-  })
-}
+  constructor(private http: HttpClient, private storedProjectUrl: CookieService) {
+    this.url = this.storedProjectUrl.get("projecturl");
+  }
 
   addNewProject(requestBody: any): Observable<any> {
     let body = JSON.stringify(requestBody);
     let headers = new HttpHeaders({'Content-Type':'application/json'});
    
     return this.http.post<any>(
-      sessionStorage.getItem('url') + '/v1/api/project',body,{headers: headers} );
+      this.url + '/v1/api/project',body,{headers: headers} );
   }
   
   assignProjectToEmployee(requestBody): Observable<any> {
@@ -32,29 +32,29 @@ export class ProjectService {
     let headers = new HttpHeaders({'Content-Type':'application/json'});
    
     return this.http.post<any>(
-      sessionStorage.getItem('url') + '/v1/api/project/assign/employee',body,{headers: headers} );
+    this.url + '/v1/api/project/assign/employee',body,{headers: headers} );
   }
 
   getProject(): Observable<any> {
-    return this.http.get<any>(sessionStorage.getItem('url')+ '/v1/api/projects')
+    return this.http.get<any>(this.url + '/v1/api/projects')
   }
 
   getAssignedProjects(employee_id: string): Observable<any> {
     return this.http.get<any>(
-      sessionStorage.getItem('url') + '/v1/api/projects/assigned/employee/' + employee_id
+      this.url + '/v1/api/projects/assigned/employee/' + employee_id
     );
   }
 
   removeProjectFromEmployee( project_id,employee_id):Observable<any>{
     return this.http.get<any>(
-      sessionStorage.getItem('url') + '/v1/api/project/' + project_id + '/remove/employee/'+ employee_id
+      this.url + '/v1/api/project/' + project_id + '/remove/employee/'+ employee_id
     );
 
   }
  
   getProjectByEmployeeId(employee_id): Observable<any> {
     return this.http.get<any>(
-      sessionStorage.getItem('url') + "/v1/api/projects/assigned/employee/" + employee_id
+      this.url + "/v1/api/projects/assigned/employee/" + employee_id
     );
   }
 
