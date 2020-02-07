@@ -48,7 +48,6 @@ export class ProjectService {
     return this.http.get<any>(
       this.url + '/v1/api/project/' + project_id + '/remove/employee/'+ employee_id
     );
-
   }
  
   getProjectByEmployeeId(employee_id): Observable<any> {
