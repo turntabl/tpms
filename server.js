@@ -103,8 +103,9 @@ app.all("*", function(req, res, next) {
     next();
   } else {
     res.redirect("/login");
+    }
   }
-});
+);
 
 app.get("/*", function(req, res) {
   res.cookie("employeeurl", process.env.EMPLOYEE);
