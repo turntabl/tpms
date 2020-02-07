@@ -13,8 +13,8 @@ export class ProjectService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(private http: HttpClient, private storedProjectUrl: CookieService) {
-    this.url = this.storedProjectUrl.get("projecturl");
+  constructor(private http: HttpClient, private storedProjecturl: CookieService) {
+    this.url = this.storedProjecturl.get("projecturl");
   }
 
   addNewProject(requestBody: any): Observable<any> {

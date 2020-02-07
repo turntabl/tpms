@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const samlStrategy = require("passport-saml").Strategy;
 const passport = require("passport");
+const cookieSession = require("cookie-session");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const app = express();
@@ -13,11 +14,14 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(cookieParser());
+
 app.use(
+  // To protect the cookies
   cookieSession({
     name: "session",
-    keys: [process.env.SUPER_KEY],
-    maxAge: 2 * 24 * 60 * 1000 
+    keys: [process.env.SECRET],
+    maxAge: 2 * 24 * 60 * 1000 // For just 1 day
   })
 );
 passport.use(
@@ -94,7 +98,7 @@ app.post(
       secure: true,
       httpOnly: false
     });
-    res.redirect(process.env.REDIRECT);
+    res.redirect("process.env.REDIRECT");
   }
 );
 

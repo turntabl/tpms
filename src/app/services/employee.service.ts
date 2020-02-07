@@ -6,7 +6,7 @@ import { CookieService } from "ngx-cookie-service";
 @Injectable({
   providedIn: "root"
 })
-export class EmployeeService {
+  export class EmployeeService {
   private url :string = '';
   private employeeName = new BehaviorSubject("");
   developerName = this.employeeName.asObservable();
@@ -17,7 +17,7 @@ export class EmployeeService {
   ) {
     this.url = this.storedEmployeeUrl.get("employeeurl");
   }
-  changeMessage(namr: string) {
+  changeMessage(name: string) {
     this.employeeName.next(name);
   }
   getEmployeeRole(email: string): Observable<any> {
