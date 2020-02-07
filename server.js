@@ -14,6 +14,13 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["super secret"],
+    maxAge: 2 * 24 * 60 * 60 * 1000 
+  })
+);
 passport.use(
   new samlStrategy(
     {
