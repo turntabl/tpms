@@ -33,11 +33,11 @@ passport.use(
       userEmail = profile.nameID;
       userFirstName =
         profile[
-          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"
+            "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"
         ];
       userlastName =
         profile[
-          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"
+            "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"
         ];
 
       return done(null, {
@@ -103,8 +103,9 @@ app.all("*", function(req, res, next) {
     next();
   } else {
     res.redirect("/login");
+    }
   }
-});
+);
 
 app.get("/*", function(req, res) {
   res.cookie("employeeurl", process.env.EMPLOYEE);
