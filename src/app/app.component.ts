@@ -11,7 +11,7 @@ export class AppComponent {
   userName: String;
   constructor(private employeeService: EmployeeService) {
     this.employeeService.developerName.subscribe(
-      name => (this.userName = name)
+    name => (this.userName = name)
     );
   }
 }
