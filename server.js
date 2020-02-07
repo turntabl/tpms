@@ -8,7 +8,6 @@ const app = express();
 let userEmail = "";
 
 app.use(express.static(__dirname + "/dist/tpms"));
-
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(passport.initialize());
