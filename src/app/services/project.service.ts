@@ -3,7 +3,6 @@ import { HttpHeaders, HttpClient, } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -49,7 +48,6 @@ export class ProjectService {
     return this.http.get<any>(
       this.url + '/v1/api/project/' + project_id + '/remove/employee/'+ employee_id
     );
-
   }
  
   getProjectByEmployeeId(employee_id): Observable<any> {
@@ -57,5 +55,4 @@ export class ProjectService {
       this.url + "/v1/api/projects/assigned/employee/" + employee_id
     );
   }
-
 }
