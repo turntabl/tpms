@@ -18,16 +18,22 @@ passport.use(
   new samlStrategy(
     {
       protocol: "https://",
-      entryPoint: process.env.ENTRY_POINT, 
-      issuer: process.env.ISSUER, 
+      entryPoint: process.env.ENTRY_POINT,
+      issuer: process.env.ISSUER,
       path: "/auth/saml/callback",
       cert: process.env.CERT
     },
-    function (profile, done) {
+    function(profile, done) {
       userEmail = profile.nameID;
-      userFirstName = profile["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"]
-      userlastName = profile["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"]
-     
+      userFirstName =
+        profile[
+          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"
+        ];
+      userlastName =
+        profile[
+          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"
+        ];
+
       return done(null, {
         email: profile.email,
         displayName: profile.cn,
@@ -37,11 +43,11 @@ passport.use(
     }
   )
 );
-passport.serializeUser(function (user, done) {
+passport.serializeUser(function(user, done) {
   done(null, user);
 });
 
-passport.deserializeUser(function (user, done) {
+passport.deserializeUser(function(user, done) {
   done(null, user);
 });
 
@@ -53,8 +59,8 @@ app.get(
   })
 );
 
-app.get("/logout", function (req, res) {
-  res.clearCookie('ttemail')
+app.get("/logout", function(req, res) {
+  res.clearCookie("ttemail");
   req.logout();
   res.redirect("https://turntabl.io");
 });
@@ -66,30 +72,41 @@ app.post(
     failureRedirect: "/error",
     failureFlash: false
   }),
-  function (req, res) {
-    res.cookie('ttemail', userEmail, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
-    res.cookie('userFirstName', userFirstName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
-    res.cookie('userlastName', userlastName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })  
+  function(req, res) {
+    res.cookie("ttemail", userEmail, {
+      maxAge: 1 * 24 * 60 * 60 * 1000,
+      secure: true,
+      httpOnly: false
+    });
+    res.cookie("userFirstName", userFirstName, {
+      maxAge: 1 * 24 * 60 * 60 * 1000,
+      secure: true,
+      httpOnly: false
+    });
+    res.cookie("userlastName", userlastName, {
+      maxAge: 1 * 24 * 60 * 60 * 1000,
+      secure: true,
+      httpOnly: false
+    });
     res.redirect("process.env.REDIRECT");
   }
 );
 
-app.all("*", function (req, res, next) {
+app.all("*", function(req, res, next) {
   if (req.isAuthenticated() || process.env.NODE_ENV !== "production") {
     next();
   } else {
     res.redirect("/login");
   }
 });
-app.get('/employee_service',(req, res) => {
-  res.json({url: process.env.EMPLOYEE})
+
+app.get("/project_service", (req, res) => {
+  res.cookie({ url: process.env.PROJECT });
 });
 
-app.get('/project_service',(req, res) => {
-  res.json({url: process.env.PROJECT})
-});
-
-app.get("/*", function (req, res) {
+app.get("/*", function(req, res) {
+  res.cookie("employeeurl", process.env.EMPLOYEE);
+  res.cookie("projecturl", process.env.PROJECT);
   res.sendFile(path.join(__dirname + "/dist/tpms/index.html"));
 });
 
