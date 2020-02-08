@@ -29,7 +29,6 @@ export class ProjectService {
 
     let body = JSON.stringify(requestBody);
     let headers = new HttpHeaders({'Content-Type':'application/json'});
-   
     return this.http.post<any>(
     this.url + '/v1/api/project/assign/employee',body,{headers: headers} );
   }
