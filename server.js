@@ -113,7 +113,7 @@ app.all("*", function(req, res, next) {
 
 app.get("/*", function(req, res) {
   res.cookie("employeeurl", process.env.EMPLOYEE);
-  res.cookie("projecturl", process.env.PROJECT);
+  // res.cookie("projecturl", process.env.PROJECT);
   res.sendFile(path.join(__dirname + "/dist/tpms/index.html"));
 });
 
