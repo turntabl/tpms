@@ -31,7 +31,7 @@ export class VerifyComponent implements OnInit {
       this.employeeService
         .getEmployeeRole(this.cookie.get("ttemail"))
         .subscribe(response => {
-          if(response.code == "00" && Object.keys(response.data).length === 0 ){
+          if(response.code === "00" && Object.keys(response.data).length === 0 ){
             var existtingUserData = response.data;
             var employee_email = this.cookie.get("ttemail");
             var employee_firstname = this.cookie.get("userFirstName");
