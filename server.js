@@ -1,14 +1,12 @@
-//Install express server
 const express = require("express");
 const path = require("path");
-const amlStrategy = require("passport-saml").Strategy;
+const SamlStrategy = require("passport-saml").Strategy;
 const passport = require("passport");
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
 let userEmail = "";
 const app = express();
-
 app.use(express.static(__dirname + "/dist/tpms"));
 
 app.use(cookieParser());
@@ -33,13 +31,15 @@ passport.use(
       cert: process.env.CERT
     },
     function (profile, done) {
-      // Parse user profile data
-      console.log("profile", profile);
-      console.log("assertion", profile.getAssertion.toString());
       userEmail = profile.nameID;
+      userFirstName = profile["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"]
+      userlastName = profile["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"]
+     
       return done(null, {
         email: profile.email,
-        name: profile.name
+        displayName: profile.cn,
+        firstName: profile.givenName,
+        lastName: profile.sn
       });
     }
   )
@@ -64,7 +64,7 @@ app.get("/logout", function (req, res) {
   res.clearCookie('ttemail')
   req.logout();
   res.redirect("https://turntabl.io");
-
+  
 });
 
 app.post(
@@ -76,9 +76,20 @@ app.post(
   }),
   function (req, res) {
     res.cookie('ttemail', userEmail, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
-    res.redirect("https://tpms-ui.herokuapp.com/verify");
+    res.cookie('userFirstName', userFirstName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
+    res.cookie('userlastName', userlastName, { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true, httpOnly: false })
+    res.redirect("https://tpms-ui.herokuapp.com");
   }
 );
+
+
+app.get('/employee_service',(req, res) => {
+  res.json({url: process.env.EMPLOYEE})
+});
+
+app.get('/project_service',(req, res) => {
+  res.json({url: process.env.PROJECT})
+});
 
 app.all("*", function (req, res, next) {
   if (req.isAuthenticated() || process.env.NODE_ENV !== "production") {
