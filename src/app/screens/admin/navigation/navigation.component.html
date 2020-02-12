@@ -1,0 +1,104 @@
+<body id="page-top">
+    <div id="wrapper">
+
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <span>Turntabl</span>
+            </a>
+
+            <hr class="sidebar-divider my-0">
+
+                <li class="nav-item active">
+                    <a class="nav-link" routerLink="reports">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+
+                <hr class="sidebar-divider">
+
+                    <div class="sidebar-heading">
+                        Actions
+                    </div>
+                    <li class="nav-item">
+                        <a aria-controls="collapseTwo" aria-expanded="true" class="nav-link " routerLink="projects">
+                            <i class="fas fa-project-diagram"></i>
+                            <span>Projects</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a aria-controls="collapseUtilities" aria-expanded="true" class="nav-link " routerLink="developer">
+                            <i class="fas fa-users"></i>
+                            <span>Developers</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="d-flex flex-column" id="content-wrapper">
+                    <div id="content">
+                        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                            <button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop">
+                                <i class="fa fa-bars"></i>
+                            </button>
+
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item dropdown no-arrow d-sm-none">
+                                    <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="searchDropdown" role="button">
+                                        <i class="fas fa-search fa-fw"></i>
+                                    </a>
+                                    <div aria-labelledby="searchDropdown" class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"></div>
+                                </li>
+
+                                <li class="nav-item dropdown no-arrow mx-1"></li>
+                                <div class="topbar-divider d-none d-sm-block"></div>
+                                <li class="nav-item dropdown no-arrow">
+                                    <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="userDropdown" role="button">
+                                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{userName}}</span>
+                                        <img class="img-profile rounded-circle" src="https://ui-avatars.com/api/?name={{userName}}&background=0D8ABC&color=fff"></a>
+
+                                        <div aria-labelledby="userDropdown" class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
+
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" data-target="#logoutModal" data-toggle="modal" href="#">
+                                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Logout
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <router-outlet></router-outlet>
+
+                        <footer class="sticky-footer bg-white">
+                            <div class="container my-auto">
+                                <div class="copyright text-center my-auto">
+                                    <span>Copyright &copy;Turntabl 2019</span>
+                                </div>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+
+                <a class="scroll-to-top rounded" href="#page-top">
+                    <i class="fas fa-angle-up"></i>
+                </a>
+                <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="logoutModal" role="dialog" tabindex="-1">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-dismiss="modal" type="button">Cancel</button>
+                                <a class="btn btn-primary" href="/logout">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </body>
